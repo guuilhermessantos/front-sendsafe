@@ -49,6 +49,10 @@ export default class MyDocument extends Document {
           />
 
           <link rel="icon" href="https://rocketseat.com.br/favicon.ico" />
+          <link
+            href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <Main />
