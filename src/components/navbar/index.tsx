@@ -47,7 +47,7 @@ export const Navbar: React.FC<IProps> = ({
             </div>
           </a>
         </div>
-        {/* <img /> */}
+
         <i
           className="bx bx-chevron-right toggle"
           onClick={() => handleControlSideMenu()}
