@@ -282,6 +282,10 @@ export const DivContainer = styled.section<IPropsHome>`
   @media screen and (max-width: 1220px) {
     flex-direction: column-reverse;
 
+    .div-contatos {
+      margin-top: 1rem;
+    }
+
     .div-info {
       width: 100%;
       height: 70%;
@@ -291,9 +295,44 @@ export const DivContainer = styled.section<IPropsHome>`
       height: 50%;
 
       img {
-        height: 15rem;
-        width: 15rem;
+        height: 14rem;
+        width: 14rem;
       }
+    }
+  }
+  @media screen and (max-width: 550px) {
+    flex-direction: column-reverse;
+
+    .div-info {
+      width: 100%;
+      height: 70%;
+    }
+
+    .div-contatos {
+      margin-top: 1rem;
+    }
+    .right {
+      width: 100%;
+      height: 30%;
+
+      img {
+        height: 13rem;
+        width: 13rem;
+      }
+    }
+
+    .div-text {
+      height: 28px;
+    }
+    .div-icon {
+      height: 28px;
+    }
+    .linkedin {
+      font-size: 10px;
+    }
+    .github {
+    }
+    .instagram {
     }
   }
   /* .div-bubbles {

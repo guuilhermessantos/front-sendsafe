@@ -3,6 +3,7 @@ import styled from 'styled-components'
 interface IPropsSwitch {
   controlSwitch: string
   controlSide: string
+  controlDisplay?: string
   controlHamburg?: string
 }
 
@@ -72,7 +73,10 @@ export const NavContainer = styled.nav<IPropsSwitch>`
   left: 0; */
   height: 100vh;
   width: ${props => (props.controlSide === 'true' ? '250px' : '88px')};
-  display: ${props => props.controlHamburg === 'true' && 'none'};
+  display: ${props =>
+    props.controlDisplay === 'true' && props.controlHamburg === 'false'
+      ? 'none'
+      : ''};
   padding: 10px 14px;
   background-color: ${props => props.theme.colors.shape};
   transition: opacity 0.3s ease-in-out, width 0.3s ease-in-out;

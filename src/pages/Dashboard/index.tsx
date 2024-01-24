@@ -2,8 +2,8 @@ import React, { ReactNode, useEffect, useState } from 'react'
 import logo from '../../public/image/logo.png'
 import arrowRight from '../../public/assets/arrow-right.png'
 
-import { BackgroundBubbles, test } from '../bubbles'
-import { Bubbles } from '../bubbles/styled'
+import { BackgroundBubbles, test } from '../../components/bubbles'
+import { Bubbles } from '../../components/bubbles/styled'
 import avatar from '../../public/image/avatar.png'
 import { DivContainer } from './styled'
 

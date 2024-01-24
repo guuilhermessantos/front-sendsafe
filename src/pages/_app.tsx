@@ -28,6 +28,7 @@ import { test } from '../components/bubbles'
 import { Bubbles } from '../components/bubbles/styled'
 import { useMediaQuery } from '@geist-ui/react'
 import { AlignCenter } from '@geist-ui/react-icons'
+import { MenuBurguer } from '../components/MenuBurguer'
 // register()
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const isXS = useMediaQuery('xs')
@@ -52,9 +53,14 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
             handleControlSideMenu={handleControlSideMenu}
             controlSide={controlSide}
           />
-          {isXS && <AlignCenter onClick={() => setToggle(!toggle)} />}
+
           <Main>
-            <Component {...pageProps} controlSide={controlSide} />
+            <Component
+              {...pageProps}
+              controlSide={controlSide}
+              setToggle={setToggle}
+              toggle={toggle}
+            />
           </Main>
         </Container>
         <GlobalStyle />

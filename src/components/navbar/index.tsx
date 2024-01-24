@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { NavContainer, Switch } from './styled'
 import logo from '../../public/image/logo.png'
 import arrowRight from '../../public/assets/arrow-right.png'
+import { useMediaQuery } from '@geist-ui/react'
 
 interface IProps {
   toggleTheme: () => void
@@ -19,11 +20,13 @@ export const Navbar: React.FC<IProps> = ({
   toggleHamburg
 }) => {
   // const windowWidth = useRef(window.innerWidth)
+  const isXS = useMediaQuery('xs')
 
   return (
     <NavContainer
       controlSwitch={theme}
       controlSide={controlSide}
+      controlDisplay={isXS ? 'true' : 'false'}
       controlHamburg={toggleHamburg}
     >
       <header>
