@@ -103,29 +103,6 @@ export const DivContainer = styled.section<IPropsHome>`
             border-radius: 4em;
             box-shadow: 0 0px 10px ${props => ` ${props.theme.colors.primary}`};
           }
-          /* :active {
-            color: white;
-            top: 1px;
-            background-image: linear-gradient(
-              to right,
-              ${props =>
-            props.theme.colors.primary},
-              ${props =>
-            props.theme.colors
-              .primary}
-            );
-            box-shadow: 0 4px 15px 0 ${props =>
-            props.theme.colors
-              .primary};
-            background-position: 100% 0;
-            moz-transition: all 0.4s ease-in-out;
-            -o-transition: all 0.4s ease-in-out;
-            -webkit-transition: all 0.4s ease-in-out;
-            transition: all 0.4s ease-in-out;
-            .arrow-down {
-              color: white;
-            }
-          } */
           :active {
             transition: all 0.4s ease-in-out;
             box-shadow: 0 0px 70px ${props => ` ${props.theme.colors.primary}`};
@@ -290,6 +267,7 @@ export const DivContainer = styled.section<IPropsHome>`
       width: 100%;
       height: 70%;
     }
+
     .right {
       width: 100%;
       height: 50%;
@@ -305,7 +283,16 @@ export const DivContainer = styled.section<IPropsHome>`
 
     .div-info {
       width: 100%;
-      height: 70%;
+      height: 63%;
+    }
+
+    .info {
+      h1 {
+        font-size: 3rem !important;
+      }
+      /* span {
+        font-size: 15px !important;
+      } */
     }
 
     .div-contatos {
@@ -313,23 +300,23 @@ export const DivContainer = styled.section<IPropsHome>`
     }
     .right {
       width: 100%;
-      height: 30%;
+      height: 15rem;
 
       img {
-        height: 13rem;
-        width: 13rem;
+        /* height: 13rem;
+        width: 13rem; */
       }
     }
 
-    .div-text {
+    /* .div-text {
       height: 28px;
-    }
-    .div-icon {
+    } */
+    /* .div-icon {
       height: 28px;
-    }
-    .linkedin {
+    } */
+    /* .linkedin {
       font-size: 10px;
-    }
+    } */
     .github {
     }
     .instagram {

@@ -6,7 +6,7 @@ import styled from 'styled-components'
 // }
 
 export const DivBurguer = styled.div`
-  position: sticky;
+  position: fixed;
   top: 5px;
   z-index: 100;
   width: 30px;

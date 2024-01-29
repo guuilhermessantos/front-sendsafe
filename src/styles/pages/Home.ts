@@ -27,6 +27,10 @@ export const Container = styled.div`
     font-size: 24px;
     line-height: 32px;
   }
+
+  @media screen and (max-width: 550px) {
+    padding: 0px 5px 0px 5px;
+  }
 `
 
 export const Scroll = styled.div`
