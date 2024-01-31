@@ -75,10 +75,41 @@ export const DivContainer = styled.section<IPropsHome>`
       @media screen and (max-width: 1450px) {
         height: 11rem;
         .title-card {
-        font-size: 0.9rem;
+          font-size: 0.9rem;
+        }
+        .info-card {
+          font-size: 0.8rem;
+        }
       }
-      .info-card {
-        font-size: 0.8rem;
+    }
+  }
+
+  @media screen and (max-width: 1070px) {
+    .footer-info {
+      margin-top: 10px;
+      flex-direction: column;
+
+      gap: 20px;
+      justify-content: space-around;
+      height: 35rem;
+      div {
+        width: 99%;
+        height: 15rem;
+      }
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .footer-info {
+      margin-top: 10px;
+      flex-direction: column;
+
+      gap: 20px;
+      justify-content: space-around;
+      height: 35rem;
+      div {
+        /* border-radius: 6px; */
+        width: 99%;
+        height: 15rem;
       }
     }
   }

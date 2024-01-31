@@ -37,9 +37,9 @@ export const ProjectsSkills: React.FC<IProps> = ({ controlSide, ...rest }) => {
           </span>
           <span className="title-card">Back-End</span>
           <span className="info-card">
-            Desenvolvimento de sites soluções no lado do servidores com Node.js
-            e o framework typeorm para trabalhar com bancos de dados relacionais
-            e arquitetura limpa para criar APIs eficientes e escaláveis.
+            Desenvolvimento de soluções no lado do servidores com Node.js e o
+            framework typeorm para trabalhar com bancos de dados relacionais e
+            arquitetura limpa para criar APIs eficientes e escaláveis.
           </span>
         </div>
         <div className="card-three">
