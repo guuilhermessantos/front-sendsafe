@@ -3,7 +3,7 @@ import styled from 'styled-components'
 interface IPropsHome {
   // controlSwitch: string
   controlSide?: string
-  isIOS: boolean
+  isIOS: string
 }
 
 export const DivContainer = styled.section<IPropsHome>`
@@ -50,15 +50,13 @@ export const DivContainer = styled.section<IPropsHome>`
       border-radius: 0px 0px 10px 10px;
       /* border: #d1d1d1 solid 1px; */
       /* background-color: ${props => props.theme.colors.text}; */
-      /* background-color: ${props =>
-        props.isIOS === true ? '250px' : '88px'}; */
       background-size: cover;
       background-position: top;
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-blend-mode: luminosity;
       background-image: ${props =>
-        props.isIOS === true ? '' : 'url(/image/paralax.webp)'};
+        props.isIOS === 'true' ? '' : 'url(/image/paralax.webp)'};
     }
     :active {
       /* cursor: grabbing !important; */
