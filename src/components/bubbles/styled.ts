@@ -60,7 +60,7 @@ export const Bubbles = styled.span<IPropsHome>`
   :hover {
     background-color: ${props => props.theme.colors.mode};
     box-shadow: ${props =>
-      `0 0 0 5px ${props.theme.colors.mode_hover}, 0 0 25px ${props.theme.colors.mode}, 0 0 50px ${props.theme.colors.mode}`};
+      `0 0 0 5px ${props.theme.colors.modeHover}, 0 0 25px ${props.theme.colors.mode}, 0 0 50px ${props.theme.colors.mode}`};
   }
 
   @keyframes animate {
@@ -68,7 +68,7 @@ export const Bubbles = styled.span<IPropsHome>`
       transform: translateY(200vh) scale(0);
     }
     100% {
-      transform: translateY(-210vh) scale(1);
+      transform: translateY(-250vh) scale(1);
     }
   }
   :nth-of-type(even) {
@@ -78,7 +78,7 @@ export const Bubbles = styled.span<IPropsHome>`
     :hover {
       background-color: ${props => props.theme.colors.mode};
       box-shadow: ${props =>
-        `0 0 0 5px ${props.theme.colors.mode_hover}, 0 0 25px ${props.theme.colors.mode}, 0 0 50px ${props.theme.colors.mode}`};
+        `0 0 0 5px ${props.theme.colors.modeHover}, 0 0 25px ${props.theme.colors.mode}, 0 0 50px ${props.theme.colors.mode}`};
     }
 
     /* @media screen and (max-width: 840px) {

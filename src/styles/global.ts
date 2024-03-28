@@ -8,6 +8,7 @@ export default createGlobalStyle`
 
     scroll-behavior: smooth;
 
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -31,7 +32,48 @@ export default createGlobalStyle`
   }
 
   html {
-    font-size: 16px;
+    font-size: 100%;
+    width: 100%;
+  }
+
+  .h1-responsive {
+    font-size: 3rem !important;
+     @media screen and (max-width: 550px) {
+      font-size: 1.8rem !important;
+    }
+  }
+  .h2-responsive {
+    font-size: 1.5rem !important;
+     @media screen and (max-width: 550px) {
+      font-size: 1rem !important;
+    }
+  }
+  .span-responsive {
+   font-size: 0.9rem !important;
+        @media screen and (max-width: 1070px) {
+          font-size: 0.97rem !important;
+        }
+        @media screen and (max-width: 550px) {
+          font-size: 0.95rem !important;
+        }
+  }
+  .span-title-card-small-responsive {
+    font-size: 0.85rem !important;
+    /* @media screen and (max-width: 1070px) {
+      font-size: 0.75rem !important;
+    } */
+     @media screen and (max-width: 550px) {
+      font-size: 0.8rem !important;
+    }
+  }
+  .span-card-small-responsive {
+    font-size: 0.85rem !important;
+    /* @media screen and (max-width: 1070px) {
+      font-size: 0.75rem !important;
+    } */
+     @media screen and (max-width: 550px) {
+      font-size: 0.82rem !important;
+    }
   }
 
 

@@ -1,11 +1,13 @@
-const themeDark = {
+import { DefaultTheme } from 'styled-components'
+
+const themeDark: DefaultTheme = {
   colors: {
     background: '#3A3B3C',
     shapeLow: '#3A3B3C',
     primary: '#59cd90',
-    primary_hover: '#59cd9044',
+    primaryHover: '#59cd9044',
     mode: '#919191',
-    mode_hover: '#91919144',
+    modeHover: '#91919144',
     // primary: '#14213D',
     text: '#CCC',
     shape: '#242526',

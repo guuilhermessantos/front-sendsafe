@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 interface IPropsSwitch {
   controlSwitch: string
-  controlSide: string
+  controlSide?: string
   controlDisplay?: string
   controlHamburg?: string
 }
@@ -252,18 +252,40 @@ export const NavContainer = styled.nav<IPropsSwitch>`
       color: ${props => props.theme.colors.text};
     }
 
+    .active {
+      background-image: linear-gradient(
+        to right,
+        ${props => props.theme.colors.primary},
+        ${props => props.theme.colors.primary}
+      );
+      box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+      background-position: 100% 0;
+      moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      -webkit-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+      .icon {
+        color: white;
+      }
+      .text {
+        color: white;
+      }
+    }
+
     a {
       height: 100%;
       width: 100%;
       display: flex;
       align-items: center;
-      text-decoration: none;
+      text-decoration: none; /* Remove sublinhado */
+      color: inherit; /* Mantém a cor padrão do texto */
       border-radius: 6px;
       transition: all 0.4s ease-in-out;
       /* moz-transition: all 0.4s ease-in-out; */
       -o-transition: all 0.4s ease-in-out;
       -webkit-transition: all 0.5s ease-in-out;
     }
+
     a:hover {
       background-image: linear-gradient(
         to right,

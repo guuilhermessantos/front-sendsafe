@@ -1,17 +1,11 @@
-import React, { ReactNode, useEffect, useState } from 'react'
-import logo from '../../public/image/logo.png'
-import arrowRight from '../../public/assets/arrow-right.png'
-
-import { BackgroundBubbles, test } from '../../components/bubbles'
-import { Bubbles } from '../../components/bubbles/styled'
-import avatar from '../../public/image/avatar.png'
+import React from 'react'
 import { DivContainer } from './styled'
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   controlSwitch?: string
 }
 
-export const Dashboard: React.FC<IProps> = ({ controlSwitch, ...rest }) => {
+const Dashboard: React.FC<IProps> = ({ ...rest }) => {
   return (
     <DivContainer {...rest}>
       {/* <div className="div-bubbles">
@@ -21,21 +15,25 @@ export const Dashboard: React.FC<IProps> = ({ controlSwitch, ...rest }) => {
       </div> */}
       <div className="div-info">
         <div className="info">
-          <h1>Olá,</h1>
-          <span>
-            Meu nome é <span className="text-weight">Guilherme Santos</span>,
+          <h1 className="h1-responsive">Olá,</h1>
+          <span className="span-responsive">
+            Meu nome é{' '}
+            <span className="text-weight span-responsive">
+              Guilherme Santos
+            </span>
+            ,
             <br />
           </span>
-          <span>
+          <span className="span-responsive">
             E sou Desenvolvedor Full Stack atualmente atuando com{' '}
-            <span className="text-weight">
+            <span className="text-weight span-responsive">
               Next JS, React JS, React Native, Reducer, Node Js
             </span>
           </span>
           <div className="div-button">
-            <a href="#sobremim">
+            <a href="#sobre">
               <button>
-                <span className="text-button">Sobre mim</span>
+                <span className="text-button span-responsive">Sobre mim</span>
                 <i className="bx bxs-down-arrow-circle arrow-down" />
               </button>
             </a>
@@ -43,7 +41,7 @@ export const Dashboard: React.FC<IProps> = ({ controlSwitch, ...rest }) => {
         </div>
         <div className="div-contatos">
           <div className="div-text">
-            <span>Contatos:</span>
+            <span className="span-responsive">Contato:</span>
           </div>
           <div className="div-icon">
             <a
@@ -72,9 +70,12 @@ export const Dashboard: React.FC<IProps> = ({ controlSwitch, ...rest }) => {
           </div>
         </div>
       </div>
+
       <div className="right">
-        <img src={avatar} alt="avatar" />
+        <img src={'/image/avatar.png'} alt="avatar" />
       </div>
     </DivContainer>
   )
 }
+
+export default Dashboard

@@ -5,114 +5,32 @@ interface IPropsHome {
   controlSide?: string
 }
 
-export const DivContainer = styled.section<IPropsHome>`
+const DivContainer = styled.section<IPropsHome>`
   z-index: 1;
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   justify-content: space-around;
   align-items: center;
 
-  .info-skills {
-    width: 100%;
-    /* height: 40%; */
-    border-radius: 10px;
-    background-color: transparent;
-    padding: 20px;
-    box-shadow: 0 8px 30px rgb(0 0 0 / 50%);
-    backdrop-filter: blur(20px);
-  }
-
-  .footer-info {
-    /* background-color: blue; */
-    width: 100%;
-    /* height: 37%; */
+  .card-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
+    justify-content: center;
 
-    div {
-      border-radius: 6px;
-      width: 30%;
-      height: 14rem;
-      border-radius: 10px;
-      background-color: transparent;
-
-      box-shadow: 0 8px 30px rgb(0 0 0 / 50%);
-      backdrop-filter: blur(15px);
-      z-index: 2;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-
-      flex-direction: column;
-      padding: 10px;
-      text-align: center;
-
-      .img {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2rem;
-        width: 40px;
-        height: 40px;
-        background-color: ${props => props.theme.colors.primary};
-        border-radius: 50%;
-        color: ${props => props.theme.colors.arrow};
-      }
-      .title-card {
-        font-weight: bold;
-        font-size: 1rem;
-      }
-      .info-card {
-        font-size: 0.9rem;
-        /* color: blue; */
-      }
-
-      @media screen and (max-width: 1450px) {
-        height: 11rem;
-        .title-card {
-          font-size: 0.9rem;
-        }
-        .info-card {
-          font-size: 0.8rem;
-        }
-      }
-    }
-  }
-
-  @media screen and (max-width: 1070px) {
-    .footer-info {
-      margin-top: 10px;
-      flex-direction: column;
-
-      gap: 20px;
-      justify-content: space-around;
-      height: 35rem;
-      div {
-        width: 99%;
-        height: 15rem;
-      }
-    }
-  }
-  @media screen and (max-width: 500px) {
-    .footer-info {
-      margin-top: 10px;
-      flex-direction: column;
-
-      gap: 20px;
-      justify-content: space-around;
-      height: 35rem;
-      div {
-        /* border-radius: 6px; */
-        width: 99%;
-        height: 15rem;
-      }
+    height: 90%;
+    width: 100%;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
+    backdrop-filter: blur(20px);
+    h2 {
+      margin-bottom: 2vh;
     }
   }
 
   /* background-color: blue; */
 `
+export default DivContainer

@@ -24,7 +24,8 @@
   "plugins": [
     "react",
     "@typescript-eslint",
-    "prettier"
+    "prettier",
+    "@next/eslint-plugin-next"
   ],
   "rules": {
     "prettier/prettier": "error",

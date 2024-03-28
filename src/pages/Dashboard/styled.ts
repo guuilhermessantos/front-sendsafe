@@ -8,7 +8,7 @@ interface IPropsHome {
 export const DivContainer = styled.section<IPropsHome>`
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: row;
   /* background-color: red; */
@@ -17,30 +17,36 @@ export const DivContainer = styled.section<IPropsHome>`
   /* background-color: red; */
   .div-info {
     width: 60%;
-    height: 80%;
+    /* background-color: red; */
+    /* background-color: ; */
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 
     .info {
-      width: 80%;
+      height: 31vh;
+      background-color: blue;
+      width: 90%;
+
       border-radius: 10px;
       background-color: transparent;
+
       /* height: 100%; */
       z-index: 1;
-      padding: 1.5rem;
+      padding: 3vh;
       box-shadow: 0 8px 30px rgb(0 0 0 / 50%);
       backdrop-filter: blur(20px);
-      font-size: 1rem;
+      /* font-size: 1rem; */
       h1 {
-        font-size: 3.5rem;
+        /* font-size: 3rem; */
         margin: 0;
       }
 
-      span {
+      /* span {
         font-size: 1rem;
-      }
+      } */
       .text-weight {
         font-weight: bold;
       }
@@ -54,7 +60,11 @@ export const DivContainer = styled.section<IPropsHome>`
     }
 
     .div-button {
+      /* background-color: red; */
       width: 100%;
+      /* height: 50%; */
+      height: 10vh;
+      /* background-color: red; */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -68,21 +78,21 @@ export const DivContainer = styled.section<IPropsHome>`
 
         button {
           cursor: pointer;
-          color: ${props => props.theme.colors.arrow};
+          color: ${({ theme }) => theme.colors?.arrow};
           padding: 10px;
           display: flex;
           align-items: center;
           justify-content: space-around;
-          margin-top: 1.7rem;
-          margin-bottom: 10px;
+          margin-top: 0.8rem;
+          /* margin-bottom: 10px; */
           z-index: 1;
-          height: 50px;
+          height: 6.5vh;
           width: 150px;
           border-radius: 5px;
           backdrop-filter: blur(5px);
-          /* background-color: ${props => props.theme.colors.primary}; */
-          background-color: ${props => props.theme.colors.primary};
-          box-shadow: 0 8px 30px ${props => ` ${props.theme.colors.primary}`};
+          /* background-color: ${props => props.theme.colors?.primary}; */
+          background-color: ${props => props.theme.colors?.primary};
+          box-shadow: 0 8px 30px ${props => ` ${props.theme.colors?.primary}`};
           border: 0;
 
           -moz-transition: all 0.4s ease-in-out;
@@ -96,24 +106,24 @@ export const DivContainer = styled.section<IPropsHome>`
           .arrow-down {
             transition: all 0.4s ease-in-out;
             font-size: 20px;
-            color: ${props => props.theme.colors.arrow};
+            color: ${({ theme }) => theme.colors?.arrow};
           }
           :hover {
             transition: all 0.4s ease-in-out;
             border-radius: 4em;
-            box-shadow: 0 0px 10px ${props => ` ${props.theme.colors.primary}`};
+            box-shadow: 0 0px 10px ${props => ` ${props.theme.colors?.primary}`};
           }
           :active {
             transition: all 0.4s ease-in-out;
-            box-shadow: 0 0px 70px ${props => ` ${props.theme.colors.primary}`};
+            box-shadow: 0 0px 70px ${props => ` ${props.theme.colors?.primary}`};
           }
         }
       }
     }
   }
   .div-contatos {
-    margin-top: 1.4rem;
-    width: 80%;
+    margin-top: 3vh;
+    width: 90%;
     /* height: 0px; */
     border-radius: 10px;
     background-color: transparent;
@@ -125,19 +135,22 @@ export const DivContainer = styled.section<IPropsHome>`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 8vh;
     .div-text {
       display: flex;
       align-items: center;
       width: 30%;
-      /* background-color: red; */
-      height: 40px;
+      font-weight: bold;
+      /* background-color: blue; */
+      /* height: 40px; */
     }
     .div-icon {
-      height: 40px;
+      /* height: 40px; */
+      /* background-color: red; */
       display: flex;
       align-items: center;
       justify-content: space-around;
-      width: 50%;
+      width: 65%;
 
       .linkedin {
         display: flex;
@@ -218,7 +231,7 @@ export const DivContainer = styled.section<IPropsHome>`
         height: 40px;
         border-radius: 50%;
         box-shadow: 0 8px 30px rgb(0 0 0 / 12%);
-        :hover {
+        :active {
           animation: girar 2s infinite linear;
 
           @keyframes girar {
@@ -237,9 +250,9 @@ export const DivContainer = styled.section<IPropsHome>`
     }
   }
   .right {
-    /* background-color: blue; */
     width: 40%;
-    height: 80%;
+    padding: 1rem;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -247,10 +260,11 @@ export const DivContainer = styled.section<IPropsHome>`
 
     img {
       z-index: 1;
-      height: 20rem;
-      width: 20rem;
-      background-color: ${props => props.theme.colors.primary};
-      box-shadow: 0 0 30px ${props => props.theme.colors.primary};
+      height: 35vh;
+      width: 35vh;
+      background-color: ${props => props.theme.colors?.primary};
+      /* background-color: blue; */
+      box-shadow: 0 0 30px ${props => props.theme.colors?.primary};
       border-radius: 50%;
     }
     /* background-color: red; */
@@ -260,21 +274,25 @@ export const DivContainer = styled.section<IPropsHome>`
     flex-direction: column-reverse;
 
     .div-contatos {
-      margin-top: 1rem;
+      /* margin-top: 1rem; */
     }
 
     .div-info {
       width: 100%;
-      height: 70%;
+      /* background-color: red; */
+      height: 70vh;
+      /* height: 70%; */
     }
 
     .right {
+      /* background-color: red; */
       width: 100%;
-      height: 50%;
+      height: 20vh;
+      /* height: 50%; */
 
       img {
-        height: 14rem;
-        width: 14rem;
+        /* height: 14rem;
+        width: 14rem; */
       }
     }
   }
@@ -283,24 +301,88 @@ export const DivContainer = styled.section<IPropsHome>`
 
     .div-info {
       width: 100%;
-      height: 63%;
+      /* height: 63%; */
     }
 
     .info {
-      h1 {
-        font-size: 3rem !important;
-      }
+      /* h1 {
+        font-size: 5vw !important;
+      } */
       /* span {
-        font-size: 15px !important;
+        font-size: 3.5vw !important;
       } */
     }
 
     .div-contatos {
-      margin-top: 1rem;
+      /* span {
+        font-size: 4vw !important;
+      } */
+
+      .linkedin {
+        width: 10px;
+        height: 10px;
+      }
     }
+
+    .div-icon {
+      /* background-color: red; */
+      button {
+        width: 6vh !important;
+        height: 6vh !important;
+        /* font-size: 3.5vh !important; */
+      }
+    }
+
+    /* .div-contatos {
+      margin-top: 1rem;
+    } */
     .right {
       width: 100%;
-      height: 15rem;
+      /* height: 15rem; */
+
+      img {
+        /* height: 13rem;
+        width: 13rem; */
+      }
+    }
+
+    /* .div-text {
+      height: 28px;
+    } */
+    /* .div-icon {
+      height: 28px;
+    } */
+    /* .linkedin {
+      font-size: 10px;
+    } */
+    .github {
+    }
+    .instagram {
+    }
+  }
+  @media screen and (max-width: 320px) {
+    .div-info {
+      width: 100%;
+
+      /* height: 63%; */
+    }
+
+    .info {
+      height: 42vh !important;
+      /* h1 {
+        font-size: 6.5vw !important;
+      } */
+      /* span {
+        font-size: 4vw !important;
+      } */
+    }
+
+    /* .div-contatos {
+      margin-top: 1rem;
+    } */
+    .right {
+      width: 100%;
+      /* height: 15rem; */
 
       img {
         /* height: 13rem;

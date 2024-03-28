@@ -5,46 +5,138 @@ interface IPropsHome {
   controlSide?: string
 }
 
-export const DivContainer = styled.section<IPropsHome>`
+const DivContainer = styled.section<IPropsHome>`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  min-height: 100vh;
-  padding: 10px;
+  /* min-height: 100vh; */
   align-items: center;
   justify-content: center;
-  .card-about-info {
-    /* background-color: red; */
-    border-radius: 6px;
-    width: 100%;
-    height: 80%;
-    border-radius: 10px;
-    background-color: transparent;
-    padding: 20px;
-    box-shadow: 0 8px 30px rgb(0 0 0 / 50%);
-    backdrop-filter: blur(20px);
-    z-index: 1;
+  width: 100%;
+  z-index: 10;
+  height: 100vh;
+  gap: 2vh;
+  /* background-color: red; */
+  .card-container {
+    /* background-color: pink; */
+    padding-top: 1.5vh;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
+    width: 100%;
+    min-height: 90vh;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgb(0 0 0 / 50%);
+    backdrop-filter: blur(20px);
+    /* padding-top: 2rem; */
 
-    .div-conteudo {
-      margin-top: 10px;
+    /* h2 {
+      height: 3rem;
+    } */
+
+    /* height: 100%; */
+
+    .info-container {
+      padding: 0 1rem 0 1rem;
+      width: 100%;
+      gap: 2rem;
+      display: flex;
+      height: 25vh;
+      align-items: center;
+      justify-content: space-between;
+
+      @media screen and (max-width: 960px) {
+        justify-content: center;
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+    hr {
+      width: 99%;
+    }
+    /* h2 {
       display: flex;
       width: 100%;
-      height: 90%;
-      .div-img {
-        width: 50%;
-        height: 100%;
-        background-color: blue;
+      justify-content: center;
+      align-items: center;
+      height: 7%;
+      box-shadow: 0 01px 15px rgb(0 0 0 / 50%);
+      backdrop-filter: blur(20px);
+      color: ${props =>
+      props.theme.colors.text};
+    } */
+    .card-info {
+      padding: 1rem;
+
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
+      backdrop-filter: blur(20px);
+      color: ${props => props.theme.colors.text};
+      line-height: 1.2rem;
+      /* font-weight: bold; */
+      /* text-align: center; */
+      display: flex;
+      /* justify-content: center; */
+      align-items: center;
+      @media screen and (max-width: 960px) {
+        height: 6rem;
+        /* font-size: 0.9rem; */
       }
-      .div-info {
-        width: 50%;
-        height: 100%;
-        background-color: red;
+      @media screen and (max-width: 520px) {
+        /* height: 5rem; */
+        /* font-size: 0.8rem; */
       }
     }
   }
 
-  /* background-color: blue; */
+  .card-about {
+    /* background-color: pink; */
+    /* background-color: blue; */
+    padding-top: 1.5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    min-height: 20vh;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgb(0 0 0 / 50%);
+    backdrop-filter: blur(20px);
+    .info-container {
+      padding: 0 1rem 0 1rem;
+      width: 100%;
+      /* gap: 2rem; */
+      display: flex;
+      height: 25vh;
+      align-items: center;
+      justify-content: space-between;
+      /* text-align: ;; */
+
+      @media screen and (max-width: 960px) {
+        justify-content: center;
+        flex-direction: column;
+        gap: 1rem;
+        /* font-size: 2.5vh; */
+      }
+    }
+  }
+  .card-journey {
+    /* background-color: pink; */
+    /* background-color: red; */
+    padding-top: 1.5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    min-height: 55vh;
+    gap: 2vh;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgb(0 0 0 / 50%);
+    backdrop-filter: blur(20px);
+  }
 `
+
+export default DivContainer

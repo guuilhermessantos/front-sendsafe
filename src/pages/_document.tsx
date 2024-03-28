@@ -8,6 +8,7 @@ import Document, {
   NextScript
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
+// import favIcon from '../../src/public/image/logo.png'
 
 export default class MyDocument extends Document {
   static async getInitialProps(
@@ -48,7 +49,12 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
 
-          <link rel="icon" href="https://rocketseat.com.br/favicon.ico" />
+          <link rel="icon" href={'/image/logo.png'} />
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          ></link>
+          {/* <link rel="icon" href="https://rocketseat.com.br/favicon.ico" /> */}
           <link
             href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
             rel="stylesheet"

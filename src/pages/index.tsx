@@ -1,28 +1,28 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React from 'react'
 import Head from 'next/head'
-import RocketseatLogo from '../assets/rocketseat.svg'
-import { Container, Scroll } from '../styles/pages/Home'
-import { Dashboard } from './Dashboard'
-import { About } from './About'
-import { Carrossel } from '../components/Carrossel'
-import { BackgroundBubbles, test } from '../components/bubbles'
+import { Container } from '../styles/pages/Home'
+
 import { Bubbles } from '../components/bubbles/styled'
-import { ProjectsSkills } from './ProjectsSkills'
-import { Form } from '../components/Form'
-import { useMediaQuery } from '@geist-ui/react'
-import { MenuBurguer } from '../components/MenuBurguer'
+
+import IconMenuBurguer from '../components/MenuBurguer'
+import Dashboard from './Dashboard'
+
+import Skills from './Skills'
+import ProjectsSkills from './ProjectsSkills'
+import Contact from './Contact'
+import About from './About'
+import { test } from '../mocks/bubblesArray'
+import useWindowSize from '../hooks/windowSize'
+
 interface IProps {
   controlSide: string
-  setToggle?: Dispatch<SetStateAction<boolean>>
-  toggle?: boolean
+  theme: string
+  toggleTheme: () => void
 }
 
-const Home: React.FC<IProps> = ({ controlSide, setToggle, toggle }) => {
-  // let windowLet
-  // if (typeof window !== 'undefined') {
-  //   windowLet = window.innerWidth
-  // }
-  const isXS = useMediaQuery('xs')
+const Home: React.FC<IProps> = ({ controlSide, theme, toggleTheme }) => {
+  const screenWidth = useWindowSize()
+
   return (
     <>
       <Head>
@@ -30,22 +30,22 @@ const Home: React.FC<IProps> = ({ controlSide, setToggle, toggle }) => {
         <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js" />
       </Head>
 
-      {isXS && <MenuBurguer setToggle={setToggle} toggle={toggle} />}
-      <Container>
+      {screenWidth <= 800 && (
+        <IconMenuBurguer theme={theme} toggleTheme={toggleTheme} />
+      )}
+      <Container className="container-page">
         <div className="div-bubbles">
           {test.map((item, index) => (
-            <Bubbles key={index} sequencia={item}></Bubbles>
+            <Bubbles key={index} sequencia={item} />
           ))}
         </div>
-        <Dashboard id="inicio" />
-        <About id="sobremim" />
+        <Dashboard id="home" />
+        <About id="sobre" theme={theme} />
 
-        <ProjectsSkills id="ProjectsSkills" controlSide={controlSide} />
-        <Form id="Form" />
+        <Skills id="skills" />
+        <ProjectsSkills id="portfolio" controlSide={controlSide} />
+        <Contact id="contato" />
       </Container>
-      {/* <RocketseatLogo />
-      <h1>ReactJS Structure</h1>
-      <p>A ReactJS + Next.js structure made by Rocketseat.</p> */}
     </>
   )
 }

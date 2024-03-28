@@ -1,13 +1,12 @@
-import React, { ReactNode, useEffect, useState } from 'react'
-import logo from '../../public/image/logo.png'
-import arrowRight from '../../public/assets/arrow-right.png'
+import React, { ReactNode } from 'react'
 import { Bubbles, DivContainer } from './styled'
+import { test } from '../../mocks/bubblesArray'
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode
 }
-export const test = [72, 12, 54, 23, 13, 32, 63, 72]
-export const BackgroundBubbles: React.FC<IProps> = ({ children, ...rest }) => {
+
+const BackgroundBubbles: React.FC<IProps> = ({ children, ...rest }) => {
   // const { innerWidth: width, innerHeight: height } = window
   return (
     <DivContainer {...rest}>
@@ -20,3 +19,5 @@ export const BackgroundBubbles: React.FC<IProps> = ({ children, ...rest }) => {
     </DivContainer>
   )
 }
+
+export default BackgroundBubbles

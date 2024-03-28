@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavContainer, Switch } from './styled'
-import logo from '../../public/image/logo.png'
-import arrowRight from '../../public/assets/arrow-right.png'
-import { useMediaQuery } from '@geist-ui/react'
+import { useRouter } from 'next/dist/client/router'
+import useWindowSize from '../../hooks/windowSize'
 
 interface IProps {
   toggleTheme: () => void
@@ -12,29 +11,38 @@ interface IProps {
   toggleHamburg: string
 }
 
-export const Navbar: React.FC<IProps> = ({
+const Navbar: React.FC<IProps> = ({
   toggleTheme,
   theme,
   handleControlSideMenu,
   controlSide,
   toggleHamburg
 }) => {
-  // const windowWidth = useRef(window.innerWidth)
-  const isXS = useMediaQuery('xs')
+  const router = useRouter()
+  const screenWidth = useWindowSize()
+  const [activeIcon, setActiveIcon] = useState('')
+
+  useEffect(() => {
+    setActiveIcon(router?.asPath?.toString().replace('/#', ''))
+  }, [])
 
   return (
     <NavContainer
       controlSwitch={theme}
       controlSide={controlSide}
-      controlDisplay={isXS ? 'true' : 'false'}
+      controlDisplay={screenWidth <= 800 ? 'true' : 'false'}
       controlHamburg={toggleHamburg}
     >
       <header>
         <div className="image-text">
-          <a href="#inicio">
+          <a href="#home" onClick={() => setActiveIcon('home')}>
             <span className="image-container">
               <span className="background-image">
-                <img src={logo} title="Guilherme Santos" alt="logo" />
+                <img
+                  src={'/image/logo.png'}
+                  title="Guilherme Santos"
+                  alt="logo"
+                />
               </span>
             </span>
             <div className="header-text">
@@ -65,50 +73,62 @@ export const Navbar: React.FC<IProps> = ({
           </li> */}
           <ul className="menu-links">
             <li className="nav-link">
-              <a href="#inicio">
-                <i className="bx bx-home-alt icon" />
+              <a
+                href="#home"
+                onClick={() => setActiveIcon('home')}
+                className={activeIcon === 'home' ? 'active' : ''}
+              >
+                <i className="bx bxs-dashboard icon" />
                 {controlSide === 'true' && (
-                  <span className="text nav-text">Início</span>
+                  <span className="text nav-text">Home</span>
                 )}
               </a>
             </li>
             <li className="nav-link">
-              <a href="#sobremim">
-                <i className="bx bx-bar-chart-alt-2 icon" />
+              <a
+                href="#sobre"
+                onClick={() => setActiveIcon('sobre')}
+                className={activeIcon === 'sobre' ? 'active' : ''}
+              >
+                <i className="bx bx-info-square icon" />
                 {controlSide === 'true' && (
-                  <span className="text nav-text">Sobre mim</span>
+                  <span className="text nav-text">Sobre</span>
                 )}
               </a>
             </li>
             <li className="nav-link">
-              <a href="#ProjectsSkills">
-                <i className="bx bx-bell icon" />
+              <a
+                href="#skills"
+                onClick={() => setActiveIcon('skills')}
+                className={activeIcon === 'skills' ? 'active' : ''}
+              >
+                <i className="bx bx-bar-chart-square icon" />
                 {controlSide === 'true' && (
                   <span className="text nav-text">Skills</span>
                 )}
               </a>
             </li>
             <li className="nav-link">
-              <a href="#Form">
-                <i className="bx bx-bar-chart-alt icon" />
+              <a
+                href="#portfolio"
+                onClick={() => setActiveIcon('portfolio')}
+                className={activeIcon === 'portfolio' ? 'active' : ''}
+              >
+                <i className="bx bx-windows icon" />
                 {controlSide === 'true' && (
-                  <span className="text nav-text">Análise</span>
+                  <span className="text nav-text">Portfólio</span>
                 )}
               </a>
             </li>
             <li className="nav-link">
-              <a href="#">
-                <i className="bx bx-heart icon" />
+              <a
+                href="#contato"
+                onClick={() => setActiveIcon('contato')}
+                className={activeIcon === 'contato' ? 'active' : ''}
+              >
+                <i className="bx bx-conversation icon" />
                 {controlSide === 'true' && (
-                  <span className="text nav-text">Likes</span>
-                )}
-              </a>
-            </li>
-            <li className="nav-link">
-              <a href="#">
-                <i className="bx bx-wallet icon" />
-                {controlSide === 'true' && (
-                  <span className="text nav-text">Carteiras</span>
+                  <span className="text nav-text">Contato</span>
                 )}
               </a>
             </li>
@@ -143,3 +163,5 @@ export const Navbar: React.FC<IProps> = ({
     </NavContainer>
   )
 }
+
+export default Navbar

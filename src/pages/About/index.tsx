@@ -1,25 +1,66 @@
-import React, { useEffect, useState } from 'react'
-import logo from '../../public/image/logo.png'
-import arrowRight from '../../public/assets/arrow-right.png'
-import { DivContainer } from './styled'
-import { Bubbles } from '../../components/bubbles/styled'
-import { test } from '../../components/bubbles'
+import React from 'react'
+
+// import { motion } from 'framer-motion'
+
+import Journey from '../../components/Journey'
+import DivContainer from './styled'
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   sla?: string
+  theme: string
 }
 
-export const About: React.FC<IProps> = ({ ...rest }) => {
+const About: React.FC<IProps> = ({ theme, ...rest }) => {
+  // const [ref] = useDragScroll()
+  // const containerRef = useRef(null)
+  // const [isDragging, setIsDragging] = useState(false)
+  // const [startX, setStartX] = useState(0)
+  // const [scrollLeft, setScrollLeft] = useState(0)
+
+  // const handleMouseDown = e => {
+  //   e.preventDefault()
+  //   setIsDragging(true)
+  //   setStartX(e.pageX - containerRef.current.offsetLeft)
+  //   setScrollLeft(containerRef.current.scrollLeft)
+  // }
+
+  // const handleMouseUp = () => {
+  //   setIsDragging(false)
+  // }
+
+  // const handleMouseMove = e => {
+  //   if (!isDragging) return
+  //   const x = e.pageX - containerRef.current.offsetLeft
+  //   const distance = x - startX
+  //   containerRef.current.scrollLeft = scrollLeft - distance
+  // }
   return (
     <DivContainer {...rest}>
-      <div className="card-about-info">
-        <h2>Sobre mim</h2>
-        <div className="div-conteudo">
-          <div className="div-img"></div>
+      <div className="card-about">
+        <h2 className="h2-responsive">Sobre Mim</h2>
 
-          <div className="div-info"></div>
+        <div className="info-container">
+          {/* <div className="card-info">
+            Bem-vindo ao meu mundo! Sou um desenvolvedor full stack apaixonado
+            por criar soluções inovadoras e funcionais. Estou aqui para
+            transformar necessidades em experiências excepcionais.
+          </div> */}
+          <span className="span-responsive">
+            Sou um desenvolvedor full stack apaixonado por criar soluções
+            inovadoras e funcionais. Estou aqui para transformar necessidades em
+            experiências excepcionais. e meu objetivo é criar experiências
+            digitais que não apenas impressionem, mas também funcionem de forma
+            excepcional e agreguem valor a negócios e projetos ao redor do
+            mundo.
+          </span>
         </div>
+      </div>
+      <div className="card-journey">
+        <h2 className="h2-responsive">Jornada</h2>
+
+        <Journey theme={theme} />
       </div>
     </DivContainer>
   )
 }
+export default About
