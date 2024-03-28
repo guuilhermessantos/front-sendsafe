@@ -22,10 +22,10 @@ export default function handler(req, res) {
 
   // Configurar o email
   const mailOptions = {
-    from: 'guuilhermessantos@gmail.com',
-    to: query.email,
+    from: query.email,
+    to: 'guuilhermessantos@gmail.com',
     subject: `Contato de ${query.nome} no portfolio`,
-    text: query.descEmail
+    text: `Contato de ${query.email}  descrição: ${query.descEmail}`
   }
 
   // Enviar o email
