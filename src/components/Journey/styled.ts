@@ -50,7 +50,8 @@ export const DivContainer = styled.section<IPropsHome>`
       /* border: #d1d1d1 solid 1px; */
       /* background-color: ${props => props.theme.colors.text}; */
       background-size: cover;
-      background-position: top;
+      /* background-position: top; */
+      background-position: center; // teste
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-blend-mode: luminosity;
