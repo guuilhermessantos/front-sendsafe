@@ -8,7 +8,7 @@ import { Main, Container } from './styled'
 import 'pure-react-carousel/dist/react-carousel.es.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
-import Navbar from '../components/Navbar'
+import Navbar from '../components/navbar'
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const [theme, setTheme] = useState('light')
