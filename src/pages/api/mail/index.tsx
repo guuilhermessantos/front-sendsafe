@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import { toast } from 'react-toastify'
 
 // import dotenv from 'dotenv'
 // dotenv.config()
@@ -30,9 +31,9 @@ export default function handler(req, res) {
   // Enviar o email
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      console.log(error)
+      toast.error('Erro ao enviar o email.')
     } else {
-      console.log('Email enviado: ' + info.response)
+      toast.success('O e-mail foi enviado com sucesso.')
     }
   })
 }
