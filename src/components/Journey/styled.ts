@@ -58,7 +58,7 @@ export const DivContainer = styled.section<IPropsHome>`
       background-attachment: fixed;
       background-blend-mode: luminosity;
       background-image: ${props =>
-        props.isIOS === true ? 'url(/image/aaallprx.webp)' : ''};
+        props.isIOS === true ? '' : 'url(/image/paralax.webp)'};
     }
     :active {
       /* cursor: grabbing !important; */
