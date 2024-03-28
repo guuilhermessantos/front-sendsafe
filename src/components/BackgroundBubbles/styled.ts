@@ -7,17 +7,10 @@ interface IPropsHome {
 }
 
 export const DivContainer = styled.section<IPropsHome>`
-  position: relative;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  /* background-color: blue; */
-  /* .div-bubbles {
-    width: 100%;
-    position: absolute;
-    display: flex;
-    background-color: red;
-  } */
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
 `
 export const Bubbles = styled.span<IPropsHome>`
   z-index: 1;

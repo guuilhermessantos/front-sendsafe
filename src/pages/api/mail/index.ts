@@ -1,29 +1,30 @@
 import nodemailer from 'nodemailer'
 
-import dotenv from 'dotenv'
-dotenv.config()
+// import dotenv from 'dotenv'
+// dotenv.config()
 
 export default function handler(req, res) {
   res.status(200).json({ message: 'Hello World' })
 
-  const body = req.query
+  const query = req.query
+  console.log('query', query)
 
   // Configurar o transporte
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     logger: true,
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
+      user: 'guuilhermessantos@gmail.com',
+      pass: 'fqdo frtn ezex sspi'
     }
   })
 
   // Configurar o email
   const mailOptions = {
-    from: body.email,
-    to: process.env.EMAIL_USER,
-    subject: `Contato de ${body.nome} no portfolio`,
-    text: body.descEmail
+    from: query.email,
+    to: 'guuilhermessantos@gmail.com',
+    subject: `Contato de ${query.nome} no portfolio`,
+    text: query.descEmail
   }
 
   // Enviar o email

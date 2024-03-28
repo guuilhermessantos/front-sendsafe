@@ -152,85 +152,14 @@ export const DivContainer = styled.section<IPropsHome>`
       justify-content: space-around;
       width: 65%;
 
-      .linkedin {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #0a66c2;
-        color: white;
-        font-size: 20px;
-      }
-      .github {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: black;
-        color: white;
-        font-size: 25px;
-      }
-      .instagram {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: radial-gradient(
-            circle farthest-corner at 35% 90%,
-            #fec564,
-            transparent 50%
-          ),
-          radial-gradient(
-            circle farthest-corner at 0 140%,
-            #fec564,
-            transparent 50%
-          ),
-          radial-gradient(
-            ellipse farthest-corner at 0 -25%,
-            #5258cf,
-            transparent 50%
-          ),
-          radial-gradient(
-            ellipse farthest-corner at 20% -50%,
-            #5258cf,
-            transparent 50%
-          ),
-          radial-gradient(
-            ellipse farthest-corner at 100% 0,
-            #893dc2,
-            transparent 50%
-          ),
-          radial-gradient(
-            ellipse farthest-corner at 60% -20%,
-            #893dc2,
-            transparent 50%
-          ),
-          radial-gradient(
-            ellipse farthest-corner at 100% 100%,
-            #d9317a,
-            transparent
-          ),
-          linear-gradient(
-            #6559ca,
-            #bc318f 30%,
-            #e33f5f 50%,
-            #f77638 70%,
-            #fec66d 100%
-          );
-
-        :hover {
-          box-shadow: 0 8px 30px rgb(0 0 0 / 12%);
-        }
-        color: white;
-        font-size: 25px;
-      }
       a {
         text-decoration: none;
       }
-      button {
+      img {
         cursor: pointer;
         border: 0;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        box-shadow: 0 8px 30px rgb(0 0 0 / 12%);
+        width: 2.2rem;
+        height: 2.5rem;
         :active {
           animation: girar 2s infinite linear;
 

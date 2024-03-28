@@ -53,17 +53,8 @@ export const DivContainer = styled.section<IPropsHome>`
 
       ${props =>
         props.isIOS === 'true'
-          ? 'background-image: url(/image/parallax.webp)'
-          : 'background-size: cover;background-position: top;background-repeat: no-repeat;background-attachment: fixed;background-blend-mode: luminosity; background-image: url(/image/parallax.webp)'}/* background-size: cover;
-      background-position: top;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-blend-mode: luminosity; */
-      /* background-image: ${props =>
-        props.isIOS === 'true'
-          ? ''
-          : 'url(/image/parallax.webp)'}; */
-      /* background-image: url(/image/parallax.webp); */
+          ? 'background-image: url(/image/parallaxAlter.jpg); background-size: cover; background-blend-mode: luminosity; '
+          : 'background-size: cover; background-position: top;background-repeat: no-repeat;background-attachment: fixed;background-blend-mode: luminosity; background-image: url(/image/parallaxAlter.jpg)'}
     }
     :active {
       /* cursor: grabbing !important; */
@@ -85,7 +76,8 @@ export const DivContainer = styled.section<IPropsHome>`
     div {
       font-size: 1rem !important;
       padding: 0.6rem 1rem;
-      background-color: #00286d70;
+      background-color: #59cd8fa0;
+      /* background-color: #59cd90; */
       border-radius: 5px;
       margin: 1rem;
       margin-right: 2rem;
@@ -95,7 +87,7 @@ export const DivContainer = styled.section<IPropsHome>`
 
       h3 {
         color: #ffffff;
-        background-color: #3c7de7;
+        background-color: #59cd90;
         width: fit-content;
         padding: 0.2rem 1rem;
         border-radius: 2rem;
@@ -119,18 +111,18 @@ export const DivContainer = styled.section<IPropsHome>`
       }
     }
     :nth-child(odd) {
-      border-bottom: 2px solid #3c7de7;
+      border-bottom: 2px solid #59cd90;
       transform: translateY(-49.3%);
     }
     :nth-child(even) {
-      border-top: 2px solid #3c7de7;
+      border-top: 2px solid #59cd90;
       transform: translateY(49.3%);
     }
 
     :nth-child(odd)::before,
     :nth-child(even)::before {
       content: '';
-      background: #3c7de7;
+      background: #59cd90;
       width: 2px;
       height: 75%;
       position: absolute;
@@ -146,7 +138,7 @@ export const DivContainer = styled.section<IPropsHome>`
     :nth-child(odd)::after,
     :nth-child(even)::after {
       content: '';
-      background: #3c7de7;
+      background: #59cd90;
       width: 0.8rem;
       height: 0.8rem;
       border-radius: 50%;

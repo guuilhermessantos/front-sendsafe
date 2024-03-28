@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { NavContainer, Switch } from './styled'
+
 import { useRouter } from 'next/dist/client/router'
 import useWindowSize from '../../hooks/windowSize'
+import { NavContainer, Switch } from './styled'
 
 interface IProps {
   toggleTheme: () => void
@@ -18,13 +19,14 @@ const Navbar: React.FC<IProps> = ({
   controlSide,
   toggleHamburg
 }) => {
-  const router = useRouter()
+  // const router = useRouter()  // logica de ativar itens no menu em construção
   const screenWidth = useWindowSize()
   const [activeIcon, setActiveIcon] = useState('')
 
-  useEffect(() => {
-    setActiveIcon(router?.asPath?.toString().replace('/#', ''))
-  }, [])
+  // logica de ativar itens no menu em construção
+  // useEffect(() => {
+  //   setActiveIcon(router?.asPath?.toString().replace('/#', ''))
+  // }, [])
 
   return (
     <NavContainer
@@ -35,7 +37,10 @@ const Navbar: React.FC<IProps> = ({
     >
       <header>
         <div className="image-text">
-          <a href="#home" onClick={() => setActiveIcon('home')}>
+          <a
+            href="#home"
+            // onClick={() => setActiveIcon('home')}   // logica de ativar itens no menu em construção
+          >
             <span className="image-container">
               <span className="background-image">
                 <img
@@ -75,55 +80,55 @@ const Navbar: React.FC<IProps> = ({
             <li className="nav-link">
               <a
                 href="#home"
-                onClick={() => setActiveIcon('home')}
+                // onClick={() => setActiveIcon('home')}  logica de ativar itens no menu em construção
                 className={activeIcon === 'home' ? 'active' : ''}
               >
                 <i className="bx bxs-dashboard icon" />
                 {controlSide === 'true' && (
-                  <span className="text nav-text">Home</span>
+                  <span className="text nav-text">Início</span>
                 )}
               </a>
             </li>
             <li className="nav-link">
               <a
                 href="#sobre"
-                onClick={() => setActiveIcon('sobre')}
+                // onClick={() => setActiveIcon('sobre')} logica de ativar itens no menu em construção
                 className={activeIcon === 'sobre' ? 'active' : ''}
               >
                 <i className="bx bx-info-square icon" />
                 {controlSide === 'true' && (
-                  <span className="text nav-text">Sobre</span>
+                  <span className="text nav-text">Sobre mim</span>
                 )}
               </a>
             </li>
             <li className="nav-link">
               <a
                 href="#skills"
-                onClick={() => setActiveIcon('skills')}
+                // onClick={() => setActiveIcon('skills')} logica de ativar itens no menu em construção
                 className={activeIcon === 'skills' ? 'active' : ''}
               >
                 <i className="bx bx-bar-chart-square icon" />
                 {controlSide === 'true' && (
-                  <span className="text nav-text">Skills</span>
+                  <span className="text nav-text">Habilidades</span>
                 )}
               </a>
             </li>
             <li className="nav-link">
               <a
                 href="#portfolio"
-                onClick={() => setActiveIcon('portfolio')}
+                // onClick={() => setActiveIcon('portfolio')} logica de ativar itens no menu em construção
                 className={activeIcon === 'portfolio' ? 'active' : ''}
               >
                 <i className="bx bx-windows icon" />
                 {controlSide === 'true' && (
-                  <span className="text nav-text">Portfólio</span>
+                  <span className="text nav-text">Projetos</span>
                 )}
               </a>
             </li>
             <li className="nav-link">
               <a
                 href="#contato"
-                onClick={() => setActiveIcon('contato')}
+                // onClick={() => setActiveIcon('contato')} logica de ativar itens no menu em construção
                 className={activeIcon === 'contato' ? 'active' : ''}
               >
                 <i className="bx bx-conversation icon" />
@@ -135,12 +140,6 @@ const Navbar: React.FC<IProps> = ({
           </ul>
         </div>
         <div className="bottom-content">
-          {/* <li className="nav-link">
-            <a href="#">
-              <i className="bx bx-log-out icon" />
-              <span className="text nav-text">Logout</span>
-            </a>
-          </li> */}
           <li className="mode">
             <div className="moon-sun">
               <i className="bx bx-moon icon moon" />

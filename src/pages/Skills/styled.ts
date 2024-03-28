@@ -79,7 +79,7 @@ export const DivContainer = styled.section<IPropsHome>`
       /* grid-template-rows: auto auto; */
 
       .card-techs {
-        width: 10rem;
+        width: 5rem;
         height: 15vh;
         padding: 1rem;
         border-radius: 10px;

@@ -28,25 +28,25 @@ const IconMenuBurguer: React.FC<IProps> = ({ toggleTheme, theme }) => {
             <a href="#home">
               <p>
                 <i className="bx bxs-dashboard icon" />
-                <span>Home</span>
+                <span>Início</span>
               </p>
             </a>
             <a href="#sobre">
               <p>
                 <i className="bx bx-info-square icon" />
-                Sobre
+                Sobre mim
               </p>
             </a>
             <a href="#skills">
               <p>
                 <i className="bx bx-bar-chart-square icon" />
-                Skills
+                Habilidades
               </p>
             </a>
             <a href="#portfolio">
               <p>
                 <i className="bx bx-windows icon" />
-                Portfólio
+                Projetos
               </p>
             </a>
             <a href="#contato">

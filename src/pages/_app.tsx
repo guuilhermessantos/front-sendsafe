@@ -8,7 +8,7 @@ import { Main, Container } from './styled'
 import 'pure-react-carousel/dist/react-carousel.es.css'
 import 'react-toastify/dist/ReactToastify.css'
 
-import Navbar from '../components/navbar'
+import Navbar from '../components/Navbar'
 import { ToastContainer } from 'react-toastify'
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {

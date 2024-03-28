@@ -53,7 +53,7 @@ export const Switch = styled.span<IPropsSwitch>`
     height: 15px;
     width: 15px;
     /* border-radius: 50px; */
-    top: 51%;
+    top: 55%;
     transition: all 0.3s ease-in-out;
     left: 27px;
     transform: translateY(-50%);

@@ -45,27 +45,31 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
           </div>
           <div className="div-icon">
             <a
-              href="https://www.linkedin.com/in/guilherme-santos-652b49174/"
+              href="https://wa.me/+5511958520407?text=Olá%20Guilherme,%20tudo%20bem?%20Vi%20seu%20site%20e%20gostaria%20de%20conversar%20com%20você."
+              aria-label="Mandar mensagem no Whatsapp"
               target="_blank"
               rel="noreferrer"
+              title="Enviar mensagem via WhatsApp"
             >
-              <button className="linkedin">
-                <i className="bx bxl-linkedin" />
-              </button>
+              <img src="/assets/whatsIcon.svg" alt="" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/guilherme-santos-652b49174/"
+              aria-label="Visite meu Linkedin"
+              target="_blank"
+              rel="noreferrer"
+              title="Visite meu Linkedin"
+            >
+              <img src="/assets/linkedinIcon.svg" alt="" />
             </a>
             <a
               href="https://github.com/guuilhermessantos"
+              aria-label="Visite meu Github"
               target="_blank"
               rel="noreferrer"
+              title="Visite meu Github"
             >
-              <button className="github">
-                <i className="bx bxl-github" />
-              </button>
-            </a>
-            <a href="#" target="_blank" rel="noreferrer">
-              <button className="instagram">
-                <i className="bx bxl-instagram" />
-              </button>
+              <img src="/assets/githubIcon.svg" alt="" />
             </a>
           </div>
         </div>

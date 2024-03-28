@@ -96,7 +96,8 @@ const DivContainer = styled.section<IPropsHome>`
   .input-container input[type='text'],
   .input-container input[type='email'],
   .input-container textarea {
-    font-size: 20px;
+    font-size: 0.9rem;
+    color: ${props => props.theme.colors?.text};
     width: 100%;
     border: none;
     border-bottom: 2px solid #ccc;
@@ -208,6 +209,7 @@ const DivContainer = styled.section<IPropsHome>`
     align-items: center;
     align-content: center;
     gap: 1rem;
+    margin-top: 5vh;
   }
 
   .social-links::before {
@@ -229,6 +231,11 @@ const DivContainer = styled.section<IPropsHome>`
     display: flex;
     flex-direction: row;
     justify-content: center !important;
+    gap: 2rem;
+    img {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
   }
 
   .social-links-icons > a {

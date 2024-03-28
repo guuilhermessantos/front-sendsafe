@@ -142,7 +142,7 @@ export const SwitchMenuBurguer = styled.span<IPropsSwitch>`
   width: 44px;
   border-radius: 25px;
   background-color: ${props => props.theme.colors.mode};
-  margin-top: 1.5rem;
+  margin-top: 1.8rem;
 
   :before {
     content: '';
