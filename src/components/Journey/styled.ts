@@ -54,7 +54,7 @@ export const DivContainer = styled.section<IPropsHome>`
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-blend-mode: luminosity;
-      background-image: url(/image/plane-bg.webp);
+      background-image: url(/image/actionsys.png);
     }
     :active {
       /* cursor: grabbing !important; */
