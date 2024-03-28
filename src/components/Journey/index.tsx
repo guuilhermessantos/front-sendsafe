@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 // import { motion } from 'framer-motion'
 
@@ -20,6 +20,17 @@ const Journey: React.FC<IProps> = ({ theme }) => {
   const [startX, setStartX] = useState(0)
   const [scrollLeft, setScrollLeft] = useState(0)
 
+  const [isIOS, setIsIOS] = useState(false)
+
+  useEffect(() => {
+    const userAgent = window.navigator.userAgent.toLowerCase()
+    setIsIOS(
+      userAgent.includes('iphone') ||
+        userAgent.includes('ipad') ||
+        userAgent.includes('ipod')
+    )
+  }, [])
+
   const handleMouseDown = e => {
     e.preventDefault()
     setIsDragging(true)
@@ -39,6 +50,7 @@ const Journey: React.FC<IProps> = ({ theme }) => {
   }
   return (
     <DivContainer>
+      <div>{isIOS ? 'Está no iOS' : 'Não está no iOS'}</div>
       <article className="container journey-area">
         <section
           id="my-journey"
