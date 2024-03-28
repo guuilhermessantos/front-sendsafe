@@ -49,8 +49,8 @@ const Journey: React.FC<IProps> = ({ theme }) => {
     containerRef.current.scrollLeft = scrollLeft - distance
   }
   return (
-    <DivContainer>
-      <div>{isIOS ? 'Está no iOS' : 'Não está no iOS'}</div>
+    <DivContainer isIOS={isIOS}>
+      {/* <div>{isIOS ? 'Está no iOS' : 'Não está no iOS'}</div> */}
       <article className="container journey-area">
         <section
           id="my-journey"
