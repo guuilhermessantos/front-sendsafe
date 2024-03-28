@@ -50,13 +50,20 @@ export const DivContainer = styled.section<IPropsHome>`
       border-radius: 0px 0px 10px 10px;
       /* border: #d1d1d1 solid 1px; */
       /* background-color: ${props => props.theme.colors.text}; */
-      background-size: cover;
+
+      ${props =>
+        props.isIOS === 'true'
+          ? 'background-image: url(/image/parallax.webp)'
+          : 'background-size: cover;background-position: top;background-repeat: no-repeat;background-attachment: fixed;background-blend-mode: luminosity; background-image: url(/image/parallax.webp)'}/* background-size: cover;
       background-position: top;
       background-repeat: no-repeat;
       background-attachment: fixed;
-      background-blend-mode: luminosity;
-      background-image: ${props =>
-        props.isIOS === 'true' ? '' : 'url(/image/paralax.webp)'};
+      background-blend-mode: luminosity; */
+      /* background-image: ${props =>
+        props.isIOS === 'true'
+          ? ''
+          : 'url(/image/parallax.webp)'}; */
+      /* background-image: url(/image/parallax.webp); */
     }
     :active {
       /* cursor: grabbing !important; */
