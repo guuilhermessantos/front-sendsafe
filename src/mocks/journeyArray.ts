@@ -42,7 +42,7 @@ export const journeyArray = [
   },
   {
     year: '2022 - HJ',
-    icon: '🎓',
+    icon: '💼',
     desc:
       'Após estudar um tempo JavaScript, Consigo uma vaga para atuar com JavaScript sendo Desenvolvedor FullStack'
   }

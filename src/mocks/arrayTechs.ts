@@ -13,7 +13,7 @@ export const arrayTechs: ITechsIconArray[] = [
     title: 'CSS'
   },
   {
-    imgTech: '/assets/techs/reactIcon.png',
+    imgTech: '/assets/techs/javascriptIcon.png',
     title: 'JavaScript'
   },
   {
