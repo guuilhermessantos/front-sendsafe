@@ -187,6 +187,10 @@ export const cardsCarrossel = [
         imgTech: '/assets/techs/nodejsIcon.png',
         title: 'Node JS'
       },
+      {
+        imgTech: '/assets/techs/jestIcon.png',
+        title: 'Jest'
+      },
 
       {
         imgTech: '/assets/techs/prismaOrm.png',
