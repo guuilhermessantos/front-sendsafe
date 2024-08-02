@@ -46,12 +46,12 @@ const About: React.FC<IProps> = ({ theme, ...rest }) => {
             transformar necessidades em experiências excepcionais.
           </div> */}
           <span className="span-responsive">
-            Sou um desenvolvedor full stack apaixonado por criar soluções
-            inovadoras e funcionais. Estou aqui para transformar necessidades em
-            experiências excepcionais. e meu objetivo é criar experiências
-            digitais que não apenas impressionem, mas também funcionem de forma
-            excepcional e agreguem valor a negócios e projetos ao redor do
-            mundo.
+            Desenvolvedor Full Stack com experiência em React, Next.js, React
+            Native e Node.js. Tenho paixão por criar aplicações web e mobile que
+            são eficientes, escaláveis e de alta performance. Com um forte
+            background em desenvolvimento front-end e back-end, trabalho para
+            oferecer soluções completas que atendem às necessidades dos
+            clientes.
           </span>
         </div>
       </div>
