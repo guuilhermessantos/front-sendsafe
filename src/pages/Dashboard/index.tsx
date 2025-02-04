@@ -329,9 +329,12 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
               value={etiqueta}
               onChange={e => setEtiqueta(e.target.value)}
             />
-            <Button onClick={handleBipagem}>Enviar</Button>
+            {isMobile ? (
+              <ModalCamera setEtiqueta={setEtiqueta} />
+            ) : (
+              <Button onClick={handleBipagem}>Enviar</Button>
+            )}
           </InputContainer>
-          <ModalCamera setEtiqueta={setEtiqueta} />
         </div>
       </div>
 
