@@ -13,20 +13,10 @@ import Quagga from 'quagga'
 import { toast } from 'react-toastify'
 
 interface IProps {
-  fields?: any
-  setValue?: any
-  update?: any
-  append?: any
   setEtiqueta?: any
 }
 
-const ModalCamera = ({
-  fields,
-  setValue,
-  update,
-  append,
-  setEtiqueta
-}: IProps) => {
+const ModalCamera = ({ setEtiqueta }: IProps) => {
   const [visibleModalCamera, setVisibleModalCamera] = useState(false)
   const [detected, setDetected] = useState(false)
   const [dadosColetados, setDadosColetados] = useState<string[]>([])
@@ -45,7 +35,12 @@ const ModalCamera = ({
           inputStream: {
             name: 'Live',
             type: 'LiveStream',
-            target: cameraRef.current
+            target: cameraRef.current,
+            constraints: {
+              width: 1280, // Tente aumentar esses valores
+              height: 720,
+              facingMode: 'environment' // Câmera traseira do celular
+            }
           },
           decoder: {
             readers: ['ean_reader', 'code_128_reader', 'code_39_reader']
