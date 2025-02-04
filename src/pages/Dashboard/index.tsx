@@ -331,7 +331,7 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
             />
             <Button onClick={handleBipagem}>Enviar</Button>
           </InputContainer>
-          <ModalCamera />
+          <ModalCamera setEtiqueta={setEtiqueta} />
         </div>
       </div>
 

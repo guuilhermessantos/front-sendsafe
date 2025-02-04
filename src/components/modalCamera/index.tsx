@@ -17,10 +17,16 @@ interface IProps {
   setValue?: any
   update?: any
   append?: any
-  reset?: any
+  setEtiqueta?: any
 }
 
-const ModalCamera = ({ fields, setValue, update, append, reset }: IProps) => {
+const ModalCamera = ({
+  fields,
+  setValue,
+  update,
+  append,
+  setEtiqueta
+}: IProps) => {
   const [visibleModalCamera, setVisibleModalCamera] = useState(false)
   const [detected, setDetected] = useState(false)
   const [dadosColetados, setDadosColetados] = useState<string[]>([])
@@ -102,6 +108,7 @@ const ModalCamera = ({ fields, setValue, update, append, reset }: IProps) => {
 
   const handleData = (mostFrequent: string) => {
     console.log('mostFrequent', mostFrequent)
+    setEtiqueta(mostFrequent)
   }
 
   // useEffect(() => {
