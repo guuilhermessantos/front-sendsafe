@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components'
 import Pagination from '../../components/Pagination'
 import Quagga from 'quagga'
 import BarcodeReader from 'react-barcode-reader'
+import ModalCamera from '../../components/modalCamera'
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   controlSwitch?: string
 }
@@ -330,22 +331,7 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
             />
             <Button onClick={handleBipagem}>Enviar</Button>
           </InputContainer>
-          {/* Condicionalmente renderiza o botão de ativar/desativar câmera em dispositivos móveis */}
-          {isMobile && !isCameraActive && (
-            <button onClick={toggleCamera}>Ativar Câmera</button>
-          )}
-          {isMobile && isCameraActive && (
-            <button onClick={toggleCamera}>Desativar Câmera</button>
-          )}
-
-          {/* Se não for mobile, exibe o leitor de código de barras */}
-          {!isMobile && <BarcodeReader onBarcodeRead={handleBarcodeRead} />}
-
-          {/* Container onde o QuaggaJS vai renderizar a câmera */}
-          <div
-            id="scanner-container"
-            style={{ width: '100%', height: '400px' }}
-          ></div>
+          <ModalCamera />
         </div>
       </div>
 
