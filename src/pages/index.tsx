@@ -28,8 +28,6 @@ const Home: React.FC<IProps> = ({ controlSide, theme, toggleTheme }) => {
         <IconMenuBurguer theme={theme} toggleTheme={toggleTheme} />
       )}
       <ContainerIndex className="container-page">
-        <BackgroundBubbles />
-
         <Dashboard id="home" />
       </ContainerIndex>
     </>
