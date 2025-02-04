@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Modal = styled.div`
-  /* z-index: ; */
+  z-index: 2001;
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -17,11 +17,11 @@ export const Modal = styled.div`
     position: relative;
     width: 80%;
     height: 80%;
-    /* z-index: 4; */
+    z-index: 4;
 
     .backCamera1 {
       position: absolute;
-      /* z-index: 3; */
+      z-index: 3;
       /* background-color: red;
       opacity: 0.5; */
       width: 100%;
@@ -31,7 +31,7 @@ export const Modal = styled.div`
     }
     .backCamera2 {
       position: absolute;
-      /* z-index: 3; */
+      z-index: 3;
       /* background-color: red;
       opacity: 0.5; */
       width: 100%;
@@ -57,7 +57,7 @@ export const Modal = styled.div`
     position: absolute;
     top: 70px;
     right: 20px;
-    /* z-index: 334; */
+    z-index: 334;
   }
   .overlay {
     /* position: relative;
