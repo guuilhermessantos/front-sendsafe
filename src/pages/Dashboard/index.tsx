@@ -216,7 +216,7 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
   // Função para ativar/desativar a câmera
   const toggleCamera = () => {
     if (isCameraActive) {
-      Quagga.stop()
+      // Quagga.stop()
       setIsCameraActive(false)
     } else {
       startQuagga()
@@ -294,7 +294,7 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
   // }
 
   const stopQuagga = () => {
-    Quagga.stop()
+    // Quagga.stop()
   }
 
   const handleBipagem = () => {
