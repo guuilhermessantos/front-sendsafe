@@ -184,7 +184,7 @@ export const DivContainer = styled.section`
     flex-direction: column;
     border-radius: 10px;
     background-color: transparent;
-    /* z-index: 1; */
+    z-index: -1;
 
     min-height: 400px;
     box-shadow: 0 8px 30px rgb(0 0 0 / 50%);
