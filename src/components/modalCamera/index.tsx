@@ -22,13 +22,8 @@ interface IProps {
 
 const ModalCamera = ({ fields, setValue, update, append, reset }: IProps) => {
   const [visibleModalCamera, setVisibleModalCamera] = useState(false)
-  const [ean, setEan] = useState('0012345678905')
   const [detected, setDetected] = useState(false)
   const [dadosColetados, setDadosColetados] = useState<string[]>([])
-  const [mostFrequent, setMostFrequent] = useState('')
-  const [updateQtde, setUpdateQtde] = useState(false)
-  const [copyContagemFisica, setCopyContagemFisica] = useState([])
-  const [resetContagemFisica, setResetContagemFisica] = useState([])
   const cameraRef = useRef<HTMLDivElement>(null)
   // const eanExist = filtros.filter(item => item.campo === 'ean')
 

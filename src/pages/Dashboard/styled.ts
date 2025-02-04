@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const DivContainer = styled.section`
-  position: relative;
+  /* position: relative; */
   width: 100%;
   /* height: 100vh; */
   display: flex;
@@ -35,7 +35,7 @@ export const DivContainer = styled.section`
       border-radius: 10px;
       background-color: transparent;
       /* height: 100%; */
-      z-index: 1;
+      /* z-index: 1; */
       padding: 3vh;
       box-shadow: 0 2px 30px rgb(0 0 0 / 50%);
       backdrop-filter: blur(20px);
@@ -54,7 +54,7 @@ export const DivContainer = styled.section`
       .text {
         width: 100%;
         /* background-color: red; */
-        z-index: 1;
+        /* z-index: 1; */
       }
 
       /* background-color: blue; */
@@ -86,7 +86,7 @@ export const DivContainer = styled.section`
           justify-content: space-around;
           margin-top: 0.8rem;
           /* margin-bottom: 10px; */
-          z-index: 1;
+          /* z-index: 1; */
           height: 6.5vh;
           width: 150px;
           border-radius: 5px;
@@ -128,7 +128,7 @@ export const DivContainer = styled.section`
     /* height: 0px; */
     border-radius: 10px;
     background-color: transparent;
-    z-index: 1;
+    /* z-index: 1; */
     padding: 20px;
     box-shadow: 0 8px 30px rgb(0 0 0 / 50%);
     backdrop-filter: blur(20px);
@@ -184,7 +184,7 @@ export const DivContainer = styled.section`
     flex-direction: column;
     border-radius: 10px;
     background-color: transparent;
-    z-index: 1;
+    /* z-index: 1; */
 
     min-height: 400px;
     box-shadow: 0 8px 30px rgb(0 0 0 / 50%);
@@ -194,7 +194,7 @@ export const DivContainer = styled.section`
       overflow-y: auto; /* Permite rolagem vertical se o conteúdo ultrapassar a altura */
     }
     img {
-      z-index: 1;
+      /* z-index: 1; */
       height: 35vh;
       width: 35vh;
       background-color: ${props => props.theme.colors?.primary};
