@@ -181,91 +181,6 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
     setIsMobile(window.innerWidth <= 768) // Ajuste o valor conforme seu design
   }, [])
 
-  // Função para iniciar QuaggaJS no mobile
-  const startQuagga = () => {
-    Quagga.init(
-      {
-        inputStream: {
-          name: 'Live',
-          type: 'LiveStream',
-          target: videoRef.current // Elemento onde o vídeo será renderizado
-        },
-        decoder: {
-          readers: [
-            'code_128_reader',
-            'ean_reader',
-            'ean_13_reader',
-            'upc_reader'
-          ]
-        }
-      },
-      err => {
-        if (err) {
-          console.log('Erro ao iniciar Quagga: ', err)
-          return
-        }
-        Quagga.start()
-      }
-    )
-
-    Quagga.onDetected(data => {
-      console.log('Código detectado: ', data.codeResult.code)
-      // Aqui você pode fazer o que for necessário com o código detectado
-    })
-  }
-
-  // Função para ativar/desativar a câmera
-  const toggleCamera = () => {
-    if (isCameraActive) {
-      // Quagga.stop()
-      setIsCameraActive(false)
-    } else {
-      startQuagga()
-      setIsCameraActive(true)
-    }
-  }
-
-  // Função para ler o código com o scanner físico (web)
-  const handleBarcodeRead = (data: string) => {
-    console.log('Código de barras lido: ', data)
-    // Aqui você pode fazer o que for necessário com o código detectado
-  }
-
-  useEffect(() => {
-    if (isCameraActive) {
-      startCamera()
-    } else {
-      // stopQuagga() // Para o Quagga quando desativar a câmera
-    }
-  }, [isCameraActive])
-
-  const startCamera = async () => {
-    setError(null)
-
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      setError('Seu navegador não suporta acesso à câmera.')
-      return
-    }
-
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: { exact: 'environment' } } // Força câmera traseira
-      })
-
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream
-        videoRef.current.play()
-
-        startQuagga() // Inicia QuaggaJS após a câmera abrir
-      }
-    } catch (err) {
-      console.error('Erro ao acessar a câmera:', err)
-      setError(
-        'Erro ao acessar a câmera. Verifique as permissões do navegador!'
-      )
-    }
-  }
-
   // const startQuagga = () => {
   //   Quagga.init(
   //     {
@@ -293,10 +208,6 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
   //     setIsCameraActive(false) // Fecha a câmera
   //   })
   // }
-
-  const stopQuagga = () => {
-    // Quagga.stop()
-  }
 
   const handleBipagem = () => {
     if (!etiqueta.trim()) return
