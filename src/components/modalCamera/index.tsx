@@ -37,9 +37,11 @@ const ModalCamera = ({ setEtiqueta }: IProps) => {
             type: 'LiveStream',
             target: cameraRef.current,
             constraints: {
-              width: 1280, // Tente aumentar esses valores
+              width: 1280,
               height: 720,
-              facingMode: 'environment' // Câmera traseira do celular
+              facingMode: 'environment',
+              focusMode: 'continuous', // Mantém o foco automático contínuo
+              advanced: [{ focusMode: 'continuous' }]
             }
           },
           decoder: {
