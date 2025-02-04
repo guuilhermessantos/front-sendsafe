@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { DivContainer } from './styled'
 import styled, { keyframes } from 'styled-components'
 import Pagination from '../../components/Pagination'
-import * as Quagga from 'quagga'
+import Quagga from 'quagga'
 import BarcodeReader from 'react-barcode-reader'
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   controlSwitch?: string
