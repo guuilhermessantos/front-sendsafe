@@ -18,20 +18,13 @@ interface IProps {
   update?: any
   append?: any
   reset?: any
-  setEtiqueta?: any
 }
 
-const ModalCamera = ({
-  fields,
-  setValue,
-  update,
-  append,
-  reset,
-  setEtiqueta
-}: IProps) => {
+const ModalCamera = ({ fields, setValue, update, append, reset }: IProps) => {
   const [visibleModalCamera, setVisibleModalCamera] = useState(false)
   const [detected, setDetected] = useState(false)
   const [dadosColetados, setDadosColetados] = useState<string[]>([])
+
   const cameraRef = useRef<HTMLDivElement>(null)
   // const eanExist = filtros.filter(item => item.campo === 'ean')
 
@@ -60,7 +53,7 @@ const ModalCamera = ({
           Quagga.start()
           Quagga.onDetected(data => {
             if (!detected) {
-              setEtiqueta(prev => [...prev, data.codeResult.code])
+              setDadosColetados(prev => [...prev, data.codeResult.code])
               setDetected(true)
             }
           })
@@ -83,6 +76,7 @@ const ModalCamera = ({
   const handleDetection = () => {
     setVisibleModalCamera(false)
     const mostFrequentCode = findMostFrequent(dadosColetados)
+    handleData(mostFrequentCode)
   }
 
   const findMostFrequent = (arr: string[]): string | null => {
@@ -104,6 +98,10 @@ const ModalCamera = ({
     }
     setDadosColetados([])
     return mostFrequent
+  }
+
+  const handleData = (mostFrequent: string) => {
+    console.log('mostFrequent', mostFrequent)
   }
 
   // useEffect(() => {
