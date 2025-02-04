@@ -6,7 +6,7 @@ import React, {
   useEffect,
   useCallback
 } from 'react'
-import { Modal } from './style'
+import { Button, Modal } from './style'
 import { XCircle } from '@geist-ui/react-icons'
 import Quagga from 'quagga'
 
@@ -114,13 +114,9 @@ const ModalCamera = ({ setEtiqueta }: IProps) => {
 
   return (
     <div>
-      <button onClick={initReader}>
-        <img
-          width={60}
-          src="https://lh6.googleusercontent.com/proxy/DCP5kKHMgQtURu5OFVSKUiMFED8bz2DqNK8BQIuQcTQntJAGK0QCIBj-C9y22OvbvYdek2m8PKJBZnsR8dOrWX6jH8CKRjWM-Hi3Hy0B4bReYPZcjHrSlpuS"
-          alt="Camera Icon"
-        />
-      </button>
+      <Button className="button" onClick={initReader}>
+        <i className="bx bx-barcode-reader" />
+      </Button>
       {visibleModalCamera && (
         <Modal className="modal">
           <XCircle onClick={() => setVisibleModalCamera(false)} />

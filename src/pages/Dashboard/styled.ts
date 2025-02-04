@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 export const DivContainer = styled.section`
-  /* position: relative; */
   width: 100%;
   /* height: 100vh; */
+  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,6 +15,7 @@ export const DivContainer = styled.section`
   .div-info {
     width: 100%;
     margin-top: 3rem;
+    z-index: 1;
     margin-bottom: 1rem;
     /* margin-left: 2rem; */
     /* background-color: red; */
@@ -184,8 +185,7 @@ export const DivContainer = styled.section`
     flex-direction: column;
     border-radius: 10px;
     background-color: transparent;
-    z-index: -1;
-
+    z-index: 0;
     min-height: 400px;
     box-shadow: 0 8px 30px rgb(0 0 0 / 50%);
     backdrop-filter: blur(20px);

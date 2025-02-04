@@ -1,6 +1,23 @@
 import styled from 'styled-components'
 
+export const Button = styled.button`
+  padding: 5px 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 30px;
+  transition: background 0.3s;
+  &:hover {
+    background-color: #218838;
+  }
+`
 export const Modal = styled.div`
+  position: relative;
   z-index: 2001;
   display: flex;
   flex-direction: column;
@@ -13,6 +30,7 @@ export const Modal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
   #camera {
     position: relative;
     width: 80%;
