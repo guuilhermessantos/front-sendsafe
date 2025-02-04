@@ -1,42 +1,43 @@
 import styled from 'styled-components'
 
-interface IPropsHome {
-  // controlSwitch: string
-  controlSide?: string
-}
-
-export const DivContainer = styled.section<IPropsHome>`
+export const DivContainer = styled.section`
   position: relative;
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   /* background-color: red; */
   /* padding: 10px; */
 
   /* background-color: red; */
   .div-info {
-    width: 60%;
+    width: 100%;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    /* margin-left: 2rem; */
     /* background-color: red; */
     /* background-color: ; */
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    /* display: flex;
+    align-items: end;
+    justify-content: right;
+    flex-direction: row; */
 
     .info {
-      height: 31vh;
-      background-color: blue;
-      width: 90%;
+      /* height: 25vh; */
 
+      width: 100%;
       border-radius: 10px;
       background-color: transparent;
-
       /* height: 100%; */
       z-index: 1;
       padding: 3vh;
-      box-shadow: 0 8px 30px rgb(0 0 0 / 50%);
+      box-shadow: 0 2px 30px rgb(0 0 0 / 50%);
       backdrop-filter: blur(20px);
       /* font-size: 1rem; */
       h1 {
@@ -179,14 +180,19 @@ export const DivContainer = styled.section<IPropsHome>`
     }
   }
   .right {
-    width: 40%;
-    padding: 1rem;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
     flex-direction: column;
+    border-radius: 10px;
+    background-color: transparent;
+    z-index: 1;
 
+    min-height: 400px;
+    box-shadow: 0 8px 30px rgb(0 0 0 / 50%);
+    backdrop-filter: blur(20px);
+    .info-table {
+      min-height: 350px; /* Define a altura fixa da tabela */
+      overflow-y: auto; /* Permite rolagem vertical se o conteúdo ultrapassar a altura */
+    }
     img {
       z-index: 1;
       height: 35vh;
@@ -200,16 +206,16 @@ export const DivContainer = styled.section<IPropsHome>`
   }
 
   @media screen and (max-width: 1220px) {
-    flex-direction: column-reverse;
+    flex-direction: column;
 
     .div-contatos {
       /* margin-top: 1rem; */
     }
 
     .div-info {
-      width: 100%;
+      /* width: 70%; */
       /* background-color: red; */
-      height: 70vh;
+      /* height: 50vh; */
       /* height: 70%; */
     }
 
@@ -226,7 +232,7 @@ export const DivContainer = styled.section<IPropsHome>`
     }
   }
   @media screen and (max-width: 550px) {
-    flex-direction: column-reverse;
+    flex-direction: column;
 
     .div-info {
       width: 100%;
@@ -297,7 +303,7 @@ export const DivContainer = styled.section<IPropsHome>`
     }
 
     .info {
-      height: 42vh !important;
+      /* height: 42vh !important; */
       /* h1 {
         font-size: 6.5vw !important;
       } */

@@ -4,10 +4,6 @@ import Head from 'next/head'
 import IconMenuBurguer from '../components/MenuBurguer'
 import Dashboard from './Dashboard'
 
-import Skills from './Skills'
-import ProjectsSkills from './Projects'
-import Contact from './Contact'
-import About from './About'
 import useWindowSize from '../hooks/windowSize'
 import { ContainerIndex } from './styled'
 import BackgroundBubbles from '../components/BackgroundBubbles'
@@ -35,11 +31,6 @@ const Home: React.FC<IProps> = ({ controlSide, theme, toggleTheme }) => {
         <BackgroundBubbles />
 
         <Dashboard id="home" />
-        <About id="sobre" theme={theme} />
-
-        <Skills id="skills" />
-        <ProjectsSkills id="portfolio" controlSide={controlSide} />
-        <Contact id="contato" />
       </ContainerIndex>
     </>
   )
