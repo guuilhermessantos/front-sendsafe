@@ -14,20 +14,18 @@ import { toast } from 'react-toastify'
 
 interface IProps {
   setEtiqueta?: any
-  setVisibleModalCamera?: any
-  visibleModalCamera?: any
+
   cameraRef?: any
 }
 
 const ModalCamera = ({
   setEtiqueta,
-  setVisibleModalCamera,
-  visibleModalCamera,
+
   cameraRef
 }: IProps) => {
   const [detected, setDetected] = useState(false)
   const [dadosColetados, setDadosColetados] = useState<string[]>([])
-
+  const [visibleModalCamera, setVisibleModalCamera] = useState(false)
   // const eanExist = filtros.filter(item => item.campo === 'ean')
 
   const initReader = () => {
@@ -123,6 +121,15 @@ const ModalCamera = ({
       <Button className="button" onClick={initReader}>
         <i className="bx bx-barcode-reader" />
       </Button>
+      {visibleModalCamera && (
+        <Modal className="modal">
+          <XCircle onClick={() => setVisibleModalCamera(false)} />
+          <div id="camera" ref={cameraRef} className="camera">
+            <div className="backCamera1"></div>
+            <div className="backCamera2"></div>
+          </div>
+        </Modal>
+      )}
     </div>
   )
 }

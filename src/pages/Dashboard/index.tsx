@@ -178,7 +178,6 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isCameraActive, setIsCameraActive] = useState<boolean>(false)
 
-  const [visibleModalCamera, setVisibleModalCamera] = useState(false)
   const cameraRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -225,15 +224,6 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
 
   return (
     <DivContainer>
-      {visibleModalCamera && (
-        <Modal className="modal">
-          <XCircle onClick={() => setVisibleModalCamera(false)} />
-          <div id="camera" ref={cameraRef} className="camera">
-            <div className="backCamera1"></div>
-            <div className="backCamera2"></div>
-          </div>
-        </Modal>
-      )}
       {/* <div className="div-bubbles">
         {test.map((item, index) => (
           <Bubbles key={index} sequencia={item}></Bubbles>
@@ -255,12 +245,7 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
               onChange={e => setEtiqueta(e.target.value)}
             />
             {isMobile ? (
-              <ModalCamera
-                setEtiqueta={setEtiqueta}
-                setVisibleModalCamera={setVisibleModalCamera}
-                visibleModalCamera={visibleModalCamera}
-                cameraRef={cameraRef}
-              />
+              <ModalCamera setEtiqueta={setEtiqueta} cameraRef={cameraRef} />
             ) : (
               <Button onClick={handleBipagem}>Enviar</Button>
             )}
