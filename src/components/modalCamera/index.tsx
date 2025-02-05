@@ -123,7 +123,11 @@ const ModalCamera = ({
       </Button>
       {visibleModalCamera && (
         <Modal className="modal">
-          <XCircle onClick={() => setVisibleModalCamera(false)} />
+          <i
+            className="bx bxs-x-circle"
+            onClick={() => setVisibleModalCamera(false)}
+          />
+          <XCircle />
           <div id="camera" ref={cameraRef} className="camera">
             <div className="backCamera1"></div>
             <div className="backCamera2"></div>
