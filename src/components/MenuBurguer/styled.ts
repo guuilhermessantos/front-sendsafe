@@ -58,6 +58,7 @@ export const DivBurguer = styled.div`
 
     a {
       width: 100%;
+      height: 50px;
       color: ${props => props.theme.colors.arrow};
       text-decoration: none;
       cursor: pointer;
@@ -65,9 +66,10 @@ export const DivBurguer = styled.div`
       font-size: 0.9rem;
       line-height: 2rem;
       p {
+        gap: 10rem;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: end;
         /* justify-content: space-between; */
         /* background-color: red; */
       }
@@ -75,7 +77,7 @@ export const DivBurguer = styled.div`
     .icon {
       /* margin-top: 9px; */
       font-size: 15px;
-      margin-right: 6rem;
+      margin-right: 7.6rem;
     }
   }
 
@@ -142,7 +144,7 @@ export const SwitchMenuBurguer = styled.span<IPropsSwitch>`
   width: 44px;
   border-radius: 25px;
   background-color: ${props => props.theme.colors.mode};
-  margin-top: 1.8rem;
+  margin-top: 13rem;
 
   :before {
     content: '';

@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 export const DivContainer = styled.section`
   width: 100%;
+  position: relative;
+
   /* height: 100vh; */
   z-index: 1;
   display: flex;
@@ -14,7 +16,6 @@ export const DivContainer = styled.section`
   /* background-color: red; */
   .div-info {
     width: 100%;
-    margin-top: 3rem;
     z-index: 1;
     margin-bottom: 1rem;
     /* margin-left: 2rem; */
@@ -31,7 +32,8 @@ export const DivContainer = styled.section`
 
     .info {
       /* height: 25vh; */
-
+      position: relative;
+      margin-top: 3rem;
       width: 100%;
       border-radius: 10px;
       background-color: transparent;

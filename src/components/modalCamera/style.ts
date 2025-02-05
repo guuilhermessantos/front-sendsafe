@@ -17,12 +17,12 @@ export const Button = styled.button`
   }
 `
 export const Modal = styled.div`
-  position: relative;
+  /* position: absolute; */
   z-index: 2001;
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 0;
+  top: -3rem;
   left: 0;
   height: 100vh;
   width: 100%;
@@ -46,6 +46,7 @@ export const Modal = styled.div`
       height: 40%;
       background: rgba(0, 0, 0, 0.7);
       border-bottom: 1px solid white;
+      border-radius: 20px 20px 0 0; /* Apenas nas bordas superiores */
     }
     .backCamera2 {
       position: absolute;
@@ -57,6 +58,7 @@ export const Modal = styled.div`
       bottom: 0;
       background: rgba(0, 0, 0, 0.7);
       border-top: 1px solid white;
+      border-radius: 0 0 20px 20px; /* Apenas nas bordas superiores */
     }
   }
   video {
@@ -65,8 +67,8 @@ export const Modal = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-    height: 80%;
-    /* height: 80vh; */
+    height: 100%;
+    border-radius: 20px;
   }
   canvas {
     display: none;

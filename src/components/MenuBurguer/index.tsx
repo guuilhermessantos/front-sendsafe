@@ -33,28 +33,13 @@ const IconMenuBurguer: React.FC<IProps> = ({ toggleTheme, theme }) => {
             </a>
             <a href="#sobre">
               <p>
-                <i className="bx bx-info-square icon" />
-                Sobre mim
+                <i className="bx bx-barcode-reader icon" />
+                <span className="text nav-text">Verifica Pedido</span>
               </p>
             </a>
-            <a href="#skills">
-              <p>
-                <i className="bx bx-bar-chart-square icon" />
-                Habilidades
-              </p>
-            </a>
-            <a href="#portfolio">
-              <p>
-                <i className="bx bx-windows icon" />
-                Projetos
-              </p>
-            </a>
-            <a href="#contato">
-              <p>
-                <i className="bx bx-conversation icon" />
-                Contato
-              </p>
-            </a>
+            <a href="#skills"></a>
+            <a href="#portfolio"></a>
+            <a href="#contato"></a>
             <p>
               <div
                 className="toggle-switch-menu-burguer"
