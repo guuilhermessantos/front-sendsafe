@@ -73,9 +73,11 @@ export const Modal = styled.div`
   canvas {
     display: none;
   }
-  svg {
+  .bx {
+    font-size: 1.4rem;
+    color: white;
     position: absolute;
-    top: 70px;
+    top: 40px;
     right: 20px;
     z-index: 334;
   }

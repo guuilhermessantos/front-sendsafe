@@ -119,7 +119,7 @@ const ModalCamera = ({
   return (
     <div>
       <Button className="button" onClick={initReader}>
-        <i className="bx bx-barcode-reader" />
+        <i className="bx bx-barcode-reader icon" />
       </Button>
       {visibleModalCamera && (
         <Modal className="modal">
@@ -127,7 +127,7 @@ const ModalCamera = ({
             className="bx bxs-x-circle"
             onClick={() => setVisibleModalCamera(false)}
           />
-          <XCircle />
+
           <div id="camera" ref={cameraRef} className="camera">
             <div className="backCamera1"></div>
             <div className="backCamera2"></div>
