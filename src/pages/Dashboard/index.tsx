@@ -142,7 +142,7 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
           <TextWrapper>
             <NormalText>
               <HighlightText>Bipe</HighlightText>a etiqueta, e confira o status
-              do seu pedido! 🚚 ✅
+              do seu pedido! 🚚✅
             </NormalText>
           </TextWrapper>
           <form onSubmit={handleSubmit(onSubmit)}>
