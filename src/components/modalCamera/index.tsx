@@ -13,21 +13,16 @@ import Quagga from 'quagga'
 import { toast } from 'react-toastify'
 
 interface IProps {
-  setEtiqueta?: any
-
+  onSubmit?: any
   cameraRef?: any
 }
 
-const ModalCamera = ({
-  setEtiqueta,
-
-  cameraRef
-}: IProps) => {
+const ModalCamera = ({ onSubmit }: IProps) => {
   const [detected, setDetected] = useState(false)
   const [dadosColetados, setDadosColetados] = useState<string[]>([])
   const [visibleModalCamera, setVisibleModalCamera] = useState(false)
   // const eanExist = filtros.filter(item => item.campo === 'ean')
-
+  const cameraRef = useRef<HTMLDivElement>(null)
   const initReader = () => {
     setVisibleModalCamera(true)
   }
@@ -109,7 +104,7 @@ const ModalCamera = ({
 
   const handleData = (mostFrequent: string) => {
     console.log('mostFrequent', mostFrequent)
-    setEtiqueta(mostFrequent)
+    onSubmit(mostFrequent)
   }
 
   // useEffect(() => {

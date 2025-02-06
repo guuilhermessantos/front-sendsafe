@@ -1,5 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { DivContainer } from './styled'
+import {
+  Button,
+  DivContainer,
+  HighlightText,
+  Input,
+  InputContainer,
+  NormalText,
+  Table,
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableHeaderCell,
+  TableRow,
+  TextWrapper
+} from './styled'
 import styled, { keyframes } from 'styled-components'
 import Pagination from '../../components/Pagination'
 import Quagga from 'quagga'
@@ -7,157 +21,30 @@ import BarcodeReader from 'react-barcode-reader'
 import ModalCamera from '../../components/modalCamera'
 import { Modal } from '@geist-ui/react'
 import { XCircle } from '@geist-ui/react-icons'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import api from '../../services/api'
+import { format, parseISO } from 'date-fns'
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   controlSwitch?: string
 }
 
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  background-color: ${props => props.theme.colors?.arrow};
-  border-radius: 8px;
-  overflow: hidden;
-  height: 100px;
-`
+interface ITag {
+  tag: string
+}
 
-const TableHeader = styled.thead`
-  background-color: ${props => props.theme.colors?.primary};
-  color: #fff;
-`
+interface IGetTag {
+  id: number
+  tag: string
+  status: string
+  data_hora: string
+}
 
-const TableHeaderCell = styled.th`
-  padding: 12px 15px;
-  text-align: left;
-  color: white;
-  font-size: 14px;
-
-  @media (max-width: 600px) {
-    font-size: 12px;
-    padding: 8px 10px;
-  }
-`
-
-const TableBody = styled.tbody``
-
-const TableRow = styled.tr`
-  border-bottom: 1px solid ${props => props.theme.colors?.mode};
-`
-
-const TableCell = styled.td`
-  padding: 12px 15px;
-  font-size: 14px;
-  text-align: left;
-
-  @media (max-width: 600px) {
-    font-size: 12px;
-    padding: 8px 10px;
-  }
-`
-
-const InputContainer = styled.div`
-  display: flex;
-  width: 100%;
-  gap: 10px;
-  margin-bottom: 20px;
-`
-
-const Input = styled.input`
-  flex: 1;
-  padding: 10px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  outline: none;
-  &:focus {
-    border-color: #28a745;
-  }
-`
-
-const Button = styled.button`
-  padding: 10px 20px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background 0.3s;
-  &:hover {
-    background-color: #218838;
-  }
-`
-
-const TextWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
-  border-radius: 8px;
-  color: ${props => props.theme.colors.text};
-  font-size: 1.25rem;
-  font-weight: 500;
-  max-width: 100%;
-  /* margin: 20px; */
-  line-height: 1.5;
-  overflow: hidden;
-
-  @media (max-width: 1024px) {
-    font-size: 1.125rem;
-    padding: 15px;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1rem;
-    padding: 12px;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 0.875rem;
-    padding: 10px;
-  }
-`
-
-const HighlightText = styled.span`
-  font-size: 2rem;
-  font-weight: 700;
-  color: ${props => props.theme.colors.primary};
-  margin-right: 8px;
-
-  @media (max-width: 1024px) {
-    font-size: 1.75rem;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1.25rem;
-  }
-`
-
-const NormalText = styled.span`
-  font-size: 1rem;
-  font-weight: 500;
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap; /* Não permite quebras de linha até o final do texto */
-
-  @media (max-width: 1024px) {
-    font-size: 0.95rem;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.85rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 0.75rem;
-  }
-`
+interface IPagination {
+  page: number
+  totalPages: number
+  totalItems: number
+}
 
 const Dashboard: React.FC<IProps> = ({ ...rest }) => {
   const data = [
@@ -168,58 +55,79 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
   ]
   // const videoRef = useRef<HTMLDivElement>(null)
 
-  const [etiqueta, setEtiqueta] = useState('')
   const [historico, setHistorico] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const totalPages = 20 // Supondo que você tenha 20 páginas
-  const videoRef = useRef<HTMLVideoElement | null>(null)
   // const [isCameraActive, setIsCameraActive] = useState(false)
-  const [error, setError] = useState<string | null>(null)
   const [isMobile, setIsMobile] = useState<boolean>(false)
-  const [isCameraActive, setIsCameraActive] = useState<boolean>(false)
+  const [tags, setTags] = useState<IGetTag[]>([])
+  const [pagination, setPagination] = useState<IPagination>({
+    page: 1,
+    totalPages: 1,
+    totalItems: 0
+  })
 
-  const cameraRef = useRef<HTMLDivElement>(null)
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors }
+  } = useForm<ITag>({
+    criteriaMode: 'all',
+    mode: 'onBlur'
+  })
+
+  const fetchTags = async (page: number) => {
+    try {
+      const response = await api.get('/historical-tag', {
+        params: {
+          page: page, // Passando a página correta
+          limit: 8 // Definindo um limite de itens por página
+        }
+      })
+      const data = response.data
+      setTags(data.data)
+      setPagination({
+        page: data.page,
+        totalPages: data.totalPages,
+        totalItems: data.totalItems
+      })
+    } catch (error) {
+      console.error('Erro ao buscar tags:', error)
+    }
+  }
+
+  useEffect(() => {
+    fetchTags(pagination.page) // Carregar as tags ao montar o componente
+  }, [pagination.page]) // A cada mudança de página, as tags serão recarregadas
 
   useEffect(() => {
     // Detecta se o dispositivo é mobile
     setIsMobile(window.innerWidth <= 768) // Ajuste o valor conforme seu design
   }, [])
 
-  // const startQuagga = () => {
-  //   Quagga.init(
-  //     {
-  //       inputStream: {
-  //         type: 'LiveStream',
-  //         target: videoRef.current, // Usa o vídeo como input
-  //         constraints: { facingMode: 'environment' }
-  //       },
-  //       decoder: {
-  //         readers: ['code_128_reader', 'ean_reader', 'ean_8_reader'] // Suporta Code-128, EAN-13, EAN-8
-  //       }
-  //     },
-  //     err => {
-  //       if (err) {
-  //         console.error('Erro ao iniciar Quagga:', err)
-  //         return
-  //       }
-  //       Quagga.start()
-  //     }
-  //   )
-
-  //   Quagga.onDetected(data => {
-  //     alert(`Código de barras detectado: ${data.codeResult.code}`)
-  //     stopQuagga() // Para após detectar um código
-  //     setIsCameraActive(false) // Fecha a câmera
-  //   })
-  // }
-
-  const handleBipagem = () => {
-    if (!etiqueta.trim()) return
-    setHistorico([{ ...historico }, { sequencia: etiqueta }])
-    setEtiqueta('')
-  }
   const handlePageChange = (page: number) => {
-    setCurrentPage(page)
+    setPagination(prevState => ({
+      ...prevState,
+      page
+    }))
+  }
+
+  const onSubmit = async (data: ITag) => {
+    try {
+      const response = await api.post('/historical-tag', {
+        tag: data.tag,
+        status: 'ativo',
+        data_hora: new Date().toISOString()
+      })
+      console.log('response', response)
+
+      toast.success(`etiqueta criada: ${data.tag}`)
+      // Após o POST, recarregar a tabela para pegar os dados atualizados
+      fetchTags(pagination.page) // Recarrega a tabela na página atual
+    } catch (error) {
+      toast.error(`etiqueta: ${data.tag}`)
+    }
   }
 
   return (
@@ -237,19 +145,22 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
               do seu pedido! 🚚✅
             </NormalText>
           </TextWrapper>
-          <InputContainer>
-            <Input
-              type="text"
-              placeholder="Bipe a etiqueta..."
-              value={etiqueta}
-              onChange={e => setEtiqueta(e.target.value)}
-            />
-            {isMobile ? (
-              <ModalCamera setEtiqueta={setEtiqueta} cameraRef={cameraRef} />
-            ) : (
-              <Button onClick={handleBipagem}>Enviar</Button>
-            )}
-          </InputContainer>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <InputContainer>
+              <Input
+                type="text"
+                placeholder="Bipe a etiqueta..."
+                {...register('tag', {
+                  required: 'O campo é obrigatório'
+                })}
+              />
+              {isMobile ? (
+                <ModalCamera onSubmit={onSubmit} />
+              ) : (
+                <Button type="submit">Enviar</Button>
+              )}
+            </InputContainer>
+          </form>
         </div>
       </div>
 
@@ -265,20 +176,22 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.map(row => (
+              {tags.map(row => (
                 <TableRow key={row.id}>
                   <TableCell>{row.id}</TableCell>
-                  <TableCell>{row.nome}</TableCell>
-                  <TableCell>{row.idade}</TableCell>
-                  <TableCell>{row.cidade}</TableCell>
+                  <TableCell>{row.tag}</TableCell>
+                  <TableCell>{row.status}</TableCell>
+                  <TableCell>
+                    {format(parseISO(row.data_hora), 'dd/MM/yyyy HH:mm:ss')}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </div>
         <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
+          currentPage={pagination.page}
+          totalPages={pagination.totalPages}
           onPageChange={handlePageChange}
         />
       </div>

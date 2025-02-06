@@ -188,11 +188,11 @@ export const DivContainer = styled.section`
     border-radius: 10px;
     background-color: transparent;
     z-index: 0;
-    min-height: 400px;
+    min-height: 450px;
     box-shadow: 0 8px 30px rgb(0 0 0 / 50%);
     backdrop-filter: blur(20px);
     .info-table {
-      min-height: 350px; /* Define a altura fixa da tabela */
+      min-height: 400px; /* Define a altura fixa da tabela */
       overflow-y: auto; /* Permite rolagem vertical se o conteúdo ultrapassar a altura */
     }
     img {
@@ -224,7 +224,7 @@ export const DivContainer = styled.section`
     .right {
       /* background-color: red; */
       width: 100%;
-      height: 20vh;
+      /* height: 20vh; */
       /* height: 50%; */
 
       img {
@@ -347,4 +347,152 @@ export const DivContainer = styled.section`
     display: flex;
   } */
   /* background-color: red; */
+`
+export const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  background-color: ${props => props.theme.colors?.arrow};
+  border-radius: 8px;
+  overflow: hidden;
+  /* height: 100px; */
+  /* min-height: 400px; */
+`
+
+export const TableHeader = styled.thead`
+  background-color: ${props => props.theme.colors?.primary};
+  color: #fff;
+`
+
+export const TableHeaderCell = styled.th`
+  padding: 12px 15px;
+  text-align: left;
+  color: white;
+  font-size: 14px;
+
+  @media (max-width: 600px) {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+`
+
+export const TableBody = styled.tbody``
+
+export const TableRow = styled.tr`
+  border-bottom: 1px solid ${props => props.theme.colors?.mode};
+`
+
+export const TableCell = styled.td`
+  padding: 12px 15px;
+  font-size: 14px;
+  text-align: left;
+
+  @media (max-width: 600px) {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+`
+
+export const InputContainer = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  margin-bottom: 20px;
+`
+
+export const Input = styled.input`
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  &:focus {
+    border-color: #28a745;
+  }
+`
+
+export const Button = styled.button`
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+  &:hover {
+    background-color: #218838;
+  }
+`
+
+export const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+  color: ${props => props.theme.colors.text};
+  font-size: 1.25rem;
+  font-weight: 500;
+  max-width: 100%;
+  /* margin: 20px; */
+  line-height: 1.5;
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    font-size: 1.125rem;
+    padding: 15px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.875rem;
+    padding: 10px;
+  }
+`
+
+export const HighlightText = styled.span`
+  font-size: 2rem;
+  font-weight: 700;
+  color: ${props => props.theme.colors.primary};
+  margin-right: 8px;
+
+  @media (max-width: 1024px) {
+    font-size: 1.75rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.25rem;
+  }
+`
+
+export const NormalText = styled.span`
+  font-size: 1rem;
+  font-weight: 500;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap; /* Não permite quebras de linha até o final do texto */
+
+  @media (max-width: 1024px) {
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+  }
 `
