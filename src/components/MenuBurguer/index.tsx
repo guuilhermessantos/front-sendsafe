@@ -34,7 +34,7 @@ const IconMenuBurguer: React.FC<IProps> = ({ toggleTheme, theme }) => {
             <a href="#sobre">
               <p>
                 <i className="bx bx-barcode-reader icon" />
-                <span className="text nav-text">Verifica Pedido</span>
+                <span className="text nav-text">Atualiza XML</span>
               </p>
             </a>
             <a href="#skills"></a>

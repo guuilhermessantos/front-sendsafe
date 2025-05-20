@@ -93,7 +93,7 @@ const Navbar: React.FC<IProps> = ({
                 {/* <i className="bx bxs-dashboard icon" /> */}
                 <i className="bx bx-barcode-reader icon" />
                 {controlSide === 'true' && (
-                  <span className="text nav-text">Verifica Pedido</span>
+                  <span className="text nav-text">Atualiza XML</span>
                 )}
               </a>
             </li>
