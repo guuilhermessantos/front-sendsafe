@@ -398,7 +398,6 @@ export const InputContainer = styled.div`
   width: 100%;
   gap: 10px;
   margin-bottom: 20px;
-  justify-content: space-evenly;
 `
 
 export const Input = styled.input`
@@ -425,30 +424,6 @@ export const Button = styled.button`
   &:hover {
     background-color: #218838;
   }
-`
-
-export const Label = styled.label`
-  background-color: #22c55e;
-  color: white;
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  display: inline-block;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #16a34a;
-  }
-`
-
-export const HiddenInput = styled.input`
-  display: none;
-`
-export const FileName = styled.p`
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: #555;
 `
 
 export const TextWrapper = styled.div`

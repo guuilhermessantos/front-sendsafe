@@ -1,7 +1,8 @@
 import axios from 'axios'
 //
 const api = axios.create({
-  baseURL: 'https://back-sendsafe.onrender.com',
+  // baseURL: 'https://back-sendsafe.onrender.com',
+  baseURL: 'http://localhost:5000',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json'
