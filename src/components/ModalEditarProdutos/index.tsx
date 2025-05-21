@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { useForm, useFieldArray, Controller } from 'react-hook-form'
 import api from '../../services/api'
-import { useHookFormMask } from 'use-mask-input'
 import { NumericFormat } from 'react-number-format'
 
 const ModalOverlay = styled.div`
@@ -82,7 +81,6 @@ export const ModalEditNota: React.FC<Props> = ({
   const { control, register, handleSubmit, reset } = useForm<FormValues>({
     defaultValues: { produtos }
   })
-  const registerWithMask = useHookFormMask(register)
 
   const { fields } = useFieldArray({
     control,
