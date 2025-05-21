@@ -27,10 +27,12 @@
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.6",
     "react-hook-form": "^7.51.2",
+    "react-number-format": "^5.4.4",
     "react-toastify": "^10.0.5",
     "sass": "^1.67.0",
     "styled-components": "^5.1.1",
-    "swiper": "^6.8.4"
+    "swiper": "^6.8.4",
+    "use-mask-input": "^3.4.2"
   },
   "devDependencies": {
     "@types/node": "^14.6.0",

@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useForm, useFieldArray } from 'react-hook-form'
+import { useForm, useFieldArray, Controller } from 'react-hook-form'
 import api from '../../services/api'
+import { useHookFormMask } from 'use-mask-input'
+import { NumericFormat } from 'react-number-format'
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -53,6 +55,7 @@ type Produto = {
   id: number
   nome: string
   quantidade: number
+  valorUnitario: number
 }
 
 type FormValues = {
@@ -79,6 +82,7 @@ export const ModalEditNota: React.FC<Props> = ({
   const { control, register, handleSubmit, reset } = useForm<FormValues>({
     defaultValues: { produtos }
   })
+  const registerWithMask = useHookFormMask(register)
 
   const { fields } = useFieldArray({
     control,
@@ -89,9 +93,25 @@ export const ModalEditNota: React.FC<Props> = ({
   //   reset({ produtos })
   // }, [produtos])
 
+  function parseValorUnitario(valor) {
+    // Remove "R$ " e espaços em branco
+    let num = valor.replace(/\s?R\$\s?/, '')
+    // Remove pontos de milhares
+    num = num.replace(/\./g, '')
+    // Troca vírgula decimal por ponto
+    num = num.replace(/,/g, '.')
+    // Converte para número
+    return parseFloat(num)
+  }
+
   const onSubmit = async (data: FormValues) => {
+    // Converte valorUnitario de string para número em cada produto
+    const produtosConvertidos = data.produtos.map(produto => ({
+      ...produto,
+      valorUnitario: parseValorUnitario(produto.valorUnitario) // se a máscara usa vírgula decimal
+    }))
     await api.put(`/nota-fiscal/${notaId}`, {
-      produtos: data.produtos
+      produtos: produtosConvertidos
     })
     onUpdated(page)
     onClose()
@@ -113,6 +133,28 @@ export const ModalEditNota: React.FC<Props> = ({
                 step="0.01"
                 {...register(`produtos.${index}.quantidade`)}
                 placeholder="Quantidade"
+              />
+              <Controller
+                name={`produtos.${index}.valorUnitario`}
+                control={control}
+                defaultValue={null}
+                render={({ field }) => (
+                  <NumericFormat
+                    {...field}
+                    thousandSeparator="."
+                    decimalSeparator=","
+                    prefix="R$ "
+                    fixedDecimalScale
+                    decimalScale={2}
+                    allowNegative={false}
+                    placeholder="R$ 0,00"
+                    style={{
+                      width: '8rem',
+                      padding: '0.4rem',
+                      fontSize: '1rem'
+                    }}
+                  />
+                )}
               />
               <input type="hidden" {...register(`produtos.${index}.id`)} />
             </ProdutoItem>
