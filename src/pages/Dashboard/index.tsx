@@ -303,6 +303,7 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
                     <Download
                       style={{ cursor: 'pointer' }}
                       onClick={() => handleDownload(row.id)}
+                      className="svg-dl"
                     />
                   </TableCell>
                   <TableCell

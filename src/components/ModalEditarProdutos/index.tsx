@@ -128,7 +128,8 @@ export const ModalEditNota: React.FC<Props> = ({
               />
               <input
                 type="number"
-                step="0.01"
+                step="1"
+                min={0}
                 {...register(`produtos.${index}.quantidade`)}
                 placeholder="Quantidade"
               />

@@ -184,9 +184,11 @@ export const DivContainer = styled.section`
   }
   .right {
     width: 100%;
+    height: 32rem;
     flex-direction: column;
     border-radius: 10px;
     background-color: transparent;
+
     z-index: 0;
     min-height: 450px;
     box-shadow: 0 8px 30px rgb(0 0 0 / 50%);
@@ -386,6 +388,13 @@ export const TableCell = styled.td`
   padding: 12px 15px;
   font-size: 14px;
   text-align: left;
+  .svg-dl {
+    width: 1rem;
+    cursor: pointer;
+    path {
+      color: blue;
+    }
+  }
 
   @media (max-width: 600px) {
     font-size: 12px;
