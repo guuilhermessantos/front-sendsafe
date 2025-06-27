@@ -18,18 +18,30 @@ const PaginationContainer = styled.div`
 const PageButton = styled.button<{ isActive: boolean; disabled?: boolean }>`
   padding: 4px 8px;
   margin: 0 3px;
-  background-color: ${({ isActive, disabled }) =>
-    disabled ? '#f1f1f1' : isActive ? '#4CAF50' : '#f1f1f1'};
-  color: ${({ isActive, disabled }) =>
-    disabled ? '#ccc' : isActive ? '#fff' : '#000'};
-  border: 1px solid #ddd;
+  background-color: ${({ isActive, disabled, theme }) =>
+    disabled
+      ? theme.colors.disabled
+      : isActive
+      ? theme.colors.primary
+      : theme.colors.backgroundAlt};
+  color: ${({ isActive, disabled, theme }) =>
+    disabled
+      ? theme.colors.textSecondary
+      : isActive
+      ? theme.colors.arrow
+      : theme.colors.text};
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 4px;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   font-size: 12px;
 
   &:hover {
-    background-color: ${({ isActive, disabled }) =>
-      disabled ? '#f1f1f1' : isActive ? '#45a049' : '#ddd'};
+    background-color: ${({ isActive, disabled, theme }) =>
+      disabled
+        ? theme.colors.disabled
+        : isActive
+        ? theme.colors.primaryHover
+        : theme.colors.shapeLow};
   }
 
   @media (max-width: 600px) {

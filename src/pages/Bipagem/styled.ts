@@ -414,7 +414,7 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   padding: 10px 20px;
-  background-color: #28a745;
+  background-color: ${props => props.theme.colors.success};
   color: white;
   border: none;
   border-radius: 5px;
@@ -422,7 +422,7 @@ export const Button = styled.button`
   font-size: 16px;
   transition: background 0.3s;
   &:hover {
-    background-color: #218838;
+    background-color: ${props => props.theme.colors.success}CC;
   }
 `
 
@@ -494,5 +494,20 @@ export const NormalText = styled.span`
 
   @media (max-width: 480px) {
     font-size: 0.75rem;
+  }
+`
+
+export const Label = styled.label`
+  background-color: ${props => props.theme.colors.success};
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.success}CC;
   }
 `

@@ -190,6 +190,12 @@ export const NavContainer = styled.nav<IPropsSwitch>`
         display: flex;
         align-items: center;
       }
+      .mode-text {
+        font-size: 0.95rem;
+        @media (max-width: 600px) {
+          font-size: 0.85rem;
+        }
+      }
       .sun {
         opacity: ${props => (props.controlSwitch === 'light' ? '0' : '100')};
         transition: all 0.1s ease-in-out;

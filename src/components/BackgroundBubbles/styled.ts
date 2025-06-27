@@ -19,7 +19,9 @@ export const Bubbles = styled.span<IPropsHome>`
   background-color: ${props => props.theme.colors.primary};
   border-radius: 50%;
   margin: 0 4px;
-  box-shadow: 0 0 0 10px #59cd9044, 0 0 50px #59cd90, 0 0 100px #59cd90;
+  box-shadow: 0 0 0 10px ${props => props.theme.colors.primary}44,
+    0 0 50px ${props => props.theme.colors.primary},
+    0 0 100px ${props => props.theme.colors.primary};
   animation: ${props =>
     `animate calc(1000s / ${props.sequencia}) linear infinite`};
   transition: all 0.1s ease-in-out;
@@ -65,8 +67,10 @@ export const Bubbles = styled.span<IPropsHome>`
     }
   }
   :nth-of-type(even) {
-    background-color: #2dc3ff;
-    box-shadow: 0 0 0 10px #2dc3ff44, 0 0 50px #2dc3ff, 0 0 100px #2dc3ff;
+    background-color: ${props => props.theme.colors.secondary};
+    box-shadow: 0 0 0 10px ${props => props.theme.colors.secondary}44,
+      0 0 50px ${props => props.theme.colors.secondary},
+      0 0 100px ${props => props.theme.colors.secondary};
     transition: all 0.1s ease-in-out;
     :hover {
       background-color: ${props => props.theme.colors.mode};

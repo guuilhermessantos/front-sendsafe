@@ -10,14 +10,23 @@ declare module 'styled-components' {
   export interface DefaultTheme extends Theme {
     colors: {
       background: string
+      backgroundAlt: string
+      shape: string
       shapeLow: string
       primary: string
       primaryHover: string
+      secondary: string
+      secondaryHover: string
       mode: string
       modeHover: string
-      // primary: string
       text: string
-      shape: string
+      textSecondary: string
+      success: string
+      error: string
+      warning: string
+      info: string
+      disabled: string
+      border: string
       arrow: string
     }
   }

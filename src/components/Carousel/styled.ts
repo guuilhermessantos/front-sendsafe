@@ -9,7 +9,7 @@ export const CarouselWrapper = styled.div`
   &.carousel-container {
     margin: 12px auto;
     width: 100%;
-    filter: drop-shadow(0px 12px 30px rgba(50, 50, 50, 0.2));
+    filter: drop-shadow(0px 12px 30px ${props => props.theme.colors.primary}33);
 
     /* Total-width (including margin) + 1 additional margin */
     /* @media (min-width: 832px) {

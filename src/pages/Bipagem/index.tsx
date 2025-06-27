@@ -1,202 +1,360 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
+import styled from 'styled-components'
 import {
-  Button,
-  DivContainer,
-  HighlightText,
-  Input,
-  InputContainer,
-  NormalText,
-  Table,
-  TableBody,
-  TableCell,
-  TableHeader,
-  TableHeaderCell,
-  TableRow,
-  TextWrapper
-} from './styled'
-import styled, { keyframes } from 'styled-components'
-import Pagination from '../../components/Pagination'
-import Quagga from 'quagga'
-import BarcodeReader from 'react-barcode-reader'
-import ModalCamera from '../../components/modalCamera'
-import { Modal } from '@geist-ui/react'
-import { XCircle } from '@geist-ui/react-icons'
-import { useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
-import api from '../../services/api'
-import { format, parseISO } from 'date-fns'
-interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  controlSwitch?: string
-}
+  CheckCircle,
+  AlertTriangle,
+  Package,
+  FileText,
+  ArrowRight
+} from '@geist-ui/react-icons'
 
-interface ITag {
-  tag: string
-}
+const Container = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: ${props => props.theme.colors.background};
+  padding: 24px 0;
+`
 
-interface IGetTag {
-  id: number
-  tag: string
-  status: string
-  data_hora: string
-}
+const Stepper = styled.div`
+  width: 90%;
+  max-width: 700px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 8px;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+  }
+`
 
-interface IPagination {
-  page: number
-  totalPages: number
-  totalItems: number
-}
+const Step = styled.div<{ active: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: ${({ active, theme }) =>
+    active ? theme.colors.primary : theme.colors.textSecondary};
+  font-size: 1.08rem;
+  background: ${({ active, theme }) =>
+    active ? theme.colors.primary + '11' : 'transparent'};
+  border-radius: 8px;
+  padding: 6px 14px;
+  transition: background 0.2s, color 0.2s;
+`
 
-const Dashboard: React.FC<IProps> = ({ ...rest }) => {
-  const data = [
-    { id: 1, nome: 'João', idade: 28, cidade: 'São Paulo' },
-    { id: 2, nome: 'Maria', idade: 22, cidade: 'Rio de Janeiro' },
-    { id: 3, nome: 'Carlos', idade: 35, cidade: 'Belo Horizonte' },
-    { id: 4, nome: 'Ana', idade: 27, cidade: 'Porto Alegre' }
-  ]
-  // const videoRef = useRef<HTMLDivElement>(null)
+const StatusGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  width: 90%;
+  max-width: 1100px;
+  margin-bottom: 24px;
+`
 
-  const [historico, setHistorico] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
-  const totalPages = 20 // Supondo que você tenha 20 páginas
-  // const [isCameraActive, setIsCameraActive] = useState(false)
-  const [isMobile, setIsMobile] = useState<boolean>(false)
-  const [tags, setTags] = useState<IGetTag[]>([])
-  const [pagination, setPagination] = useState<IPagination>({
-    page: 1,
-    totalPages: 1,
-    totalItems: 0
-  })
+const StatusCard = styled.div`
+  background: ${props => props.theme.colors.shape};
+  border-radius: 12px;
+  box-shadow: 0 2px 12px ${props => props.theme.colors.primary}11;
+  padding: 18px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+`
 
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors }
-  } = useForm<ITag>({
-    criteriaMode: 'all',
-    mode: 'onBlur'
-  })
+const StatusLabel = styled.span`
+  color: ${props => props.theme.colors.textSecondary};
+  font-size: 0.95rem;
+`
 
-  const fetchTags = async (page: number) => {
-    try {
-      const response = await api.get('/historical-tag', {
-        params: {
-          page: page, // Passando a página correta
-          limit: 8 // Definindo um limite de itens por página
-        }
-      })
-      const data = response.data
-      setTags(data.data)
-      setPagination({
-        page: data.page,
-        totalPages: data.totalPages,
-        totalItems: data.totalItems
-      })
-    } catch (error) {
-      console.error('Erro ao buscar tags:', error)
+const StatusValue = styled.span`
+  color: ${props => props.theme.colors.primary};
+  font-size: 1.25rem;
+  font-weight: bold;
+`
+
+const StatusIcon = styled.div`
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+  color: ${props => props.theme.colors.primary};
+`
+
+const MainGrid = styled.div`
+  display: flex;
+  gap: 24px;
+  width: 90%;
+  max-width: 1100px;
+  @media (max-width: 900px) {
+    flex-direction: column;
+    gap: 16px;
+  }
+`
+
+const Section = styled.div<{ active?: boolean }>`
+  background: ${props => props.theme.colors.shape};
+  border-radius: 12px;
+  box-shadow: 0 2px 12px ${props => props.theme.colors.primary}11;
+  padding: 20px 16px;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: ${({ active }) => (active === false ? 0.5 : 1)};
+  pointer-events: ${({ active }) => (active === false ? 'none' : 'auto')};
+  @media (max-width: 900px) {
+    padding: 14px 6px;
+  }
+`
+
+const SectionTitle = styled.h2`
+  color: ${props => props.theme.colors.primary};
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+`
+
+const EtiquetaList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 220px;
+  overflow-y: auto;
+  font-size: 0.98rem;
+  li {
+    padding: 6px 0;
+    border-bottom: 1px solid ${props => props.theme.colors.border};
+    color: ${props => props.theme.colors.text};
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    &:last-child {
+      border-bottom: none;
     }
   }
+`
 
-  useEffect(() => {
-    fetchTags(pagination.page) // Carregar as tags ao montar o componente
-  }, [pagination.page]) // A cada mudança de página, as tags serão recarregadas
+const EtiquetaInput = styled.input`
+  width: 100%;
+  padding: 14px 12px;
+  border-radius: 8px;
+  border: 2px solid ${props => props.theme.colors.primary};
+  font-size: 1.1rem;
+  background: ${props => props.theme.colors.shapeLow};
+  color: ${props => props.theme.colors.text};
+  margin-bottom: 8px;
+  outline: none;
+  transition: border 0.2s;
+  &:focus {
+    border-color: ${props => props.theme.colors.primaryHover};
+  }
+`
 
-  useEffect(() => {
-    // Detecta se o dispositivo é mobile
-    setIsMobile(window.innerWidth <= 768) // Ajuste o valor conforme seu design
-  }, [])
+const ResultBox = styled.div<{ ok: boolean }>`
+  background: ${({ ok, theme }) =>
+    ok ? theme.colors.success + '22' : theme.colors.error + '22'};
+  color: ${({ ok, theme }) => (ok ? theme.colors.success : theme.colors.error)};
+  border-radius: 8px;
+  padding: 14px 10px;
+  font-weight: 600;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.05rem;
+`
 
-  const handlePageChange = (page: number) => {
-    setPagination(prevState => ({
-      ...prevState,
-      page
-    }))
+const Instruction = styled.div`
+  width: 90%;
+  max-width: 700px;
+  margin-bottom: 18px;
+  color: ${props => props.theme.colors.textSecondary};
+  font-size: 1.05rem;
+  text-align: left;
+  @media (max-width: 600px) {
+    font-size: 0.97rem;
+  }
+`
+
+const MOCK_EMBALADAS: string[] = []
+
+const Bipagem: React.FC = () => {
+  // Etapa: 0 = bipar embaladas, 1 = bipar conferência
+  const [step, setStep] = useState(0)
+  const [embaladas, setEmbaladas] = useState<string[]>(MOCK_EMBALADAS)
+  const [conferidas, setConferidas] = useState<string[]>([])
+  const [input, setInput] = useState('')
+
+  // Lógica de conferência
+  const faltando = embaladas.filter(e => !conferidas.includes(e))
+  const ok = faltando.length === 0 && conferidas.length > 0
+
+  function handleAddEtiqueta(e: React.FormEvent) {
+    e.preventDefault()
+    const etq = input.trim().toUpperCase()
+    if (!etq) return setInput('')
+    if (step === 0) {
+      if (!embaladas.includes(etq)) setEmbaladas(prev => [...prev, etq])
+    } else {
+      if (!conferidas.includes(etq)) setConferidas(prev => [...prev, etq])
+    }
+    setInput('')
   }
 
-  const onSubmit = async (data: ITag) => {
-    try {
-      const response = await api.post('/historical-tag', {
-        tag: data.tag,
-        status: 'ativo',
-        data_hora: new Date().toISOString()
-      })
-      console.log('response', response)
-
-      toast.success(`etiqueta criada: ${data.tag}`)
-      // Após o POST, recarregar a tabela para pegar os dados atualizados
-      fetchTags(pagination.page) // Recarrega a tabela na página atual
-    } catch (error) {
-      toast.error(`etiqueta: ${data.tag}`)
-    }
+  function handleNextStep() {
+    setStep(1)
+    setInput('')
+  }
+  function handleReset() {
+    setStep(0)
+    setEmbaladas([])
+    setConferidas([])
+    setInput('')
   }
 
   return (
-    <DivContainer>
-      {/* <div className="div-bubbles">
-        {test.map((item, index) => (
-          <Bubbles key={index} sequencia={item}></Bubbles>
-        ))}
-      </div> */}
-      <div className="div-info">
-        <div className="info">
-          <TextWrapper>
-            <NormalText>
-              <HighlightText>Bipe</HighlightText>a etiqueta, e confira o status
-              do seu pedido! 🚚 / ✅
-            </NormalText>
-          </TextWrapper>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <InputContainer>
-              <Input
-                type="text"
-                placeholder="Bipe a etiqueta..."
-                {...register('tag', {
-                  required: 'O campo é obrigatório'
-                })}
-              />
-              {isMobile ? (
-                <ModalCamera onSubmit={onSubmit} />
-              ) : (
-                <Button type="submit">Enviar</Button>
-              )}
-            </InputContainer>
+    <Container>
+      <Instruction>
+        Siga as etapas para conferir as etiquetas de envio:
+      </Instruction>
+      <Stepper>
+        <Step active={step === 0}>1. Bipar Embaladas</Step>
+        <ArrowRight style={{ opacity: 0.5 }} />
+        <Step active={step === 1}>2. Bipar Conferência</Step>
+      </Stepper>
+      <StatusGrid>
+        <StatusCard>
+          <StatusIcon>
+            <Package />
+          </StatusIcon>
+          <StatusLabel>Embaladas</StatusLabel>
+          <StatusValue>{embaladas.length}</StatusValue>
+        </StatusCard>
+        <StatusCard>
+          <StatusIcon>
+            <FileText />
+          </StatusIcon>
+          <StatusLabel>Conferidas</StatusLabel>
+          <StatusValue>{conferidas.length}</StatusValue>
+        </StatusCard>
+        <StatusCard>
+          <StatusIcon>
+            <AlertTriangle />
+          </StatusIcon>
+          <StatusLabel>Faltando</StatusLabel>
+          <StatusValue>{faltando.length}</StatusValue>
+        </StatusCard>
+        <StatusCard>
+          <StatusIcon>
+            {ok ? (
+              <CheckCircle color="#22c55e" />
+            ) : (
+              <AlertTriangle color="#f87171" />
+            )}
+          </StatusIcon>
+          <StatusLabel>Status</StatusLabel>
+          <StatusValue>{ok ? 'OK' : 'Faltando'}</StatusValue>
+        </StatusCard>
+      </StatusGrid>
+      <MainGrid>
+        <Section active={step === 0}>
+          <SectionTitle>1. Bipar Etiquetas Embaladas</SectionTitle>
+          <form onSubmit={handleAddEtiqueta} style={{ width: '100%' }}>
+            <EtiquetaInput
+              placeholder="Bipe ou digite a etiqueta..."
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              autoFocus={step === 0}
+              disabled={step !== 0}
+            />
           </form>
-        </div>
-      </div>
-
-      <div className="right">
-        <div className="info-table">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHeaderCell>Sequencia</TableHeaderCell>
-                <TableHeaderCell>Num Etiqueta</TableHeaderCell>
-                <TableHeaderCell>Status</TableHeaderCell>
-                <TableHeaderCell>Data Hora</TableHeaderCell>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {tags.map(row => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.id}</TableCell>
-                  <TableCell>{row.tag}</TableCell>
-                  <TableCell>{row.status}</TableCell>
-                  <TableCell>
-                    {format(parseISO(row.data_hora), 'dd/MM/yyyy HH:mm:ss')}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-        <Pagination
-          currentPage={pagination.page}
-          totalPages={pagination.totalPages}
-          onPageChange={handlePageChange}
-        />
-      </div>
-    </DivContainer>
+          <EtiquetaList>
+            {embaladas.map(etq => (
+              <li key={etq}>
+                <FileText style={{ fontSize: 16 }} /> {etq}
+              </li>
+            ))}
+          </EtiquetaList>
+          <button
+            type="button"
+            style={{
+              marginTop: 10,
+              padding: '10px 0',
+              borderRadius: 8,
+              background: '#2563eb',
+              color: '#fff',
+              fontWeight: 600,
+              border: 'none',
+              cursor: embaladas.length === 0 ? 'not-allowed' : 'pointer',
+              opacity: embaladas.length === 0 ? 0.5 : 1,
+              transition: 'opacity 0.2s'
+            }}
+            disabled={embaladas.length === 0}
+            onClick={handleNextStep}
+          >
+            Avançar para Conferência
+          </button>
+        </Section>
+        <Section active={step === 1}>
+          <SectionTitle>2. Bipar Etiquetas para Conferência</SectionTitle>
+          <form onSubmit={handleAddEtiqueta} style={{ width: '100%' }}>
+            <EtiquetaInput
+              placeholder="Bipe ou digite a etiqueta..."
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              autoFocus={step === 1}
+              disabled={step !== 1}
+            />
+          </form>
+          <EtiquetaList>
+            {conferidas.map(etq => (
+              <li key={etq}>
+                <FileText style={{ fontSize: 16 }} /> {etq}
+              </li>
+            ))}
+          </EtiquetaList>
+          {conferidas.length > 0 && (
+            <ResultBox ok={ok}>
+              {ok ? (
+                <>
+                  <CheckCircle /> Tudo conferido!
+                </>
+              ) : (
+                <>
+                  <AlertTriangle /> Faltando: {faltando.join(', ')}
+                </>
+              )}
+            </ResultBox>
+          )}
+          {step === 1 && (
+            <button
+              type="button"
+              style={{
+                marginTop: 10,
+                padding: '10px 0',
+                borderRadius: 8,
+                background: '#e5e7eb',
+                color: '#222',
+                fontWeight: 600,
+                border: 'none',
+                cursor: 'pointer'
+              }}
+              onClick={handleReset}
+            >
+              Reiniciar Processo
+            </button>
+          )}
+        </Section>
+      </MainGrid>
+    </Container>
   )
 }
 
-export default Dashboard
+export default Bipagem

@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 export const Button = styled.button`
   padding: 5px 10px;
-  background-color: #28a745;
-  color: white;
+  background-color: ${props => props.theme.colors.success};
+  color: ${props => props.theme.colors.arrow};
   border: none;
   border-radius: 5px;
   display: flex;
@@ -13,7 +13,7 @@ export const Button = styled.button`
   font-size: 30px;
   transition: background 0.3s;
   &:hover {
-    background-color: #218838;
+    background-color: ${props => props.theme.colors.success}CC;
   }
 `
 export const Modal = styled.div`

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const CardWrapper = styled.div`
   border-radius: 8px;
-  background: #f5f5f6;
+  background: ${props => props.theme.colors.shape};
   height: 70vh;
 
   .imgTech {
@@ -52,9 +52,7 @@ export const CardWrapper = styled.div`
     .heading {
       .heading__subtitle {
         font-weight: 600;
-
-        color: #4b4c53;
-
+        color: ${props => props.theme.colors.text};
         font-size: 1rem !important;
         @media screen and (max-width: 1070px) {
           font-size: 0.9 !important;
@@ -69,8 +67,7 @@ export const CardWrapper = styled.div`
       .details__text {
         font-weight: 200;
         /* line-height: 20px; */
-        color: #4b4c53;
-
+        color: ${props => props.theme.colors.textSecondary};
         padding-bottom: 1vh;
         word-spacing: 1px;
         font-size: 0.9rem !important;
@@ -93,10 +90,10 @@ export const CardWrapper = styled.div`
       display: flex;
       align-items: center;
       justify-content: space-around;
-      background-color: #333;
-      color: #fff;
+      background-color: ${props => props.theme.colors.primary};
+      color: ${props => props.theme.colors.arrow};
       text-decoration: none;
-      border: 2px solid transparent;
+      border: 2px solid ${props => props.theme.colors.primary};
       border-radius: 5px;
       font-weight: bold;
       transition: background-color 0.3s, border-color 0.3s, color 0.3s;
@@ -105,13 +102,13 @@ export const CardWrapper = styled.div`
       /* gap: 2rem; */
 
       :hover {
-        background-color: #555;
-        border-color: #555;
-        color: #fff;
+        background-color: ${props => props.theme.colors.primaryHover};
+        border-color: ${props => props.theme.colors.primaryHover};
+        color: ${props => props.theme.colors.arrow};
       }
       :active {
-        background-color: #222;
-        border-color: #222;
+        background-color: ${props => props.theme.colors.primary};
+        border-color: ${props => props.theme.colors.primary};
       }
     }
 

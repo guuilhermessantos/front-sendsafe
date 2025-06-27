@@ -7,8 +7,10 @@ import styled from 'styled-components'
 
 export const DivBurguer = styled.div`
   position: fixed;
-  top: 5px;
-  z-index: 100;
+  top: 12px;
+  left: 12px;
+  z-index: 9999;
+  pointer-events: all;
   width: 30px;
   height: 30px;
   padding: 2px;

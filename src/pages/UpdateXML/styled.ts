@@ -263,15 +263,6 @@ export const DivContainer = styled.section`
       }
     }
 
-    .div-icon {
-      /* background-color: red; */
-      button {
-        width: 6vh !important;
-        height: 6vh !important;
-        /* font-size: 3.5vh !important; */
-      }
-    }
-
     /* .div-contatos {
       margin-top: 1rem;
     } */
@@ -360,14 +351,26 @@ export const Table = styled.table`
   box-shadow: 0 2px 16px ${props => props.theme.colors.primary}11;
   margin-top: 16px;
   font-size: 1rem;
+  min-width: 600px;
+  @media (max-width: 1200px) {
+    font-size: 0.97rem;
+    min-width: 520px;
+  }
   @media (max-width: 900px) {
-    font-size: 0.95rem;
+    font-size: 0.93rem;
+    min-width: 420px;
   }
   @media (max-width: 600px) {
     font-size: 0.85rem;
+    min-width: 340px;
     display: block;
     overflow-x: auto;
     white-space: nowrap;
+  }
+  @media (max-width: 400px) {
+    font-size: 0.78rem;
+    min-width: 260px;
+    padding: 0;
   }
 `
 
@@ -384,6 +387,22 @@ export const TableHeaderCell = styled.th`
   font-weight: bold;
   text-align: left;
   border-bottom: 2px solid ${props => props.theme.colors.primaryHover};
+  @media (max-width: 1200px) {
+    padding: 14px 7px;
+    font-size: 0.97rem;
+  }
+  @media (max-width: 900px) {
+    padding: 12px 6px;
+    font-size: 0.93rem;
+  }
+  @media (max-width: 600px) {
+    padding: 8px 4px;
+    font-size: 0.85rem;
+  }
+  @media (max-width: 400px) {
+    padding: 6px 2px;
+    font-size: 0.78rem;
+  }
 `
 
 export const TableBody = styled.tbody``
@@ -403,6 +422,22 @@ export const TableCell = styled.td`
   border-bottom: 1px solid ${props => props.theme.colors.border};
   text-align: left;
   vertical-align: middle;
+  @media (max-width: 1200px) {
+    padding: 10px 7px;
+    font-size: 0.97rem;
+  }
+  @media (max-width: 900px) {
+    padding: 9px 6px;
+    font-size: 0.93rem;
+  }
+  @media (max-width: 600px) {
+    padding: 7px 4px;
+    font-size: 0.82rem;
+  }
+  @media (max-width: 400px) {
+    padding: 5px 2px;
+    font-size: 0.75rem;
+  }
   &.icon-cell {
     text-align: center;
     vertical-align: middle;
