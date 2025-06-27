@@ -28,7 +28,7 @@ const Home: React.FC<IProps> = ({ controlSide, theme, toggleTheme }) => {
         <IconMenuBurguer theme={theme} toggleTheme={toggleTheme} />
       )}
       <ContainerIndex className="container-page">
-        <Dashboard id="home" />
+        <Dashboard />
       </ContainerIndex>
     </>
   )
