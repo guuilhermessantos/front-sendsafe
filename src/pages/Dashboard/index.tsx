@@ -409,10 +409,10 @@ const ExclusiveServicesSection = styled.section`
 `
 
 const ExclusiveTitle = styled.h2`
-  color: #111;
+  color: ${({ theme }) => theme.colors.primary};
   font-size: 0.98rem;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin: 12px 0 8px 0;
   letter-spacing: 0.1px;
   text-align: center;
 `
