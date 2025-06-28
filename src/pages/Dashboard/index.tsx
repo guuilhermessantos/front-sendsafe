@@ -20,6 +20,10 @@ const DashboardContainer = styled.div`
   background: ${({ theme }) =>
     `linear-gradient(120deg, ${theme.colors.background} 0%, ${theme.colors.backgroundAlt} 100%)`};
   padding-bottom: 32px;
+
+  @media (max-width: 700px) {
+    padding-bottom: 16px;
+  }
 `
 
 const Header = styled.header`
@@ -32,6 +36,13 @@ const Header = styled.header`
   padding: 32px 32px 0 32px;
   position: relative;
   animation: ${fadeIn} 0.7s;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 8px 0 8px;
+    gap: 18px;
+  }
 `
 
 const Title = styled.h1`
@@ -41,6 +52,10 @@ const Title = styled.h1`
   letter-spacing: 2px;
   text-transform: uppercase;
   margin: 0;
+
+  @media (max-width: 700px) {
+    font-size: 1.4rem;
+  }
 `
 
 const ServiceBadge = styled.span`
@@ -63,6 +78,11 @@ const ServiceBadge = styled.span`
 const QuickMenu = styled.div`
   display: flex;
   gap: 18px;
+  @media (max-width: 700px) {
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+  }
 `
 
 const QuickCard = styled.a`
@@ -92,6 +112,11 @@ const QuickCard = styled.a`
     font-size: 1.5rem;
     margin-bottom: 4px;
   }
+  @media (max-width: 500px) {
+    padding: 10px 10px;
+    min-width: 90px;
+    font-size: 0.8rem;
+  }
 `
 
 const ServiceBadgeCard = styled.span`
@@ -117,6 +142,10 @@ const MainSection = styled.section`
   align-items: center;
   margin-top: 32px;
   animation: ${fadeIn} 0.8s 0.1s backwards;
+  @media (max-width: 700px) {
+    margin-top: 18px;
+    padding: 0 4px;
+  }
 `
 
 const HeroCard = styled.div`
@@ -139,6 +168,11 @@ const HeroCard = styled.div`
   cursor: pointer;
   margin-bottom: 32px;
   animation: ${fadeIn} 0.9s 0.2s backwards;
+  @media (max-width: 700px) {
+    padding: 32px 8px 24px 8px;
+    min-width: 220px;
+    width: 98vw;
+  }
 `
 
 const Mascot = styled.div`
@@ -244,6 +278,9 @@ const HeroNumber = styled.span`
   line-height: 1;
   letter-spacing: 2px;
   text-shadow: 0 2px 12px ${({ theme }) => theme.colors.primary}22;
+  @media (max-width: 700px) {
+    font-size: 2.2rem;
+  }
 `
 
 const HeroLabel = styled.span`
@@ -252,6 +289,9 @@ const HeroLabel = styled.span`
   font-size: 1.7rem;
   margin-top: 12px;
   letter-spacing: 1px;
+  @media (max-width: 700px) {
+    font-size: 1rem;
+  }
 `
 
 const UpdateBadge = styled.span`
@@ -266,6 +306,12 @@ const UpdateBadge = styled.span`
   padding: 6px 18px;
   box-shadow: 0 2px 8px ${({ theme }) => theme.colors.primary}11;
   letter-spacing: 1px;
+  @media (max-width: 700px) {
+    top: 10px;
+    right: 10px;
+    font-size: 0.8rem;
+    padding: 4px 10px;
+  }
 `
 
 const StatsGrid = styled.div`
@@ -277,6 +323,10 @@ const StatsGrid = styled.div`
   justify-content: center;
   margin-bottom: 32px;
   animation: ${fadeIn} 1s 0.3s backwards;
+  @media (max-width: 700px) {
+    gap: 12px;
+    margin-bottom: 18px;
+  }
 `
 
 const StatCard = styled.div`
@@ -290,6 +340,11 @@ const StatCard = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  @media (max-width: 700px) {
+    padding: 16px 8px;
+    min-width: 120px;
+    min-height: 80px;
+  }
 `
 
 const StatIcon = styled.div`
