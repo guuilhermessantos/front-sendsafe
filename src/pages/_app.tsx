@@ -9,6 +9,8 @@ import 'pure-react-carousel/dist/react-carousel.es.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
 import Navbar from '../components/navbar'
+import IconMenuBurguer from '../components/MenuBurguer'
+import useWindowSize from '../hooks/windowSize'
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const [theme, setTheme] = useState('light')
@@ -20,12 +22,16 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const handleControlSideMenu = () => {
     setControlSide(controlSide === 'true' ? 'false' : 'true')
   }
+  const screenWidth = useWindowSize()
 
   return (
     <>
       <ThemeProvider theme={theme === 'light' ? themeLight : themeDark}>
         <ToastContainer theme={theme === 'light' ? 'colored' : 'dark'} />
         <Container>
+          {screenWidth <= 800 && (
+            <IconMenuBurguer theme={theme} toggleTheme={toggleTheme} />
+          )}
           <Navbar
             theme={theme}
             toggleTheme={toggleTheme}

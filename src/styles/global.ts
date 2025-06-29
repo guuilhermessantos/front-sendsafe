@@ -34,45 +34,45 @@ export default createGlobalStyle`
   html {
     font-size: 100%;
     width: 100%;
+    @media (max-width: 600px) {
+      font-size: 87.5%; /* 14px base */
+    }
+    @media (max-width: 400px) {
+      font-size: 75%; /* 12px base */
+    }
   }
 
   .h1-responsive {
     font-size: 3rem !important;
-     @media screen and (max-width: 550px) {
-      font-size: 1.8rem !important;
+    @media screen and (max-width: 550px) {
+      font-size: 1.5rem !important;
     }
   }
   .h2-responsive {
     font-size: 1.5rem !important;
-     @media screen and (max-width: 550px) {
+    @media screen and (max-width: 550px) {
       font-size: 1rem !important;
     }
   }
   .span-responsive {
-   font-size: 0.9rem !important;
-        @media screen and (max-width: 1070px) {
-          font-size: 0.97rem !important;
-        }
-        @media screen and (max-width: 550px) {
-          font-size: 0.95rem !important;
-        }
+    font-size: 0.9rem !important;
+    @media screen and (max-width: 1070px) {
+      font-size: 0.97rem !important;
+    }
+    @media screen and (max-width: 550px) {
+      font-size: 0.85rem !important;
+    }
   }
   .span-title-card-small-responsive {
     font-size: 0.85rem !important;
-    /* @media screen and (max-width: 1070px) {
+    @media screen and (max-width: 550px) {
       font-size: 0.75rem !important;
-    } */
-     @media screen and (max-width: 550px) {
-      font-size: 0.8rem !important;
     }
   }
   .span-card-small-responsive {
     font-size: 0.85rem !important;
-    /* @media screen and (max-width: 1070px) {
+    @media screen and (max-width: 550px) {
       font-size: 0.75rem !important;
-    } */
-     @media screen and (max-width: 550px) {
-      font-size: 0.82rem !important;
     }
   }
 
@@ -83,5 +83,11 @@ export default createGlobalStyle`
     font: 400 16px Roboto, sans-serif;
     display: flex;
     flex-direction: column;
+    @media (max-width: 600px) {
+      font-size: 14px;
+    }
+    @media (max-width: 400px) {
+      font-size: 12px;
+    }
   }
 `

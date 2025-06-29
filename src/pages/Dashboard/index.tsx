@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled, { keyframes } from 'styled-components'
-import { Users } from '@geist-ui/react-icons'
+import { Users, Info } from '@geist-ui/react-icons'
 import confetti from 'canvas-confetti'
 import api from '../../services/api'
 import { format, parseISO } from 'date-fns'
@@ -19,10 +19,13 @@ const DashboardContainer = styled.div`
   align-items: center;
   background: ${({ theme }) =>
     `linear-gradient(120deg, ${theme.colors.background} 0%, ${theme.colors.backgroundAlt} 100%)`};
-  padding-bottom: 32px;
-
+  padding-bottom: 2.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   @media (max-width: 700px) {
-    padding-bottom: 16px;
+    padding-bottom: 1rem;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
   }
 `
 
@@ -33,15 +36,14 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 32px 32px 0 32px;
+  padding: 2.5rem 2rem 0 2rem;
   position: relative;
   animation: ${fadeIn} 0.7s;
-
   @media (max-width: 900px) {
     flex-direction: column;
     align-items: flex-start;
-    padding: 24px 8px 0 8px;
-    gap: 18px;
+    padding: 1.2rem 0.5rem 0 0.5rem;
+    gap: 1.2rem;
   }
 `
 
@@ -52,7 +54,6 @@ const Title = styled.h1`
   letter-spacing: 2px;
   text-transform: uppercase;
   margin: 0;
-
   @media (max-width: 700px) {
     font-size: 1.4rem;
   }
@@ -91,15 +92,15 @@ const QuickCard = styled.a`
   align-items: center;
   justify-content: center;
   background: ${({ theme }) => theme.colors.background};
-  border-radius: 16px;
+  border-radius: 1rem;
   box-shadow: 0 2px 12px ${({ theme }) => theme.colors.primary}11;
-  padding: 18px 32px;
-  min-width: 120px;
-  min-height: 60px;
+  padding: 1rem 1.5rem;
+  min-width: 90px;
+  min-height: 48px;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.primary};
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1rem;
   transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
   border: 2px solid transparent;
@@ -113,9 +114,9 @@ const QuickCard = styled.a`
     margin-bottom: 4px;
   }
   @media (max-width: 500px) {
-    padding: 10px 10px;
-    min-width: 90px;
-    font-size: 0.8rem;
+    padding: 0.7rem 0.7rem;
+    min-width: 70px;
+    font-size: 0.85rem;
   }
 `
 
@@ -140,38 +141,42 @@ const MainSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 32px;
+  margin-top: 2rem;
+  gap: 2rem;
   animation: ${fadeIn} 0.8s 0.1s backwards;
   @media (max-width: 700px) {
-    margin-top: 18px;
-    padding: 0 4px;
+    margin-top: 1rem;
+    padding: 0 0.2rem;
+    gap: 1rem;
   }
 `
 
 const HeroCard = styled.div`
   background: ${({ theme }) =>
     `linear-gradient(135deg, ${theme.colors.primary}22 0%, ${theme.colors.secondary}22 100%)`};
-  border-radius: 32px;
+  border-radius: 2rem;
   box-shadow: 0 8px 32px ${({ theme }) => theme.colors.primary}22;
-  padding: 56px 32px 40px 32px;
-  min-width: 340px;
-  min-height: 320px;
+  padding: 3.5rem 2rem 2.5rem 2rem;
+  min-width: 220px;
+  min-height: 220px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 420px;
-  max-width: 95vw;
+  width: 100%;
+  max-width: 420px;
   border: 2.5px solid ${({ theme }) => theme.colors.primary};
   transition: box-shadow 0.2s;
   cursor: pointer;
-  margin-bottom: 32px;
+  margin-bottom: 2rem;
+  margin-top: 0.5rem;
   animation: ${fadeIn} 0.9s 0.2s backwards;
   @media (max-width: 700px) {
-    padding: 32px 8px 24px 8px;
-    min-width: 220px;
+    padding: 2rem 0.5rem 1.2rem 0.5rem;
+    min-width: 160px;
     width: 98vw;
+    margin-bottom: 1rem;
   }
 `
 
@@ -317,33 +322,33 @@ const UpdateBadge = styled.span`
 const StatsGrid = styled.div`
   width: 100%;
   max-width: 700px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
   justify-content: center;
-  margin-bottom: 32px;
+  margin-bottom: 2rem;
   animation: ${fadeIn} 1s 0.3s backwards;
   @media (max-width: 700px) {
-    gap: 12px;
-    margin-bottom: 18px;
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+    grid-template-columns: 1fr;
   }
 `
 
 const StatCard = styled.div`
   background: ${({ theme }) => theme.colors.shape};
-  border-radius: 18px;
+  border-radius: 1.1rem;
   box-shadow: 0 2px 12px ${({ theme }) => theme.colors.primary}11;
-  padding: 32px 38px;
-  min-width: 200px;
-  min-height: 120px;
+  padding: 1.2rem 1rem;
+  min-height: 90px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 0.5rem;
+  justify-content: center;
   @media (max-width: 700px) {
-    padding: 16px 8px;
-    min-width: 120px;
-    min-height: 80px;
+    padding: 0.7rem 0.3rem;
+    min-height: 60px;
   }
 `
 
@@ -419,9 +424,90 @@ const ExclusiveTitle = styled.h2`
 
 const ExclusiveCardsRow = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
+  @media (max-width: 500px) {
+    gap: 0.5rem;
+  }
+`
+
+// Divider visual
+const Divider = styled.hr`
+  width: 100%;
+  max-width: 700px;
+  border: none;
+  border-top: 1.5px solid ${({ theme }) => theme.colors.primary}22;
+  margin: 24px 0 12px 0;
+`
+
+// Skeleton Loader
+const Skeleton = styled.div`
+  width: 100%;
+  height: 32px;
+  background: linear-gradient(90deg, #f3f3f3 25%, #ececec 50%, #f3f3f3 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.2s infinite linear;
+  border-radius: 8px;
+  @keyframes skeleton-loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+`
+
+// Tooltip simples
+const Tooltip = styled.span`
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  & .tooltip-text {
+    visibility: hidden;
+    width: 160px;
+    background: #222;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 6px 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.85rem;
+  }
+  &:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+`
+
+// Gráfico de barras SVG simples
+const BarChartWrapper = styled.div`
+  width: 100%;
+  max-width: 700px;
+  background: ${({ theme }) => theme.colors.shape};
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px ${({ theme }) => theme.colors.primary}11;
+  padding: 1.1rem 0.7rem 0.5rem 0.7rem;
+  margin: 0 auto 0.7rem auto;
+  @media (max-width: 700px) {
+    padding: 0.5rem 0.1rem 0.2rem 0.1rem;
+  }
+`
+
+const BarChartTitle = styled.h3`
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  text-align: left;
 `
 
 function MascotXML() {
@@ -619,6 +705,16 @@ const Dashboard: React.FC = () => {
   const [xmls, setXmls] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
+  // Mock para gráfico: XMLs por mês
+  const xmlsPorMes = [
+    { mes: 'Jan', total: 12 },
+    { mes: 'Fev', total: 18 },
+    { mes: 'Mar', total: 22 },
+    { mes: 'Abr', total: 15 },
+    { mes: 'Mai', total: 27 },
+    { mes: 'Jun', total: 19 }
+  ]
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -639,32 +735,23 @@ const Dashboard: React.FC = () => {
 
   const fornecedoresUnicos = Array.from(new Set(xmls.map(t => t.fornecedor)))
     .length
-
-  const ultimaData = format(new Date(), 'dd/MM/yyyy HH:mm')
+  // Última data real de XML salvo (mock se não houver)
+  const ultimaDataXML =
+    xmls.length > 0
+      ? format(
+          parseISO(xmls[0].createdAt || new Date().toISOString()),
+          'dd/MM/yyyy HH:mm'
+        )
+      : format(new Date(), 'dd/MM/yyyy HH:mm')
+  // Total de XMLs no mês (mock)
+  const totalXMLMes = xmlsPorMes[xmlsPorMes.length - 1].total
 
   return (
     <DashboardContainer>
-      <Header>
-        <Title>Dashboard XMLs</Title>
-
-        <QuickMenu>
-          {/* Serviços exclusivos SendSafe */}
-          <ExclusiveServicesSection>
-            <ExclusiveTitle>Serviços exclusivos</ExclusiveTitle>
-            <ExclusiveCardsRow>
-              <QuickCard href="/UpdateXML">
-                <i className="bx bx-barcode-reader icon" />
-                Atualizar XML
-              </QuickCard>
-              <QuickCard href="/Bipagem">
-                <i className="bx bx-barcode icon" />
-                Bipagem
-              </QuickCard>
-            </ExclusiveCardsRow>
-          </ExclusiveServicesSection>
-        </QuickMenu>
-      </Header>
+      {/* Card de boas-vindas */}
+      <Header></Header>
       <MainSection>
+        {/* Hero Card */}
         <HeroCard
           onClick={() =>
             confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } })
@@ -673,30 +760,147 @@ const Dashboard: React.FC = () => {
           <MascotXML />
           <HeroNumber>
             {loading ? (
-              '...'
+              <Skeleton style={{ height: 48, width: 120 }} />
             ) : (
               <CountUp end={totalXML} duration={1.2} separator="," />
             )}
           </HeroNumber>
-          <HeroLabel>XMLs Salvos</HeroLabel>
-          <UpdateBadge>Última atualização: {ultimaData}</UpdateBadge>
+          <HeroLabel>Total de XMLs Salvos</HeroLabel>
+          <UpdateBadge>Última atualização: {ultimaDataXML}</UpdateBadge>
         </HeroCard>
+        <Divider />
+        {/* Serviços Exclusivos */}
+        <ExclusiveTitle>Serviços exclusivos</ExclusiveTitle>
+        <ExclusiveServicesSection>
+          <ExclusiveCardsRow>
+            <QuickCard href="/UpdateXML">
+              <i className="bx bx-barcode-reader icon" />
+              Atualizar XML
+            </QuickCard>
+            <QuickCard href="/Bipagem">
+              <i className="bx bx-barcode icon" />
+              Bipagem
+            </QuickCard>
+          </ExclusiveCardsRow>
+        </ExclusiveServicesSection>
+        <Divider />
+        {/* Estatísticas */}
+        <ExclusiveTitle>Estatísticas</ExclusiveTitle>
         <StatsGrid>
           <StatCard>
             <StatIcon>
-              <Users />
+              <i className="bx bx-user-check icon" />
             </StatIcon>
-            <StatValue>{fornecedoresUnicos}</StatValue>
-            <StatLabel>Fornecedores únicos</StatLabel>
+            <StatValue>
+              {loading ? (
+                <Skeleton style={{ height: 28, width: 40 }} />
+              ) : (
+                fornecedoresUnicos
+              )}
+            </StatValue>
+            <StatLabel>
+              Fornecedores únicos
+              <Tooltip>
+                <Info
+                  size={16}
+                  style={{ marginLeft: 4, verticalAlign: 'middle' }}
+                />
+                <span className="tooltip-text">
+                  Quantidade de fornecedores diferentes encontrados nos XMLs.
+                </span>
+              </Tooltip>
+            </StatLabel>
           </StatCard>
           <StatCard>
             <StatIcon>
-              <Users />
+              <i className="bx bx-calendar icon" />
             </StatIcon>
-            <StatValue>{ultimaData}</StatValue>
-            <StatLabel>Último envio</StatLabel>
+            <StatValue>
+              {loading ? (
+                <Skeleton style={{ height: 28, width: 80 }} />
+              ) : (
+                ultimaDataXML
+              )}
+            </StatValue>
+            <StatLabel>
+              Último XML salvo
+              <Tooltip>
+                <Info
+                  size={16}
+                  style={{ marginLeft: 4, verticalAlign: 'middle' }}
+                />
+                <span className="tooltip-text">
+                  Data e hora do último XML salvo no sistema.
+                </span>
+              </Tooltip>
+            </StatLabel>
+          </StatCard>
+          <StatCard>
+            <StatIcon>
+              <i className="bx bx-bar-chart-alt-2 icon" />
+            </StatIcon>
+            <StatValue>
+              {loading ? (
+                <Skeleton style={{ height: 28, width: 40 }} />
+              ) : (
+                totalXMLMes
+              )}
+            </StatValue>
+            <StatLabel>
+              XMLs no mês
+              <Tooltip>
+                <Info
+                  size={16}
+                  style={{ marginLeft: 4, verticalAlign: 'middle' }}
+                />
+                <span className="tooltip-text">
+                  Total de XMLs salvos neste mês.
+                </span>
+              </Tooltip>
+            </StatLabel>
           </StatCard>
         </StatsGrid>
+        {/* Gráfico de barras simples */}
+        <BarChartWrapper>
+          <BarChartTitle>Evolução de XMLs por mês</BarChartTitle>
+          <svg width="100%" height="90" viewBox="0 0 220 90">
+            {xmlsPorMes.map((item, idx) => {
+              const max = Math.max(...xmlsPorMes.map(x => x.total))
+              const barHeight = (item.total / max) * 60
+              return (
+                <g key={item.mes}>
+                  <rect
+                    x={20 + idx * 32}
+                    y={80 - barHeight}
+                    width={20}
+                    height={barHeight}
+                    rx={4}
+                    fill="#2563eb"
+                    opacity="0.85"
+                  />
+                  <text
+                    x={30 + idx * 32}
+                    y={88}
+                    textAnchor="middle"
+                    fontSize="11"
+                    fill="#888"
+                  >
+                    {item.mes}
+                  </text>
+                  <text
+                    x={30 + idx * 32}
+                    y={75 - barHeight}
+                    textAnchor="middle"
+                    fontSize="10"
+                    fill="#2563eb"
+                  >
+                    {item.total}
+                  </text>
+                </g>
+              )
+            })}
+          </svg>
+        </BarChartWrapper>
       </MainSection>
     </DashboardContainer>
   )

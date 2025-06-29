@@ -363,7 +363,7 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
   const [currentPage, setCurrentPage] = useState(1)
   const totalPages = 20 // Supondo que você tenha 20 páginas
   // const [isCameraActive, setIsCameraActive] = useState(false)
-  const [isMobile, setIsMobile] = useState<boolean>(false)
+  const [isMobile, setIsMobile] = useState(false)
   const [tags, setTags] = useState<IGetTag[]>([])
   const [pagination, setPagination] = useState<IPagination>({
     page: 1,
@@ -445,8 +445,10 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
   }
 
   useEffect(() => {
-    // Detecta se o dispositivo é mobile
-    setIsMobile(window.innerWidth <= 768) // Ajuste o valor conforme seu design
+    const handleResize = () => setIsMobile(window.innerWidth <= 700)
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   const handlePageChange = (page: number) => {
@@ -593,44 +595,200 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
         </CardsColumn>
       </TopSection>
       <TableSection>
-        <TableWrapper>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHeaderCell>Download</TableHeaderCell>
-                <TableHeaderCell>id</TableHeaderCell>
-                <TableHeaderCell>Chave</TableHeaderCell>
-                <TableHeaderCell>Fornecedor</TableHeaderCell>
-                <TableHeaderCell>Data Hora Emissão</TableHeaderCell>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
+        {!isMobile && (
+          <TableWrapper>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHeaderCell>Download</TableHeaderCell>
+                  <TableHeaderCell>id</TableHeaderCell>
+                  <TableHeaderCell>Chave</TableHeaderCell>
+                  <TableHeaderCell>Fornecedor</TableHeaderCell>
+                  <TableHeaderCell>Data Hora Emissão</TableHeaderCell>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {tags.map(row => (
+                  <TableRow key={row.id}>
+                    <TableCell className="icon-cell">
+                      <Download
+                        onClick={() => handleDownload(row.id)}
+                        className="icon-download"
+                      />
+                    </TableCell>
+                    <TableCell>{row.id}</TableCell>
+                    <TableCell>{row.chave}</TableCell>
+                    <TableCell>{row.fornecedor}</TableCell>
+                    <TableCell>
+                      {format(parseISO(row.dataEmissao), 'dd/MM/yyyy HH:mm:ss')}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableWrapper>
+        )}
+        {isMobile && (
+          <>
+            <div
+              style={{
+                width: '100%',
+                maxHeight: '60vh',
+                overflowY: 'auto',
+                padding: '0.5rem 0.1rem',
+                background: '#f7f7fa',
+                borderRadius: '1rem',
+                marginBottom: '0.7rem',
+                border: 'none'
+              }}
+            >
               {tags.map(row => (
-                <TableRow key={row.id}>
-                  <TableCell className="icon-cell">
+                <div
+                  key={row.id}
+                  style={{
+                    background: '#fff',
+                    borderRadius: '0.9rem',
+                    boxShadow: '0 1px 6px #0001',
+                    marginBottom: '1.1rem',
+                    padding: '1.1rem 1rem 0.8rem 1rem',
+                    width: '100%',
+                    border: '1px solid #ececec',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.7rem'
+                  }}
+                >
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: 700,
+                        color: '#2563eb',
+                        fontSize: '1.08rem',
+                        minWidth: 90
+                      }}
+                    >
+                      Download
+                    </span>
                     <Download
                       onClick={() => handleDownload(row.id)}
                       className="icon-download"
+                      style={{
+                        cursor: 'pointer',
+                        fontSize: 28,
+                        color: '#2563eb',
+                        background: '#e8f0fe',
+                        borderRadius: '50%',
+                        padding: 6
+                      }}
                     />
-                  </TableCell>
-                  <TableCell>{row.id}</TableCell>
-                  <TableCell>{row.chave}</TableCell>
-                  <TableCell>{row.fornecedor}</TableCell>
-                  <TableCell>
-                    {format(parseISO(row.dataEmissao), 'dd/MM/yyyy HH:mm:ss')}
-                  </TableCell>
-                </TableRow>
+                  </div>
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: 500,
+                        color: '#888',
+                        fontSize: '1rem',
+                        minWidth: 90
+                      }}
+                    >
+                      Fornecedor
+                    </span>
+                    <span
+                      style={{
+                        fontWeight: 600,
+                        color: '#222',
+                        fontSize: '1.08rem'
+                      }}
+                    >
+                      {row.fornecedor}
+                    </span>
+                  </div>
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: 500,
+                        color: '#888',
+                        fontSize: '1rem',
+                        minWidth: 90
+                      }}
+                    >
+                      Data
+                    </span>
+                    <span
+                      style={{
+                        fontWeight: 600,
+                        color: '#222',
+                        fontSize: '1.08rem'
+                      }}
+                    >
+                      {format(parseISO(row.dataEmissao), 'dd/MM/yyyy HH:mm:ss')}
+                    </span>
+                  </div>
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: 500,
+                        color: '#888',
+                        fontSize: '1rem',
+                        minWidth: 90
+                      }}
+                    >
+                      Chave
+                    </span>
+                    <span
+                      style={{
+                        wordBreak: 'break-all',
+                        color: '#444',
+                        fontSize: '0.98rem'
+                      }}
+                    >
+                      {row.chave}
+                    </span>
+                  </div>
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: 500,
+                        color: '#888',
+                        fontSize: '1rem',
+                        minWidth: 90
+                      }}
+                    >
+                      ID
+                    </span>
+                    <span style={{ color: '#444', fontSize: '0.98rem' }}>
+                      {row.id}
+                    </span>
+                  </div>
+                </div>
               ))}
-            </TableBody>
-          </Table>
-        </TableWrapper>
-        <PaginationWrapper>
-          <Pagination
-            currentPage={pagination.page}
-            totalPages={pagination.totalPages}
-            onPageChange={handlePageChange}
-          />
-        </PaginationWrapper>
+            </div>
+            <div
+              style={{
+                width: '100%',
+                marginTop: '0.2rem',
+                display: 'flex',
+                justifyContent: 'center'
+              }}
+            >
+              <Pagination
+                currentPage={pagination.page}
+                totalPages={pagination.totalPages}
+                onPageChange={handlePageChange}
+              />
+            </div>
+          </>
+        )}
       </TableSection>
     </PageContainer>
   )
