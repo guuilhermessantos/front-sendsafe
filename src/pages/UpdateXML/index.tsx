@@ -596,7 +596,15 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
       </TopSection>
       <TableSection>
         {!isMobile && (
-          <TableWrapper>
+          <TableWrapper
+            style={{
+              height: '420px',
+              minHeight: '320px',
+              maxHeight: '60vh',
+              overflowY: 'auto',
+              marginBottom: '0.7rem'
+            }}
+          >
             <Table>
               <TableHeader>
                 <TableRow>
@@ -629,166 +637,154 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
           </TableWrapper>
         )}
         {isMobile && (
-          <>
-            <div
-              style={{
-                width: '100%',
-                maxHeight: '60vh',
-                overflowY: 'auto',
-                padding: '0.5rem 0.1rem',
-                background: '#f7f7fa',
-                borderRadius: '1rem',
-                marginBottom: '0.7rem',
-                border: 'none'
-              }}
-            >
-              {tags.map(row => (
-                <div
-                  key={row.id}
-                  style={{
-                    background: '#fff',
-                    borderRadius: '0.9rem',
-                    boxShadow: '0 1px 6px #0001',
-                    marginBottom: '1.1rem',
-                    padding: '1.1rem 1rem 0.8rem 1rem',
-                    width: '100%',
-                    border: '1px solid #ececec',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '0.7rem'
-                  }}
-                >
-                  <div
-                    style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+          <div
+            style={{
+              width: '100%',
+              maxHeight: '60vh',
+              overflowY: 'auto',
+              padding: '0.5rem 0.1rem',
+              background: '#f7f7fa',
+              borderRadius: '1rem',
+              marginBottom: '0.7rem',
+              border: 'none'
+            }}
+          >
+            {tags.map(row => (
+              <div
+                key={row.id}
+                style={{
+                  background: '#fff',
+                  borderRadius: '0.9rem',
+                  boxShadow: '0 1px 6px #0001',
+                  marginBottom: '1.1rem',
+                  padding: '1.1rem 1rem 0.8rem 1rem',
+                  width: '100%',
+                  border: '1px solid #ececec',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.7rem'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span
+                    style={{
+                      fontWeight: 700,
+                      color: '#2563eb',
+                      fontSize: '1.08rem',
+                      minWidth: 90
+                    }}
                   >
-                    <span
-                      style={{
-                        fontWeight: 700,
-                        color: '#2563eb',
-                        fontSize: '1.08rem',
-                        minWidth: 90
-                      }}
-                    >
-                      Download
-                    </span>
-                    <Download
-                      onClick={() => handleDownload(row.id)}
-                      className="icon-download"
-                      style={{
-                        cursor: 'pointer',
-                        fontSize: 28,
-                        color: '#2563eb',
-                        background: '#e8f0fe',
-                        borderRadius: '50%',
-                        padding: 6
-                      }}
-                    />
-                  </div>
-                  <div
-                    style={{ display: 'flex', alignItems: 'center', gap: 10 }}
-                  >
-                    <span
-                      style={{
-                        fontWeight: 500,
-                        color: '#888',
-                        fontSize: '1rem',
-                        minWidth: 90
-                      }}
-                    >
-                      Fornecedor
-                    </span>
-                    <span
-                      style={{
-                        fontWeight: 600,
-                        color: '#222',
-                        fontSize: '1.08rem'
-                      }}
-                    >
-                      {row.fornecedor}
-                    </span>
-                  </div>
-                  <div
-                    style={{ display: 'flex', alignItems: 'center', gap: 10 }}
-                  >
-                    <span
-                      style={{
-                        fontWeight: 500,
-                        color: '#888',
-                        fontSize: '1rem',
-                        minWidth: 90
-                      }}
-                    >
-                      Data
-                    </span>
-                    <span
-                      style={{
-                        fontWeight: 600,
-                        color: '#222',
-                        fontSize: '1.08rem'
-                      }}
-                    >
-                      {format(parseISO(row.dataEmissao), 'dd/MM/yyyy HH:mm:ss')}
-                    </span>
-                  </div>
-                  <div
-                    style={{ display: 'flex', alignItems: 'center', gap: 10 }}
-                  >
-                    <span
-                      style={{
-                        fontWeight: 500,
-                        color: '#888',
-                        fontSize: '1rem',
-                        minWidth: 90
-                      }}
-                    >
-                      Chave
-                    </span>
-                    <span
-                      style={{
-                        wordBreak: 'break-all',
-                        color: '#444',
-                        fontSize: '0.98rem'
-                      }}
-                    >
-                      {row.chave}
-                    </span>
-                  </div>
-                  <div
-                    style={{ display: 'flex', alignItems: 'center', gap: 10 }}
-                  >
-                    <span
-                      style={{
-                        fontWeight: 500,
-                        color: '#888',
-                        fontSize: '1rem',
-                        minWidth: 90
-                      }}
-                    >
-                      ID
-                    </span>
-                    <span style={{ color: '#444', fontSize: '0.98rem' }}>
-                      {row.id}
-                    </span>
-                  </div>
+                    Download
+                  </span>
+                  <Download
+                    onClick={() => handleDownload(row.id)}
+                    className="icon-download"
+                    style={{
+                      cursor: 'pointer',
+                      fontSize: 28,
+                      color: '#2563eb',
+                      background: '#e8f0fe',
+                      borderRadius: '50%',
+                      padding: 6
+                    }}
+                  />
                 </div>
-              ))}
-            </div>
-            <div
-              style={{
-                width: '100%',
-                marginTop: '0.2rem',
-                display: 'flex',
-                justifyContent: 'center'
-              }}
-            >
-              <Pagination
-                currentPage={pagination.page}
-                totalPages={pagination.totalPages}
-                onPageChange={handlePageChange}
-              />
-            </div>
-          </>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span
+                    style={{
+                      fontWeight: 500,
+                      color: '#888',
+                      fontSize: '1rem',
+                      minWidth: 90
+                    }}
+                  >
+                    Fornecedor
+                  </span>
+                  <span
+                    style={{
+                      fontWeight: 600,
+                      color: '#222',
+                      fontSize: '1.08rem'
+                    }}
+                  >
+                    {row.fornecedor}
+                  </span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span
+                    style={{
+                      fontWeight: 500,
+                      color: '#888',
+                      fontSize: '1rem',
+                      minWidth: 90
+                    }}
+                  >
+                    Data
+                  </span>
+                  <span
+                    style={{
+                      fontWeight: 600,
+                      color: '#222',
+                      fontSize: '1.08rem'
+                    }}
+                  >
+                    {format(parseISO(row.dataEmissao), 'dd/MM/yyyy HH:mm:ss')}
+                  </span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span
+                    style={{
+                      fontWeight: 500,
+                      color: '#888',
+                      fontSize: '1rem',
+                      minWidth: 90
+                    }}
+                  >
+                    Chave
+                  </span>
+                  <span
+                    style={{
+                      wordBreak: 'break-all',
+                      color: '#444',
+                      fontSize: '0.98rem'
+                    }}
+                  >
+                    {row.chave}
+                  </span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span
+                    style={{
+                      fontWeight: 500,
+                      color: '#888',
+                      fontSize: '1rem',
+                      minWidth: 90
+                    }}
+                  >
+                    ID
+                  </span>
+                  <span style={{ color: '#444', fontSize: '0.98rem' }}>
+                    {row.id}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         )}
+        <div
+          style={{
+            width: '100%',
+            marginTop: '0.2rem',
+            display: 'flex',
+            justifyContent: 'center'
+          }}
+        >
+          <Pagination
+            currentPage={pagination.page}
+            totalPages={pagination.totalPages}
+            onPageChange={handlePageChange}
+          />
+        </div>
       </TableSection>
     </PageContainer>
   )
