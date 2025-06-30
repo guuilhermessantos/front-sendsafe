@@ -45,6 +45,7 @@ interface IGetTag {
   fornecedor: string
   dataEmissao: string
   produtos: any
+  xml?: any
 }
 
 interface IPagination {
@@ -391,6 +392,7 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
   })
 
   const abrirModal = async (produtos, notaId) => {
+    console.log('abrirModal produtos:', produtos, 'notaId:', notaId)
     setNotaIdSelecionada(notaId)
     setProdutosSelecionados(produtos)
     setOpenModal(true)
@@ -624,10 +626,36 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
                         className="icon-download"
                       />
                     </TableCell>
-                    <TableCell>{row.id}</TableCell>
-                    <TableCell>{row.chave}</TableCell>
-                    <TableCell>{row.fornecedor}</TableCell>
-                    <TableCell>
+                    <TableCell
+                      onClick={() => {
+                        abrirModal(row.produtos || [], row.id)
+                      }}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      {row.id}
+                    </TableCell>
+                    <TableCell
+                      onClick={() => {
+                        abrirModal(row.produtos || [], row.id)
+                      }}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      {row.chave}
+                    </TableCell>
+                    <TableCell
+                      onClick={() => {
+                        abrirModal(row.produtos || [], row.id)
+                      }}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      {row.fornecedor}
+                    </TableCell>
+                    <TableCell
+                      onClick={() => {
+                        abrirModal(row.produtos || [], row.id)
+                      }}
+                      style={{ cursor: 'pointer' }}
+                    >
                       {format(parseISO(row.dataEmissao), 'dd/MM/yyyy HH:mm:ss')}
                     </TableCell>
                   </TableRow>
@@ -786,6 +814,15 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
           />
         </div>
       </TableSection>
+
+      <ModalEditNota
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        produtos={produtosSelecionados}
+        notaId={notaIdSelecionada}
+        onUpdated={fetchTags}
+        page={pagination.page}
+      />
     </PageContainer>
   )
 }
