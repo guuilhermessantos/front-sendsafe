@@ -59,7 +59,7 @@ const Navbar: React.FC<IProps> = ({
             <div className="header-text">
               {controlSide === 'true' && (
                 <>
-                  <span className="name text">ConfereTag</span>
+                  <span className="name text">SendSafe</span>
                 </>
               )}
             </div>
@@ -148,7 +148,7 @@ const Navbar: React.FC<IProps> = ({
           </li>
           <li>
             {controlSide === 'true' ? (
-            <Button
+              <Button
                 style={{
                   width: '100%',
                   marginTop: 12,
@@ -159,8 +159,8 @@ const Navbar: React.FC<IProps> = ({
                   fontWeight: 500,
                   fontSize: 16
                 }}
-              onClick={handleLogout}
-            >
+                onClick={handleLogout}
+              >
                 <FiUser style={{ marginRight: 4 }} />
                 {userName || 'Usuário'}
                 <FiLogOut style={{ marginLeft: 8 }} />
@@ -182,7 +182,7 @@ const Navbar: React.FC<IProps> = ({
                 title="Sair"
               >
                 <FiLogOut />
-            </Button>
+              </Button>
             )}
           </li>
         </div>
