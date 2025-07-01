@@ -240,7 +240,7 @@ const Login: React.FC<{ toggleTheme: () => void; theme: string }> = ({
     setLoading(true)
     setError('')
     try {
-      const res = await fetch('http://localhost:5000/login', {
+      const res = await fetch('https://back-sendsafe.onrender.com/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, senha: password })

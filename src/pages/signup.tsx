@@ -279,7 +279,7 @@ const Signup: React.FC<{ toggleTheme: () => void; theme: string }> = ({
     setLoading(true)
     setError('')
     try {
-      const res = await fetch('http://localhost:5000/signup', {
+      const res = await fetch('https://back-sendsafe.onrender.com/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nome: name, email, senha: password })
