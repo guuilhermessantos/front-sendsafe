@@ -16,6 +16,9 @@ const ModalOverlay = styled.div`
   align-items: center;
   z-index: 2000;
   padding: 16px;
+  @media (max-width: 700px) {
+    padding: 0;
+  }
 `
 
 const ModalContent = styled.div`
@@ -30,9 +33,45 @@ const ModalContent = styled.div`
   gap: 1.5rem;
   position: relative;
   @media (max-width: 700px) {
-    padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+    padding: 0.8rem 0.5rem 0.8rem 0.5rem;
     max-width: 98vw;
     min-width: 0;
+    height: 55vh;
+    border-radius: 18px;
+    justify-content: flex-start;
+    gap: 0.7rem;
+    box-shadow: 0 2px 24px rgba(30, 41, 59, 0.18);
+  }
+  @media (max-width: 480px) {
+    padding: 0.5rem 0.1rem 0.5rem 0.1rem;
+    height: 60vh;
+  }
+  overflow: hidden;
+`
+
+const DragBar = styled.div`
+  width: 44px;
+  height: 5px;
+  background: #d1d5db;
+  border-radius: 3px;
+  margin: 12px auto 8px auto;
+  @media (min-width: 701px) {
+    display: none;
+  }
+`
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 2.1rem;
+  color: #888;
+  cursor: pointer;
+  z-index: 20;
+  @media (min-width: 701px) {
+    display: none;
   }
 `
 
@@ -52,8 +91,14 @@ const ProdutoList = styled.div`
   max-height: 45vh;
   overflow-y: auto;
   margin-bottom: 0.5rem;
-  @media (max-width: 600px) {
-    max-height: 55vh;
+  @media (max-width: 700px) {
+    max-height: 54vh;
+    padding: 0 1.1rem;
+    margin-bottom: 0.2rem;
+  }
+  @media (max-width: 480px) {
+    max-height: 60vh;
+    padding: 0 0.3rem;
   }
 `
 
@@ -120,10 +165,23 @@ const ButtonRow = styled.div`
   justify-content: center;
   gap: 1.1rem;
   margin-top: 1.2rem;
-  @media (max-width: 600px) {
-    flex-direction: column;
+  @media (max-width: 700px) {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: ${({ theme }) => theme.colors.shape || '#fff'};
+    padding: 0.9rem 0.7rem 1.2rem 0.7rem;
+    z-index: 30;
     gap: 0.7rem;
-    margin-top: 0.7rem;
+    margin-top: 0;
+    width: 100vw;
+    box-shadow: 0 -2px 16px #0002;
+  }
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.7rem 0.2rem 1.1rem 0.2rem;
   }
 `
 
@@ -215,8 +273,20 @@ export const ModalEditNota: React.FC<Props> = ({
   return (
     <ModalOverlay open={open}>
       <ModalContent>
+        <DragBar />
+        <CloseButton onClick={onClose} aria-label="Fechar modal">
+          ×
+        </CloseButton>
         <ModalTitle>Editar Produtos da Nota {notaId}</ModalTitle>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1,
+            minHeight: 0
+          }}
+        >
           <ProdutoList>
             {fields.map((field, index) => (
               <ProdutoItem key={field.id}>
@@ -257,6 +327,7 @@ export const ModalEditNota: React.FC<Props> = ({
               </ProdutoItem>
             ))}
           </ProdutoList>
+          <div style={{ flex: 1 }} />
           <ButtonRow>
             <Button type="submit">Salvar</Button>
             <Button type="button" className="cancel" onClick={onClose}>

@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import useWindowSize from '../../hooks/windowSize'
 import { NavContainer, Switch } from './styled'
+import Button from '../ui/Button'
+import { FiLogOut, FiUser } from 'react-icons/fi'
 
 interface IProps {
   toggleTheme: () => void
@@ -22,6 +24,19 @@ const Navbar: React.FC<IProps> = ({
 }) => {
   const router = useRouter()
   const screenWidth = useWindowSize()
+  const [userName, setUserName] = useState('')
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setUserName(localStorage.getItem('nome') || '')
+    }
+  }, [])
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('nome')
+    router.push('/login')
+  }
 
   return (
     <NavContainer
@@ -36,8 +51,8 @@ const Navbar: React.FC<IProps> = ({
             <span className="image-container">
               <img
                 src={'/assets/confereTag.svg'}
-                title="ConfereTag"
-                alt="ConfereTag logo"
+                title="SendSafe"
+                alt="SendSafe logo"
                 style={{ width: 38, height: 38 }}
               />
             </span>
@@ -130,6 +145,45 @@ const Navbar: React.FC<IProps> = ({
                 <i className="bx bx-sun switch-sun" />
               </Switch>
             </div>
+          </li>
+          <li>
+            {controlSide === 'true' ? (
+            <Button
+                style={{
+                  width: '100%',
+                  marginTop: 12,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  justifyContent: 'center',
+                  fontWeight: 500,
+                  fontSize: 16
+                }}
+              onClick={handleLogout}
+            >
+                <FiUser style={{ marginRight: 4 }} />
+                {userName || 'Usuário'}
+                <FiLogOut style={{ marginLeft: 8 }} />
+              </Button>
+            ) : (
+              <Button
+                style={{
+                  width: '100%',
+                  marginTop: 12,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 500,
+                  fontSize: 20,
+                  padding: 0,
+                  height: 44
+                }}
+                onClick={handleLogout}
+                title="Sair"
+              >
+                <FiLogOut />
+            </Button>
+            )}
           </li>
         </div>
       </div>

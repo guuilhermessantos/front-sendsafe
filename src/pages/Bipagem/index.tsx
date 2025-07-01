@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import {
   CheckCircle,
@@ -7,6 +7,8 @@ import {
   FileText,
   ArrowRight
 } from '@geist-ui/react-icons'
+import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 const Container = styled.div`
   width: 100%;
@@ -186,6 +188,16 @@ const Instruction = styled.div`
 const MOCK_EMBALADAS: string[] = []
 
 const Bipagem: React.FC = () => {
+  const router = useRouter()
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token')
+      if (!token) {
+        router.replace('/login')
+      }
+    }
+  }, [])
+
   // Etapa: 0 = bipar embaladas, 1 = bipar conferência
   const [step, setStep] = useState(0)
   const [embaladas, setEmbaladas] = useState<string[]>(MOCK_EMBALADAS)
@@ -220,140 +232,145 @@ const Bipagem: React.FC = () => {
   }
 
   return (
-    <Container>
-      <Instruction>
-        Siga as etapas para conferir as etiquetas de envio:
-      </Instruction>
-      <Stepper>
-        <Step active={step === 0}>1. Bipar Embaladas</Step>
-        <ArrowRight style={{ opacity: 0.5 }} />
-        <Step active={step === 1}>2. Bipar Conferência</Step>
-      </Stepper>
-      <StatusGrid>
-        <StatusCard>
-          <StatusIcon>
-            <Package />
-          </StatusIcon>
-          <StatusLabel>Embaladas</StatusLabel>
-          <StatusValue>{embaladas.length}</StatusValue>
-        </StatusCard>
-        <StatusCard>
-          <StatusIcon>
-            <FileText />
-          </StatusIcon>
-          <StatusLabel>Conferidas</StatusLabel>
-          <StatusValue>{conferidas.length}</StatusValue>
-        </StatusCard>
-        <StatusCard>
-          <StatusIcon>
-            <AlertTriangle />
-          </StatusIcon>
-          <StatusLabel>Faltando</StatusLabel>
-          <StatusValue>{faltando.length}</StatusValue>
-        </StatusCard>
-        <StatusCard>
-          <StatusIcon>
-            {ok ? (
-              <CheckCircle color="#22c55e" />
-            ) : (
-              <AlertTriangle color="#f87171" />
-            )}
-          </StatusIcon>
-          <StatusLabel>Status</StatusLabel>
-          <StatusValue>{ok ? 'OK' : 'Faltando'}</StatusValue>
-        </StatusCard>
-      </StatusGrid>
-      <MainGrid>
-        <Section active={step === 0}>
-          <SectionTitle>1. Bipar Etiquetas Embaladas</SectionTitle>
-          <form onSubmit={handleAddEtiqueta} style={{ width: '100%' }}>
-            <EtiquetaInput
-              placeholder="Bipe ou digite a etiqueta..."
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              autoFocus={step === 0}
-              disabled={step !== 0}
-            />
-          </form>
-          <EtiquetaList>
-            {embaladas.map(etq => (
-              <li key={etq}>
-                <FileText style={{ fontSize: 16 }} /> {etq}
-              </li>
-            ))}
-          </EtiquetaList>
-          <button
-            type="button"
-            style={{
-              marginTop: 10,
-              padding: '10px 0',
-              borderRadius: 8,
-              background: '#2563eb',
-              color: '#fff',
-              fontWeight: 600,
-              border: 'none',
-              cursor: embaladas.length === 0 ? 'not-allowed' : 'pointer',
-              opacity: embaladas.length === 0 ? 0.5 : 1,
-              transition: 'opacity 0.2s'
-            }}
-            disabled={embaladas.length === 0}
-            onClick={handleNextStep}
-          >
-            Avançar para Conferência
-          </button>
-        </Section>
-        <Section active={step === 1}>
-          <SectionTitle>2. Bipar Etiquetas para Conferência</SectionTitle>
-          <form onSubmit={handleAddEtiqueta} style={{ width: '100%' }}>
-            <EtiquetaInput
-              placeholder="Bipe ou digite a etiqueta..."
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              autoFocus={step === 1}
-              disabled={step !== 1}
-            />
-          </form>
-          <EtiquetaList>
-            {conferidas.map(etq => (
-              <li key={etq}>
-                <FileText style={{ fontSize: 16 }} /> {etq}
-              </li>
-            ))}
-          </EtiquetaList>
-          {conferidas.length > 0 && (
-            <ResultBox ok={ok}>
+    <>
+      <Head>
+        <title>Bipagem | SendSafe</title>
+      </Head>
+      <Container>
+        <Instruction>
+          Siga as etapas para conferir as etiquetas de envio:
+        </Instruction>
+        <Stepper>
+          <Step active={step === 0}>1. Bipar Embaladas</Step>
+          <ArrowRight style={{ opacity: 0.5 }} />
+          <Step active={step === 1}>2. Bipar Conferência</Step>
+        </Stepper>
+        <StatusGrid>
+          <StatusCard>
+            <StatusIcon>
+              <Package />
+            </StatusIcon>
+            <StatusLabel>Embaladas</StatusLabel>
+            <StatusValue>{embaladas.length}</StatusValue>
+          </StatusCard>
+          <StatusCard>
+            <StatusIcon>
+              <FileText />
+            </StatusIcon>
+            <StatusLabel>Conferidas</StatusLabel>
+            <StatusValue>{conferidas.length}</StatusValue>
+          </StatusCard>
+          <StatusCard>
+            <StatusIcon>
+              <AlertTriangle />
+            </StatusIcon>
+            <StatusLabel>Faltando</StatusLabel>
+            <StatusValue>{faltando.length}</StatusValue>
+          </StatusCard>
+          <StatusCard>
+            <StatusIcon>
               {ok ? (
-                <>
-                  <CheckCircle /> Tudo conferido!
-                </>
+                <CheckCircle color="#22c55e" />
               ) : (
-                <>
-                  <AlertTriangle /> Faltando: {faltando.join(', ')}
-                </>
+                <AlertTriangle color="#f87171" />
               )}
-            </ResultBox>
-          )}
-          {step === 1 && (
+            </StatusIcon>
+            <StatusLabel>Status</StatusLabel>
+            <StatusValue>{ok ? 'OK' : 'Faltando'}</StatusValue>
+          </StatusCard>
+        </StatusGrid>
+        <MainGrid>
+          <Section active={step === 0}>
+            <SectionTitle>1. Bipar Etiquetas Embaladas</SectionTitle>
+            <form onSubmit={handleAddEtiqueta} style={{ width: '100%' }}>
+              <EtiquetaInput
+                placeholder="Bipe ou digite a etiqueta..."
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                autoFocus={step === 0}
+                disabled={step !== 0}
+              />
+            </form>
+            <EtiquetaList>
+              {embaladas.map(etq => (
+                <li key={etq}>
+                  <FileText style={{ fontSize: 16 }} /> {etq}
+                </li>
+              ))}
+            </EtiquetaList>
             <button
               type="button"
               style={{
                 marginTop: 10,
                 padding: '10px 0',
                 borderRadius: 8,
-                background: '#e5e7eb',
-                color: '#222',
+                background: '#2563eb',
+                color: '#fff',
                 fontWeight: 600,
                 border: 'none',
-                cursor: 'pointer'
+                cursor: embaladas.length === 0 ? 'not-allowed' : 'pointer',
+                opacity: embaladas.length === 0 ? 0.5 : 1,
+                transition: 'opacity 0.2s'
               }}
-              onClick={handleReset}
+              disabled={embaladas.length === 0}
+              onClick={handleNextStep}
             >
-              Reiniciar Processo
+              Avançar para Conferência
             </button>
-          )}
-        </Section>
-      </MainGrid>
-    </Container>
+          </Section>
+          <Section active={step === 1}>
+            <SectionTitle>2. Bipar Etiquetas para Conferência</SectionTitle>
+            <form onSubmit={handleAddEtiqueta} style={{ width: '100%' }}>
+              <EtiquetaInput
+                placeholder="Bipe ou digite a etiqueta..."
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                autoFocus={step === 1}
+                disabled={step !== 1}
+              />
+            </form>
+            <EtiquetaList>
+              {conferidas.map(etq => (
+                <li key={etq}>
+                  <FileText style={{ fontSize: 16 }} /> {etq}
+                </li>
+              ))}
+            </EtiquetaList>
+            {conferidas.length > 0 && (
+              <ResultBox ok={ok}>
+                {ok ? (
+                  <>
+                    <CheckCircle /> Tudo conferido!
+                  </>
+                ) : (
+                  <>
+                    <AlertTriangle /> Faltando: {faltando.join(', ')}
+                  </>
+                )}
+              </ResultBox>
+            )}
+            {step === 1 && (
+              <button
+                type="button"
+                style={{
+                  marginTop: 10,
+                  padding: '10px 0',
+                  borderRadius: 8,
+                  background: '#e5e7eb',
+                  color: '#222',
+                  fontWeight: 600,
+                  border: 'none',
+                  cursor: 'pointer'
+                }}
+                onClick={handleReset}
+              >
+                Reiniciar Processo
+              </button>
+            )}
+          </Section>
+        </MainGrid>
+      </Container>
+    </>
   )
 }
 

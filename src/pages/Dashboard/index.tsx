@@ -5,6 +5,9 @@ import confetti from 'canvas-confetti'
 import api from '../../services/api'
 import { format, parseISO } from 'date-fns'
 import CountUp from 'react-countup'
+import Button from '../../components/ui/Button'
+import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(-16px); }
@@ -704,6 +707,16 @@ const Dashboard: React.FC = () => {
   const [totalXML, setTotalXML] = useState<number>(0)
   const [xmls, setXmls] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token')
+      if (!token) {
+        router.replace('/login')
+      }
+    }
+  }, [])
 
   // Mock para gráfico: XMLs por mês
   const xmlsPorMes = [
@@ -747,162 +760,165 @@ const Dashboard: React.FC = () => {
   const totalXMLMes = xmlsPorMes[xmlsPorMes.length - 1].total
 
   return (
-    <DashboardContainer>
-      {/* Card de boas-vindas */}
-      <Header></Header>
-      <MainSection>
-        {/* Hero Card */}
-        <HeroCard
-          onClick={() =>
-            confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } })
-          }
-        >
-          <MascotXML />
-          <HeroNumber>
-            {loading ? (
-              <Skeleton style={{ height: 48, width: 120 }} />
-            ) : (
-              <CountUp end={totalXML} duration={1.2} separator="," />
-            )}
-          </HeroNumber>
-          <HeroLabel>Total de XMLs Salvos</HeroLabel>
-          <UpdateBadge>Última atualização: {ultimaDataXML}</UpdateBadge>
-        </HeroCard>
-        <Divider />
-        {/* Serviços Exclusivos */}
-        <ExclusiveTitle>Serviços exclusivos</ExclusiveTitle>
-        <ExclusiveServicesSection>
-          <ExclusiveCardsRow>
-            <QuickCard href="/UpdateXML">
-              <i className="bx bx-barcode-reader icon" />
-              Atualizar XML
-            </QuickCard>
-            <QuickCard href="/Bipagem">
-              <i className="bx bx-barcode icon" />
-              Bipagem
-            </QuickCard>
-          </ExclusiveCardsRow>
-        </ExclusiveServicesSection>
-        <Divider />
-        {/* Estatísticas */}
-        <ExclusiveTitle>Estatísticas</ExclusiveTitle>
-        <StatsGrid>
-          <StatCard>
-            <StatIcon>
-              <i className="bx bx-user-check icon" />
-            </StatIcon>
-            <StatValue>
+    <>
+      <Head>
+        <title>Dashboard | SendSafe</title>
+      </Head>
+      <DashboardContainer>
+        <MainSection>
+          {/* Hero Card */}
+          <HeroCard
+            onClick={() =>
+              confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } })
+            }
+          >
+            <MascotXML />
+            <HeroNumber>
               {loading ? (
-                <Skeleton style={{ height: 28, width: 40 }} />
+                <Skeleton style={{ height: 48, width: 120 }} />
               ) : (
-                fornecedoresUnicos
+                <CountUp end={totalXML} duration={1.2} separator="," />
               )}
-            </StatValue>
-            <StatLabel>
-              Fornecedores únicos
-              <Tooltip>
-                <Info
-                  size={16}
-                  style={{ marginLeft: 4, verticalAlign: 'middle' }}
-                />
-                <span className="tooltip-text">
-                  Quantidade de fornecedores diferentes encontrados nos XMLs.
-                </span>
-              </Tooltip>
-            </StatLabel>
-          </StatCard>
-          <StatCard>
-            <StatIcon>
-              <i className="bx bx-calendar icon" />
-            </StatIcon>
-            <StatValue>
-              {loading ? (
-                <Skeleton style={{ height: 28, width: 80 }} />
-              ) : (
-                ultimaDataXML
-              )}
-            </StatValue>
-            <StatLabel>
-              Último XML salvo
-              <Tooltip>
-                <Info
-                  size={16}
-                  style={{ marginLeft: 4, verticalAlign: 'middle' }}
-                />
-                <span className="tooltip-text">
-                  Data e hora do último XML salvo no sistema.
-                </span>
-              </Tooltip>
-            </StatLabel>
-          </StatCard>
-          <StatCard>
-            <StatIcon>
-              <i className="bx bx-bar-chart-alt-2 icon" />
-            </StatIcon>
-            <StatValue>
-              {loading ? (
-                <Skeleton style={{ height: 28, width: 40 }} />
-              ) : (
-                totalXMLMes
-              )}
-            </StatValue>
-            <StatLabel>
-              XMLs no mês
-              <Tooltip>
-                <Info
-                  size={16}
-                  style={{ marginLeft: 4, verticalAlign: 'middle' }}
-                />
-                <span className="tooltip-text">
-                  Total de XMLs salvos neste mês.
-                </span>
-              </Tooltip>
-            </StatLabel>
-          </StatCard>
-        </StatsGrid>
-        {/* Gráfico de barras simples */}
-        <BarChartWrapper>
-          <BarChartTitle>Evolução de XMLs por mês</BarChartTitle>
-          <svg width="100%" height="90" viewBox="0 0 220 90">
-            {xmlsPorMes.map((item, idx) => {
-              const max = Math.max(...xmlsPorMes.map(x => x.total))
-              const barHeight = (item.total / max) * 60
-              return (
-                <g key={item.mes}>
-                  <rect
-                    x={20 + idx * 32}
-                    y={80 - barHeight}
-                    width={20}
-                    height={barHeight}
-                    rx={4}
-                    fill="#2563eb"
-                    opacity="0.85"
+            </HeroNumber>
+            <HeroLabel>Total de XMLs Salvos</HeroLabel>
+            <UpdateBadge>Última atualização: {ultimaDataXML}</UpdateBadge>
+          </HeroCard>
+          <Divider />
+          {/* Serviços Exclusivos */}
+          <ExclusiveTitle>Serviços exclusivos</ExclusiveTitle>
+          <ExclusiveServicesSection>
+            <ExclusiveCardsRow>
+              <QuickCard href="/UpdateXML">
+                <i className="bx bx-barcode-reader icon" />
+                Atualizar XML
+              </QuickCard>
+              <QuickCard href="/Bipagem">
+                <i className="bx bx-barcode icon" />
+                Bipagem
+              </QuickCard>
+            </ExclusiveCardsRow>
+          </ExclusiveServicesSection>
+          <Divider />
+          {/* Estatísticas */}
+          <ExclusiveTitle>Estatísticas</ExclusiveTitle>
+          <StatsGrid>
+            <StatCard>
+              <StatIcon>
+                <i className="bx bx-user-check icon" />
+              </StatIcon>
+              <StatValue>
+                {loading ? (
+                  <Skeleton style={{ height: 28, width: 40 }} />
+                ) : (
+                  fornecedoresUnicos
+                )}
+              </StatValue>
+              <StatLabel>
+                Fornecedores únicos
+                <Tooltip>
+                  <Info
+                    size={16}
+                    style={{ marginLeft: 4, verticalAlign: 'middle' }}
                   />
-                  <text
-                    x={30 + idx * 32}
-                    y={88}
-                    textAnchor="middle"
-                    fontSize="11"
-                    fill="#888"
-                  >
-                    {item.mes}
-                  </text>
-                  <text
-                    x={30 + idx * 32}
-                    y={75 - barHeight}
-                    textAnchor="middle"
-                    fontSize="10"
-                    fill="#2563eb"
-                  >
-                    {item.total}
-                  </text>
-                </g>
-              )
-            })}
-          </svg>
-        </BarChartWrapper>
-      </MainSection>
-    </DashboardContainer>
+                  <span className="tooltip-text">
+                    Quantidade de fornecedores diferentes encontrados nos XMLs.
+                  </span>
+                </Tooltip>
+              </StatLabel>
+            </StatCard>
+            <StatCard>
+              <StatIcon>
+                <i className="bx bx-calendar icon" />
+              </StatIcon>
+              <StatValue>
+                {loading ? (
+                  <Skeleton style={{ height: 28, width: 80 }} />
+                ) : (
+                  ultimaDataXML
+                )}
+              </StatValue>
+              <StatLabel>
+                Último XML salvo
+                <Tooltip>
+                  <Info
+                    size={16}
+                    style={{ marginLeft: 4, verticalAlign: 'middle' }}
+                  />
+                  <span className="tooltip-text">
+                    Data e hora do último XML salvo no sistema.
+                  </span>
+                </Tooltip>
+              </StatLabel>
+            </StatCard>
+            <StatCard>
+              <StatIcon>
+                <i className="bx bx-bar-chart-alt-2 icon" />
+              </StatIcon>
+              <StatValue>
+                {loading ? (
+                  <Skeleton style={{ height: 28, width: 40 }} />
+                ) : (
+                  totalXMLMes
+                )}
+              </StatValue>
+              <StatLabel>
+                XMLs no mês
+                <Tooltip>
+                  <Info
+                    size={16}
+                    style={{ marginLeft: 4, verticalAlign: 'middle' }}
+                  />
+                  <span className="tooltip-text">
+                    Total de XMLs salvos neste mês.
+                  </span>
+                </Tooltip>
+              </StatLabel>
+            </StatCard>
+          </StatsGrid>
+          {/* Gráfico de barras simples */}
+          <BarChartWrapper>
+            <BarChartTitle>Evolução de XMLs por mês</BarChartTitle>
+            <svg width="100%" height="90" viewBox="0 0 220 90">
+              {xmlsPorMes.map((item, idx) => {
+                const max = Math.max(...xmlsPorMes.map(x => x.total))
+                const barHeight = (item.total / max) * 60
+                return (
+                  <g key={item.mes}>
+                    <rect
+                      x={20 + idx * 32}
+                      y={80 - barHeight}
+                      width={20}
+                      height={barHeight}
+                      rx={4}
+                      fill="#2563eb"
+                      opacity="0.85"
+                    />
+                    <text
+                      x={30 + idx * 32}
+                      y={88}
+                      textAnchor="middle"
+                      fontSize="11"
+                      fill="#888"
+                    >
+                      {item.mes}
+                    </text>
+                    <text
+                      x={30 + idx * 32}
+                      y={75 - barHeight}
+                      textAnchor="middle"
+                      fontSize="10"
+                      fill="#2563eb"
+                    >
+                      {item.total}
+                    </text>
+                  </g>
+                )
+              })}
+            </svg>
+          </BarChartWrapper>
+        </MainSection>
+      </DashboardContainer>
+    </>
   )
 }
 

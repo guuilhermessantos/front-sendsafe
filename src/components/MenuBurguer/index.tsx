@@ -7,6 +7,9 @@ import {
   SwitchMenuBurguer
 } from './styled'
 import Link from 'next/link'
+import Button from '../ui/Button'
+import { useRouter } from 'next/router'
+import { FiLogOut, FiUser } from 'react-icons/fi'
 
 interface IProps {
   theme: string
@@ -17,6 +20,8 @@ const IconMenuBurguer: React.FC<IProps> = ({ toggleTheme, theme }) => {
   const [visible, setVisible] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const burgerButtonRef = useRef<HTMLButtonElement>(null)
+  const router = useRouter()
+  const [userName, setUserName] = useState('')
 
   // Fecha o menu ao clicar fora (mas não no botão)
   useEffect(() => {
@@ -39,6 +44,18 @@ const IconMenuBurguer: React.FC<IProps> = ({ toggleTheme, theme }) => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [visible])
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setUserName(localStorage.getItem('nome') || '')
+    }
+  }, [])
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('nome')
+    router.push('/login')
+  }
 
   return (
     <>
@@ -86,6 +103,23 @@ const IconMenuBurguer: React.FC<IProps> = ({ toggleTheme, theme }) => {
               <i className="bx bx-sun switch-sun" />
             </SwitchMenuBurguer>
           </div>
+          <Button
+            style={{
+              width: '100%',
+              marginTop: 16,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              justifyContent: 'center',
+              fontWeight: 500,
+              fontSize: 16
+            }}
+            onClick={handleLogout}
+          >
+            <FiUser style={{ marginRight: 4 }} />
+            <span>{userName || 'Usuário'}</span>
+            <FiLogOut style={{ marginLeft: 8 }} />
+          </Button>
         </nav>
       </SideMenu>
     </>

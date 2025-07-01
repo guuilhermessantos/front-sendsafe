@@ -49,7 +49,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
 
-          <link rel="icon" href={'/image/logo.png'} />
+          <link rel="icon" href={'/assets/confereTag.svg'} />
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"

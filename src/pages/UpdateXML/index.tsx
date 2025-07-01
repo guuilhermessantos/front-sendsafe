@@ -29,6 +29,8 @@ import { toast } from 'react-toastify'
 import api from '../../services/api'
 import { format, parseISO } from 'date-fns'
 import { ModalEditNota } from '../../components/ModalEditarProdutos'
+import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   controlSwitch?: string
@@ -391,6 +393,17 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
     mode: 'onBlur'
   })
 
+  const router = useRouter()
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token')
+      if (!token) {
+        router.replace('/login')
+      }
+    }
+  }, [])
+
   const abrirModal = async (produtos, notaId) => {
     console.log('abrirModal produtos:', produtos, 'notaId:', notaId)
     setNotaIdSelecionada(notaId)
@@ -530,300 +543,326 @@ const Dashboard: React.FC<IProps> = ({ ...rest }) => {
     : '--'
 
   return (
-    <PageContainer>
-      <TopSection>
-        <UploadSection>
-          <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%' }}>
-            <UploadLabelBox
-              className={dragActive ? 'drag-active' : ''}
-              onDragEnter={handleDrag}
-              onDragOver={handleDrag}
-              onDragLeave={handleDrag}
-              onDrop={handleDrop}
-            >
-              <UploadIcon>📁</UploadIcon>
-              <span
-                style={{
-                  fontWeight: 600,
-                  color: '#2563eb',
-                  fontSize: '1.08rem',
-                  marginBottom: 6
-                }}
+    <>
+      <Head>
+        <title>Atualizar XML | SendSafe</title>
+      </Head>
+      <PageContainer>
+        <TopSection>
+          <UploadSection>
+            <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%' }}>
+              <UploadLabelBox
+                className={dragActive ? 'drag-active' : ''}
+                onDragEnter={handleDrag}
+                onDragOver={handleDrag}
+                onDragLeave={handleDrag}
+                onDrop={handleDrop}
               >
-                Selecione ou arraste o XML aqui
-              </span>
-              <Controller
-                name="files"
-                control={control}
-                rules={{ required: 'Selecione um arquivo XML' }}
-                render={({ field: { onChange, ...field } }) => (
-                  <HiddenInput
-                    id="file-upload"
-                    type="file"
-                    accept=".xml"
-                    ref={inputRef}
-                    onChange={e => {
-                      onChange(e.target.files)
-                      setFileName(e.target.files?.[0]?.name || '')
-                    }}
-                    name={field.name}
-                    onBlur={field.onBlur}
-                    disabled={field.disabled}
-                  />
+                <UploadIcon>📁</UploadIcon>
+                <span
+                  style={{
+                    fontWeight: 600,
+                    color: '#2563eb',
+                    fontSize: '1.08rem',
+                    marginBottom: 6
+                  }}
+                >
+                  Selecione ou arraste o XML aqui
+                </span>
+                <Controller
+                  name="files"
+                  control={control}
+                  rules={{ required: 'Selecione um arquivo XML' }}
+                  render={({ field: { onChange, ...field } }) => (
+                    <HiddenInput
+                      id="file-upload"
+                      type="file"
+                      accept=".xml"
+                      ref={inputRef}
+                      onChange={e => {
+                        onChange(e.target.files)
+                        setFileName(e.target.files?.[0]?.name || '')
+                      }}
+                      name={field.name}
+                      onBlur={field.onBlur}
+                      disabled={field.disabled}
+                    />
+                  )}
+                />
+                {fileName && (
+                  <UploadFileName>
+                    Arquivo selecionado: {fileName}
+                  </UploadFileName>
                 )}
-              />
-              {fileName && (
-                <UploadFileName>Arquivo selecionado: {fileName}</UploadFileName>
-              )}
-            </UploadLabelBox>
-            <UploadButton type="submit" disabled={loading}>
-              {loading ? 'Enviando...' : 'Enviar'}
-            </UploadButton>
-          </form>
-        </UploadSection>
-        <CardsColumn>
-          <Card>
-            <CardLabel>Total de Notas</CardLabel>
-            <CardValue>{totalNotas}</CardValue>
-          </Card>
-          <Card>
-            <CardLabel>Fornecedores Únicos</CardLabel>
-            <CardValue>{fornecedoresUnicos}</CardValue>
-          </Card>
-          <Card>
-            <CardLabel>Último Envio</CardLabel>
-            <CardValue>{ultimaData}</CardValue>
-          </Card>
-        </CardsColumn>
-      </TopSection>
-      <TableSection>
-        {!isMobile && (
-          <TableWrapper
-            style={{
-              height: '420px',
-              minHeight: '320px',
-              maxHeight: '60vh',
-              overflowY: 'auto',
-              marginBottom: '0.7rem'
-            }}
-          >
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHeaderCell>Download</TableHeaderCell>
-                  <TableHeaderCell>id</TableHeaderCell>
-                  <TableHeaderCell>Chave</TableHeaderCell>
-                  <TableHeaderCell>Fornecedor</TableHeaderCell>
-                  <TableHeaderCell>Data Hora Emissão</TableHeaderCell>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {tags.map(row => (
-                  <TableRow key={row.id}>
-                    <TableCell className="icon-cell">
-                      <Download
-                        onClick={() => handleDownload(row.id)}
-                        className="icon-download"
-                      />
-                    </TableCell>
-                    <TableCell
-                      onClick={() => {
-                        abrirModal(row.produtos || [], row.id)
+              </UploadLabelBox>
+              <UploadButton type="submit" disabled={loading}>
+                {loading ? 'Enviando...' : 'Enviar'}
+              </UploadButton>
+            </form>
+          </UploadSection>
+          <CardsColumn>
+            <Card>
+              <CardLabel>Total de Notas</CardLabel>
+              <CardValue>{totalNotas}</CardValue>
+            </Card>
+            <Card>
+              <CardLabel>Fornecedores Únicos</CardLabel>
+              <CardValue>{fornecedoresUnicos}</CardValue>
+            </Card>
+            <Card>
+              <CardLabel>Último Envio</CardLabel>
+              <CardValue>{ultimaData}</CardValue>
+            </Card>
+          </CardsColumn>
+        </TopSection>
+        <TableSection>
+          {!isMobile && (
+            <TableWrapper
+              style={{
+                height: '420px',
+                minHeight: '320px',
+                maxHeight: '60vh',
+                overflowY: 'auto',
+                marginBottom: '0.7rem'
+              }}
+            >
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHeaderCell>Download</TableHeaderCell>
+                    <TableHeaderCell>id</TableHeaderCell>
+                    <TableHeaderCell>Chave</TableHeaderCell>
+                    <TableHeaderCell>Fornecedor</TableHeaderCell>
+                    <TableHeaderCell>Data Hora Emissão</TableHeaderCell>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {tags.map(row => (
+                    <TableRow key={row.id}>
+                      <TableCell className="icon-cell">
+                        <Download
+                          onClick={() => handleDownload(row.id)}
+                          className="icon-download"
+                        />
+                      </TableCell>
+                      <TableCell
+                        onClick={() => {
+                          abrirModal(row.produtos || [], row.id)
+                        }}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        {row.id}
+                      </TableCell>
+                      <TableCell
+                        onClick={() => {
+                          abrirModal(row.produtos || [], row.id)
+                        }}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        {row.chave}
+                      </TableCell>
+                      <TableCell
+                        onClick={() => {
+                          abrirModal(row.produtos || [], row.id)
+                        }}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        {row.fornecedor}
+                      </TableCell>
+                      <TableCell
+                        onClick={() => {
+                          abrirModal(row.produtos || [], row.id)
+                        }}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        {format(
+                          parseISO(row.dataEmissao),
+                          'dd/MM/yyyy HH:mm:ss'
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableWrapper>
+          )}
+          {isMobile && (
+            <div
+              style={{
+                width: '100%',
+                maxHeight: '60vh',
+                overflowY: 'auto',
+                padding: '0.5rem 0.1rem',
+                background: '#f7f7fa',
+                borderRadius: '1rem',
+                marginBottom: '0.7rem',
+                border: 'none'
+              }}
+            >
+              {tags.map(row => (
+                <div
+                  key={row.id}
+                  onClick={() => abrirModal(row.produtos || [], row.id)}
+                  style={{
+                    background: '#fff',
+                    borderRadius: '0.9rem',
+                    boxShadow: '0 1px 6px #0001',
+                    marginBottom: '1.1rem',
+                    padding: '1.1rem 1rem 0.8rem 1rem',
+                    width: '100%',
+                    border: '1px solid #ececec',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.7rem',
+                    cursor: 'pointer',
+                    transition: 'box-shadow 0.18s'
+                  }}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`Editar produtos da nota ${row.id}`}
+                >
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: 700,
+                        color: '#2563eb',
+                        fontSize: '1.08rem',
+                        minWidth: 90
                       }}
-                      style={{ cursor: 'pointer' }}
                     >
-                      {row.id}
-                    </TableCell>
-                    <TableCell
-                      onClick={() => {
-                        abrirModal(row.produtos || [], row.id)
+                      Download
+                    </span>
+                    <Download
+                      onClick={() => handleDownload(row.id)}
+                      className="icon-download"
+                      style={{
+                        cursor: 'pointer',
+                        fontSize: 28,
+                        color: '#2563eb',
+                        background: '#e8f0fe',
+                        borderRadius: '50%',
+                        padding: 6
                       }}
-                      style={{ cursor: 'pointer' }}
+                    />
+                  </div>
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: 500,
+                        color: '#888',
+                        fontSize: '1rem',
+                        minWidth: 90
+                      }}
                     >
-                      {row.chave}
-                    </TableCell>
-                    <TableCell
-                      onClick={() => {
-                        abrirModal(row.produtos || [], row.id)
+                      Fornecedor
+                    </span>
+                    <span
+                      style={{
+                        fontWeight: 600,
+                        color: '#222',
+                        fontSize: '1.08rem'
                       }}
-                      style={{ cursor: 'pointer' }}
                     >
                       {row.fornecedor}
-                    </TableCell>
-                    <TableCell
-                      onClick={() => {
-                        abrirModal(row.produtos || [], row.id)
+                    </span>
+                  </div>
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: 500,
+                        color: '#888',
+                        fontSize: '1rem',
+                        minWidth: 90
                       }}
-                      style={{ cursor: 'pointer' }}
+                    >
+                      Data
+                    </span>
+                    <span
+                      style={{
+                        fontWeight: 600,
+                        color: '#222',
+                        fontSize: '1.08rem'
+                      }}
                     >
                       {format(parseISO(row.dataEmissao), 'dd/MM/yyyy HH:mm:ss')}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableWrapper>
-        )}
-        {isMobile && (
+                    </span>
+                  </div>
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: 500,
+                        color: '#888',
+                        fontSize: '1rem',
+                        minWidth: 90
+                      }}
+                    >
+                      Chave
+                    </span>
+                    <span
+                      style={{
+                        wordBreak: 'break-all',
+                        color: '#444',
+                        fontSize: '0.98rem'
+                      }}
+                    >
+                      {row.chave}
+                    </span>
+                  </div>
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: 500,
+                        color: '#888',
+                        fontSize: '1rem',
+                        minWidth: 90
+                      }}
+                    >
+                      ID
+                    </span>
+                    <span style={{ color: '#444', fontSize: '0.98rem' }}>
+                      {row.id}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
           <div
             style={{
               width: '100%',
-              maxHeight: '60vh',
-              overflowY: 'auto',
-              padding: '0.5rem 0.1rem',
-              background: '#f7f7fa',
-              borderRadius: '1rem',
-              marginBottom: '0.7rem',
-              border: 'none'
+              marginTop: '0.2rem',
+              display: 'flex',
+              justifyContent: 'center'
             }}
           >
-            {tags.map(row => (
-              <div
-                key={row.id}
-                style={{
-                  background: '#fff',
-                  borderRadius: '0.9rem',
-                  boxShadow: '0 1px 6px #0001',
-                  marginBottom: '1.1rem',
-                  padding: '1.1rem 1rem 0.8rem 1rem',
-                  width: '100%',
-                  border: '1px solid #ececec',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.7rem'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <span
-                    style={{
-                      fontWeight: 700,
-                      color: '#2563eb',
-                      fontSize: '1.08rem',
-                      minWidth: 90
-                    }}
-                  >
-                    Download
-                  </span>
-                  <Download
-                    onClick={() => handleDownload(row.id)}
-                    className="icon-download"
-                    style={{
-                      cursor: 'pointer',
-                      fontSize: 28,
-                      color: '#2563eb',
-                      background: '#e8f0fe',
-                      borderRadius: '50%',
-                      padding: 6
-                    }}
-                  />
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <span
-                    style={{
-                      fontWeight: 500,
-                      color: '#888',
-                      fontSize: '1rem',
-                      minWidth: 90
-                    }}
-                  >
-                    Fornecedor
-                  </span>
-                  <span
-                    style={{
-                      fontWeight: 600,
-                      color: '#222',
-                      fontSize: '1.08rem'
-                    }}
-                  >
-                    {row.fornecedor}
-                  </span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <span
-                    style={{
-                      fontWeight: 500,
-                      color: '#888',
-                      fontSize: '1rem',
-                      minWidth: 90
-                    }}
-                  >
-                    Data
-                  </span>
-                  <span
-                    style={{
-                      fontWeight: 600,
-                      color: '#222',
-                      fontSize: '1.08rem'
-                    }}
-                  >
-                    {format(parseISO(row.dataEmissao), 'dd/MM/yyyy HH:mm:ss')}
-                  </span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <span
-                    style={{
-                      fontWeight: 500,
-                      color: '#888',
-                      fontSize: '1rem',
-                      minWidth: 90
-                    }}
-                  >
-                    Chave
-                  </span>
-                  <span
-                    style={{
-                      wordBreak: 'break-all',
-                      color: '#444',
-                      fontSize: '0.98rem'
-                    }}
-                  >
-                    {row.chave}
-                  </span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <span
-                    style={{
-                      fontWeight: 500,
-                      color: '#888',
-                      fontSize: '1rem',
-                      minWidth: 90
-                    }}
-                  >
-                    ID
-                  </span>
-                  <span style={{ color: '#444', fontSize: '0.98rem' }}>
-                    {row.id}
-                  </span>
-                </div>
-              </div>
-            ))}
+            <Pagination
+              currentPage={pagination.page}
+              totalPages={pagination.totalPages}
+              onPageChange={handlePageChange}
+            />
           </div>
-        )}
-        <div
-          style={{
-            width: '100%',
-            marginTop: '0.2rem',
-            display: 'flex',
-            justifyContent: 'center'
-          }}
-        >
-          <Pagination
-            currentPage={pagination.page}
-            totalPages={pagination.totalPages}
-            onPageChange={handlePageChange}
-          />
-        </div>
-      </TableSection>
+        </TableSection>
 
-      <ModalEditNota
-        open={openModal}
-        onClose={() => setOpenModal(false)}
-        produtos={produtosSelecionados}
-        notaId={notaIdSelecionada}
-        onUpdated={fetchTags}
-        page={pagination.page}
-      />
-    </PageContainer>
+        <ModalEditNota
+          open={openModal}
+          onClose={() => setOpenModal(false)}
+          produtos={produtosSelecionados}
+          notaId={notaIdSelecionada}
+          onUpdated={fetchTags}
+          page={pagination.page}
+        />
+      </PageContainer>
+    </>
   )
 }
 

@@ -20,7 +20,7 @@ const Home: React.FC<IProps> = ({ controlSide, theme, toggleTheme }) => {
   return (
     <>
       <Head>
-        <title>SendSafe</title>
+        <title>Home | SendSafe</title>
         {/* <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js" /> */}
       </Head>
 
